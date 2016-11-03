@@ -10,7 +10,7 @@
 3. SDN
 4. My own choosing
  - service discovery
-5. hadoop
+5. Hadoop
 6. security
 7. user concerns
  - fairness
@@ -71,7 +71,12 @@ These NoSQL database systems do well for many use cases which don't require stro
 
 % subsubsection storage (end)
 
+\subsubsection{Power}
 
+Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling and power distribution and lighting.
+There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (See section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems.
+
+% subsubsection power (end)
 
 
 
@@ -82,7 +87,7 @@ Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topolo
 
 \section{Software Defined Networks}
 
-SDN is the virtualization of networks. With SDN, custom networking protocols and addressing schemes can be used. This is particulairly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
+SDN is the virtualization of networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
 
 \section{TBD - Service Discovery}
 
@@ -102,12 +107,12 @@ There is no one size fits all scheduler for properly scheduling jobs to their re
 Likely to have their own SLA for it's end users.
 
 
-\subsection{Provider Concerns}
+\subsection{Provider Concerns} \label{provider-concerns}
 
 % idea: SLA's/SLO's for users, see Jennings2015
 
 \cite{Jennings2015}
-Balanced load - utilization balanced across all resrouces of a type
+Balanced load - utilization balanced across all resources of a type
 fault tolerance - impact on sys performance is minimized
 energy consumption minimized - resources allocated to allow for minimum energy consumption for a workload
 Any of the above may be optimized in whichever matter makes the most sense for the organization.
