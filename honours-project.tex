@@ -9,6 +9,7 @@
 2. network structure (data centre network)
 3. SDN
 4. My own choosing
+ - service discovery
 5. hadoop
 6. security
 7. user concerns
@@ -44,20 +45,80 @@ Hello World
 
 \subsection{Methodology}
 
+This document is constructed from a number of surveys focused on various topics in cloud and datacentre networks. The main points and ideas are collected, including current issues and challenges.
+
+\subsection{Paper Organization}
+
+\subsection{Resources}
+
+Compute, Network, Storage, Power. Compute is the main resource consisting of memory, CPU, network interface, local I/O. Many times the service provider runs virtual machines on top of the physical machines for the consumers to use. This provides a necessary level of abstraction to separate users in a cloud computing environment \cite{Jennings2015}.
+
+Network equipment interconnect the computing resources to allow for high speed communication between other compute resources and the internet. Communicating effectively is constrained by cost \cite{Jennings2015}. A complete graph connects every compute resource to every other compute resource but the cost of each link grows by $n$, where $n$ is the number of compute resources, also known as nodes.
+
+The goal of interconnecting compute resources is to provide a scalable topology where ``increasing the number of ports in the network should linearly increase the bisection bandwidth'' \cite{abts2012guided}.
+
+The most commonly used topology for datacentres is trees. Trees provide a high bisection bandwidth for all nodes connected to the same switch. Also well known is the hyper-cubes and meshes, which are more present in High Performance Computing (HPC) \cite{Jennings2015}. Another type of topology is the Clos network. % go into more detail
+
+Software Defined Networks (SDN) is making it possible to have more flexible networks. Custom protocols and different addressing schemes can be used where a physical network would be impractical otherwise.
+
+\subsubsection{Storage}
+
+
+% this paragraph is awkward
+Public cloud providers currently offer persistent storage through virtual disks, object storage and various types of databases. Common databases that are available are of the ACID type, while a newer type of database is of the NoSQL type. These newer types of databases are more scalable but less consistent since they don't follow the ACID transactional properties. The trade-off with these two different types of databases is performance and consistency, where performance caters to availability and response time, and consistency follows the ACID transactional properties \cite{Jennings2015}.
+
+These NoSQL database systems do well for many use cases which don't require strong consistency. A few different types available are column stores, key-value stores, document stores, and graph databases \cite{graphDB2013}. Object stores are built on top of key-value stores, where a key is used to retrieve some data or new data is uploaded and a key corresponding to that data is returned. Both Amazon \cite{dynamodb}, Google \cite{cassandra} and LinkedIn \cite{voldemort} have their own version of a key-value datastore.
+
+% subsubsection storage (end)
+
+
+
+
+
+% end subsection Resources
 \section{Network Structure}
+
+Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
 
 \section{Software Defined Networks}
 
-\section{To be determined}
+SDN is the virtualization of networks. With SDN, custom networking protocols and addressing schemes can be used. This is particulairly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
+
+\section{TBD - Service Discovery}
 
 \section{Hadoop}
 
 \section{Security}
 
-\section{Scheduling - User Concerns}
+\section{Scheduling}
 
-\section{Scheduling - Provider Concerns}
+There is no one size fits all scheduler for properly scheduling jobs to their resources. \cite{Jennings2015}
 
+
+
+\subsection{User Concerns}
+
+\cite{Jennings2015}
+Likely to have their own SLA for it's end users.
+
+
+\subsection{Provider Concerns}
+
+% idea: SLA's/SLO's for users, see Jennings2015
+
+\cite{Jennings2015}
+Balanced load - utilization balanced across all resrouces of a type
+fault tolerance - impact on sys performance is minimized
+energy consumption minimized - resources allocated to allow for minimum energy consumption for a workload
+Any of the above may be optimized in whichever matter makes the most sense for the organization.
+
+
+% end scheduling
 \section{Conclusion}
+
+
+
+\bibliographystyle{plain}
+\bibliography{research}
 
 \end{document}
