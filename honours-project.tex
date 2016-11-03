@@ -97,9 +97,43 @@ SDN is the virtualization of networks. With SDN, custom networking protocols and
 
 \section{Scheduling}
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. \cite{Jennings2015}
+There is no one size fits all scheduler for properly scheduling jobs to their resources.
 
+Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
+Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
 
+A number of resource scheduling algorithm types have been researched thus far \cite{Singh2016}:
+\begin{itemize}
+    \item Cost
+    \item Time
+    \item Dynamic
+    \item Priority
+    \item Energy
+    \item Optimisation
+    \item SLA and QoS
+    \item Compromised Cost Time
+    \item Profit Based
+    \item Hybrid
+    \item Bargaining
+    \item VM
+    \item Nature Inspired and Bio-Inspired
+\end{itemize}
+
+QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by Singh \cite{Singh2016}:
+\begin{itemize}
+    \item Cost
+    \item Energy
+    \item Execution Time
+    \item Response Time
+    \item Resource Utilization
+    \item Deadline
+    \item Throughput
+    \item Availability
+    \item Scalability
+    \item Migration Cost
+\end{itemize}
+
+Resource scheduling algorithms can be described by a common set of characteristics as defined by Singh \cite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective funciton, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used. 
 
 \subsection{User Concerns}
 
@@ -116,6 +150,8 @@ Balanced load - utilization balanced across all resources of a type
 fault tolerance - impact on sys performance is minimized
 energy consumption minimized - resources allocated to allow for minimum energy consumption for a workload
 Any of the above may be optimized in whichever matter makes the most sense for the organization.
+
+
 
 
 % end scheduling
