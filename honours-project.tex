@@ -1,6 +1,9 @@
 
 \documentclass[fullapage,12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{nameref}
+
+\newcommand{\secref}[1]{Section \ref{#1} - \nameref{#1}}
 
 
 \iffalse
@@ -38,20 +41,29 @@
 \maketitle
 \end{titlepage}
 
-\section{Introduction}
+\section{Introduction} \label{sec:introduction}
 Hello World
 
-\subsection{Contribution}
+\subsection{Contribution} \label{sub:contribution}
 
-\subsection{Methodology}
+\subsection{Methodology} \label{sub:methodology}
 
-This document is constructed from a number of surveys focused on various topics in cloud and datacentre networks. The main points and ideas are collected, including current issues and challenges.
+This document is constructed from a number of modern surveys focused on a number of topics in cloud and datacentre networks. The main points and ideas are collected, including current issues and challenges.
 
-\subsection{Paper Organization}
+\subsection{Paper Organization} \label{sub:organization}
 
-\subsection{Resources}
+Cloud and datacentre networking can be broken down into the six following sections: \secref{sec:network-structure} for the physical structure of the network, \secref{sec:sdn} discusses the networking abstractions that can be built on top of the physical networks, \secref{sec:service-discovery} where services are able to discover each other in a dynamic and changing environment, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to scheduling multiple heterogeneous workloads across a pool of resources.
 
-Compute, Network, Storage, Power. Compute is the main resource consisting of memory, CPU, network interface, local I/O. Many times the service provider runs virtual machines on top of the physical machines for the consumers to use. This provides a necessary level of abstraction to separate users in a cloud computing environment \cite{Jennings2015}.
+\subsection{Resources} \label{sub:resources}
+
+At the bottom layer of every datacentre and cloud is the individual resources that power it. Single units of resources that when interconnected together form powerful networks of compute and storage. The compute, network and storage resources require a comparably sized power grid to keep all of the components powered.
+
+\subsubsection{Compute} \label{ssub:compute}
+
+Compute is the main resource consisting of memory, CPU, network interface and local I/O. Many times the service provider runs virtual machines on top of the physical machines for the consumers to use. This provides a necessary level of abstraction to separate users in a cloud computing environment \cite{Jennings2015}.
+
+% subsubsection compute (end)
+\subsubsection{Network} \label{ssub:network}
 
 Network equipment interconnect the computing resources to allow for high speed communication between other compute resources and the internet. Communicating effectively is constrained by cost \cite{Jennings2015}. A complete graph connects every compute resource to every other compute resource but the cost of each link grows by $n$, where $n$ is the number of compute resources, also known as nodes.
 
@@ -61,7 +73,8 @@ The most commonly used topology for datacentres is trees. Trees provide a high b
 
 Software Defined Networks (SDN) is making it possible to have more flexible networks. Custom protocols and different addressing schemes can be used where a physical network would be impractical otherwise.
 
-\subsubsection{Storage}
+% subsubsection network (end)
+\subsubsection{Storage} \label{ssub:storage}
 
 
 % this paragraph is awkward
@@ -71,9 +84,9 @@ These NoSQL database systems do well for many use cases which don't require stro
 
 % subsubsection storage (end)
 
-\subsubsection{Power}
+\subsubsection{Power} \label{ssub:power}
 
-Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling and power distribution and lighting.
+Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting.
 There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (See section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems.
 
 % subsubsection power (end)
@@ -81,21 +94,21 @@ There are four main ways to reduce power consumption for datacentres as defined 
 
 
 % end subsection Resources
-\section{Network Structure}
+\section{Network Structure} \label{sec:network-structure}
 
 Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
 
-\section{Software Defined Networks}
+\section{Software Defined Networks} \label{sec:sdn}
 
 SDN is the virtualization of networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
 
-\section{TBD - Service Discovery}
+\section{Service Discovery} \label{sec:service-discovery}
 
-\section{Hadoop}
+\section{Hadoop} \label{sec:hadoop}
 
-\section{Security}
+\section{Security} \label{sec:security}
 
-\section{Scheduling}
+\section{Scheduling} \label{sec:scheduling}
 
 There is no one size fits all scheduler for properly scheduling jobs to their resources.
 
@@ -133,7 +146,7 @@ QoS has many unique parameters that have been explored before. Based on requirem
     \item Migration Cost
 \end{itemize}
 
-Resource scheduling algorithms can be described by a common set of characteristics as defined by Singh \cite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective funciton, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used. 
+Resource scheduling algorithms can be described by a common set of characteristics as defined by Singh \cite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective funciton, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used to test.
 
 \subsection{User Concerns}
 
@@ -155,7 +168,7 @@ Any of the above may be optimized in whichever matter makes the most sense for t
 
 
 % end scheduling
-\section{Conclusion}
+\section{Conclusion} \label{sec:conclusion}
 
 
 
