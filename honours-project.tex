@@ -54,13 +54,14 @@ In this paper, the main topics of cloud and datacentre networking are explained 
 
 \subsection{Methodology} \label{sub:methodology}
 
-This document is constructed from a number of recent surveys focused on the topics of network structures, software-defined-networks, service discovery, Hadoop, security and scheduling. The main points and ideas are collected, including current issues and challenges.
-
-% are current issues and challenges needed?
+This document is constructed from a number of recent surveys and newer articles focused on the topics of network structures, software-defined-networks, service discovery, Hadoop, security and scheduling. The main points and ideas are collected and then compared based on features.
 
 \subsection{Paper Organization} \label{sub:organization}
 
-Cloud and datacentre networking can be broken down into the six following sections: \secref{sec:network-structure} for the physical structure of the network, \secref{sec:sdn} discusses the networking abstractions that can be built on top of the physical networks, \secref{sec:service-discovery} where services are able to discover each other in a dynamic and changing environment, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to scheduling multiple heterogeneous workloads across a pool of resources.
+% update organization with updated sections
+
+Cloud and datacentre networking is broken down into the following six sections:
+\secref{sec:network-structure} for the physical structure of the network, \secref{sec:sdn} discusses the networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} where services are able to discover each other in a dynamic and changing environment, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to scheduling multiple heterogeneous workloads across a pool of resources.
 
 \subsection{Resources} \label{sub:resources}
 
@@ -99,9 +100,17 @@ There are four main ways to reduce power consumption for datacentres as defined 
 
 % subsubsection power (end)
 
-
-
 % end subsection Resources
+\section{Cloud Services} \label{sec:cloud-services}
+
+% IaaS, PaaS, SaaS
+
+Cloud computing can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software. SaaS is a cloud classification where the provider manages the software and it's associated data on behalf of the customer. The customer benefits from not having to manage the software and the required infrastructure.
+
+IaaS utilizes virtualization of the hardware to make the on-demand creation, configuration and removal of computing, storage and network equipment faster than the same process using physical hardware. The providers of IaaS are able to rent their virtualized hardware based on usage compared to the high
+
+
+% subsection cloud-classification (end)
 \section{Network Structure} \label{sec:network-structure}
 
 Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
@@ -110,7 +119,7 @@ Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topolo
 
 Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
 
-\section{Service Discovery} \label{sec:service-discovery}
+\section{Data Processing} \label{sec:data-processing}
 
 \section{Hadoop} \label{sec:hadoop}
 
