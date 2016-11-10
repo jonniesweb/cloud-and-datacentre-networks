@@ -1,8 +1,12 @@
-
 \documentclass[fullapage,12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{nameref}
-\usepackage{url}
+\usepackage{nameref,csquotes,hyperref}
+\usepackage[english]{babel}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\urlstyle{sf}
+
+
+\bibliography{research}
 
 \newcommand{\secref}[1]{Section \ref{#1} - \nameref{#1}}
 
@@ -40,6 +44,7 @@
 
 \begin{titlepage}
 \maketitle
+\thispagestyle{empty}
 \end{titlepage}
 
 \section{Introduction} \label{sec:introduction}
@@ -99,7 +104,7 @@ These NoSQL database systems do well for many use cases which don't require stro
 \subsubsection{Power} \label{ssub:power}
 
 Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting.
-There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (See section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems.
+There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (see section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems.
 
 % subsubsection power (end)
 
@@ -169,7 +174,7 @@ A number of resource scheduling algorithm types have been researched thus far \c
 
 \subsubsection{Cost} \label{ssub:algCost}
 
-Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and VM. \cite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal. \cite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
+Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and VM. \textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal. \textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
 
 
 % subsubsection algCost (end)
@@ -224,8 +229,7 @@ Any of the above may be optimized in whichever matter makes the most sense for t
 \section{Conclusion} \label{sec:conclusion}
 
 
-
-\bibliographystyle{plain}
-\bibliography{research}
+% end conclusion
+\printbibliography
 
 \end{document}
