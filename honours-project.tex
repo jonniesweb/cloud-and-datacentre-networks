@@ -54,8 +54,10 @@ In this paper, the main topics of cloud and datacentre networking are explained 
 
 \subsection{Methodology} \label{sub:methodology}
 
-This document is constructed from a number of recent surveys and newer articles focused on the topics of network structures, software-defined-networks, service discovery, Hadoop, security and scheduling. The main points and ideas are collected and then compared based on features.
+% update section names
+This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of network structures, software-defined networks, service discovery, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared on their commonalities and differences. The results from the surveys are updated with newer articles that have come out since their respective publishing date.
 
+% end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
 
 % update organization with updated sections
@@ -107,7 +109,11 @@ There are four main ways to reduce power consumption for datacentres as defined 
 
 Cloud computing can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software. SaaS is a cloud classification where the provider manages the software and it's associated data on behalf of the customer. The customer benefits from not having to manage the software and the required infrastructure.
 
-IaaS utilizes virtualization of the hardware to make the on-demand creation, configuration and removal of computing, storage and network equipment faster than the same process using physical hardware. The providers of IaaS are able to rent their virtualized hardware based on usage compared to the high
+IaaS utilizes virtualization of the hardware to make the on-demand creation, configuration and removal of computing, storage and network equipment faster than the same process using physical hardware. The providers of IaaS are able to rent their virtualized hardware to customers as needed. Basic services such as server images, storage, and resource information are provided by the IaaS provider to make management simpler for customers.
+
+PaaS builds on top of IaaS by giving the customer the ability to build and run applications on top of a platform provided by the cloud provider. PaaS leaves the management of infrastructure up to the provider, leaving the customer to only worry about their application. PaaS usually have their support multiple programming languages and provide a Source Development Kit (SDK) to customers for building their apps. A management console may be provided to manage resources, configure PaaS services and view operational information. Notable companies in this space are Heroku \ref{heroku} and Google App Engine \ref{googleappengine}.
+
+SaaS is a piece of software that is hosted by the provider and accessed over a network by the customer. SaaS reduces the need for the customer to maintain the hardware and software required to run the software product since the provider takes care of that. General pricing models for SaaS applications follow usage per month or per-user per month. Other types of SaaS have emerged from the expanding functionality of websites. Many websites may offer feature-rich services through the user's web browser. Examples of SaaS include various social networks \ref{facebook}, business applications \ref{salesforce} and interactive websites \ref{netflix}.
 
 
 % subsection cloud-classification (end)
