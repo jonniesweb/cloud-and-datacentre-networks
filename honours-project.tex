@@ -56,7 +56,7 @@ In this paper, the main topics of cloud and datacentre networking are explained 
 \subsection{Methodology} \label{sub:methodology}
 
 % update section names
-This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of network structures, software-defined networks, service discovery, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared on their commonalities and differences. The results from the surveys are updated with newer articles that have come out since their respective publishing date.
+This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The results from the surveys are updated with newer articles that have come out since their respective publishing date.
 
 % end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
@@ -106,9 +106,7 @@ There are four main ways to reduce power consumption for datacentres as defined 
 % end subsection Resources
 \section{Cloud Services} \label{sec:cloud-services}
 
-% IaaS, PaaS, SaaS
-
-Cloud computing can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software. SaaS is a cloud classification where the provider manages the software and it's associated data on behalf of the customer. The customer benefits from not having to manage the software and the required infrastructure.
+Cloud computing can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
 
 \subsection{Infrastructure as a Service} \label{sub:iaas}
 
@@ -150,6 +148,8 @@ There is no one size fits all scheduler for properly scheduling jobs to their re
 Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
 
+\subsection{Algorithms} \label{sub:schedalgorithms}
+
 A number of resource scheduling algorithm types have been researched thus far \cite{Singh2016}:
 \begin{itemize}
     \item Cost
@@ -167,6 +167,16 @@ A number of resource scheduling algorithm types have been researched thus far \c
     \item Nature Inspired and Bio-Inspired
 \end{itemize}
 
+\subsubsection{Cost} \label{ssub:algCost}
+
+Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and VM. \cite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal. \cite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
+
+
+% subsubsection algCost (end)
+% subsection schedalgorithms (end)
+
+\subsection{QoS Parameters} \label{sub:schedQosParams}
+
 QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by Singh \cite{Singh2016}:
 \begin{itemize}
     \item Cost
@@ -181,8 +191,13 @@ QoS has many unique parameters that have been explored before. Based on requirem
     \item Migration Cost
 \end{itemize}
 
+% subsection schedQosParams (end)
+\subsection{Algorithm Classification} \label{sub:algclassification}
+
 Resource scheduling algorithms can be described by a common set of characteristics as defined by Singh \cite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective function, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used to test.
 
+
+% subsection algclassification (end)
 \subsection{User Concerns}
 
 \cite{Jennings2015}
