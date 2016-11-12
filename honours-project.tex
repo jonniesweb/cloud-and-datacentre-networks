@@ -148,20 +148,20 @@ Software Defined Networks (SDN) is the virtualization of physical networks. With
 
 \section{Scheduling} \label{sec:scheduling}
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources.
+There is no one size fits all scheduler for properly scheduling jobs to their resources. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into two major groups: static and dynamic. Static refers to those algorithms that assign a fixed amount of resources to a task whereas dynamic allows different amounts of resources to be given to a task over a period of time.
 
 Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
 
 \subsection{Algorithms} \label{sub:schedalgorithms}
 
-A number of resource scheduling algorithm types have been researched thus far \cite{Singh2016}:
+A number of resource scheduling algorithm (RSA) types have been researched thus far \cite{Singh2016}:
 \begin{itemize}
     \item Cost
     \item Time
+    \item Energy
     \item Dynamic
     \item Priority
-    \item Energy
     \item Optimization
     \item SLA and QoS
     \item Compromised Cost Time
@@ -172,9 +172,26 @@ A number of resource scheduling algorithm types have been researched thus far \c
     \item Nature Inspired and Bio-Inspired
 \end{itemize}
 
+
+
 \subsubsection{Cost} \label{ssub:algCost}
 
-Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and VM. \textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal. \textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
+% taxonomy
+Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and virtual machine (VM).
+Bag of tasks consists of first come first serve scheduling based on QoS of task.
+Hybrid algorithm designs try to balance the overloading and underloading of resources.
+Algorithms concerned with SLAs of both the user and provider take into account their respective QoS requirements like energy, makespan or monetary cost etc.
+Task-based cost algorithms group subtasks together, then that group is scheduled the needed resources.
+With VM, SLAs are used to schedule resources based on violations of the SLA.
+
+% non-provider, migrateable workloads
+\textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal.
+\textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
+
+%
+A genetic cost-based algorithm that takes into account the SLA was built by \textcite{liu2013cost}. It considers a low and high budget to effectively schedule resources, ultimately lowering the SLA violations, increasing utilization and profit while lowering cost.
+\textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using pareto dominance, and another to de-prioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
+\textcite{ioannis2011cost} determined a way to handle starvations and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
 
 
 % subsubsection algCost (end)
