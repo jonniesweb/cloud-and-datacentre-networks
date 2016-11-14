@@ -8,7 +8,7 @@ deploy:
   provider: releases
   api_key:
     secure: cd9v6pvv7dZHxPdYyLGdeAKQKIaj5GBdMlG98UGf7j4sVPZb9WLw/wexoXt5mVmD33MFNiow4CGtgcxGcHa88F21SzhwNQsdrgciYrinPHus5nPhSMJDJNaatw+ohbR5ONo09dkrN6jGp8b4Tt9mxZm6EY+5nDN3xRtjQ3wKWkyQqOqVMa1sKYjGDflQSdh0tmxdzcKingfCSyzvA4lWqrPH2116Uyi6UwUv1p7jnoiSiK5blCR9irI+3wb4pMHnlH/CmWEKcmxQHuHtH094kFoGX8ncxw12XmFPx/aGlHfuz/+o4Bxz95FeOYlzudaMGSx1ijYMeDWzlYcibK5jF2N0m2on3ZK9mhdAjV5R1mb+CnEaV341BA5d+VbSwclEvUX62lqoXXUOIwKPALs6yLKHKWQa0LF9JoMhxCXx5W7mJfp4Dmtc+jKjkx2aAJeR4WSl7mRnSCtoj899R9iXBwUlj64ndNCAMcYOEoASgNSDQPHYiwd08JDKqLAbSqoQzV8LfnNExsKJG+lTXFaVNFQLBtWcI0H4QkfpGKJDWL65neLdsKy7vsHbWbT1/kmQ7olvXLiRTn4Sk/caEGFQsjkianNgnmRy4EzhlQ/f2DovO0f8n2kRl5LNTOf4Wc/8z0QvQ4HHro0WLfi/6708kDc1s6/IKKShLqGMQdEHjJI=
-  file: _build/honours-project.pdf
+  file: honours-project.pdf
   skip_cleanup: true
   on:
     repo: jonniesweb/honours-project
