@@ -160,7 +160,7 @@ Software Defined Networks (SDN) is the virtualization of physical networks. With
 
 \section{Scheduling} \label{sec:scheduling}
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into two major groups: static and dynamic. Static refers to those algorithms that assign a fixed amount of resources to a task whereas dynamic allows different amounts of resources to be given to a task over a period of time.
+There is no one size fits all scheduler for properly scheduling jobs to their resources. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
 
 Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
@@ -196,11 +196,11 @@ Algorithms concerned with SLAs of both the user and provider take into account t
 Task-based cost algorithms group subtasks together, then that group is scheduled the needed resources.
 With VM, SLAs are used to schedule resources based on violations of the SLA.
 
-% non-provider, migrateable workloads
+% non-provider, migrateable workloads (dynamic)
 \textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal.
 \textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
 
-%
+% distributed
 A genetic cost-based algorithm that takes into account the SLA was built by \textcite{liu2013cost}. It considers a low and high budget to effectively schedule resources, ultimately lowering the SLA violations, increasing utilization and profit while lowering cost.
 \textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using pareto dominance, and another to de-prioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
 \textcite{ioannis2011cost} determined a way to handle starvations and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
@@ -228,10 +228,41 @@ QoS has many unique parameters that have been explored before. Based on requirem
 % subsection schedQosParams (end)
 \subsection{Algorithm Classification} \label{sub:algclassification}
 
-Resource scheduling algorithms can be described by a common set of characteristics as defined by Singh \cite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective function, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used to test.
 
+% May not want this section if not making a table
+Resource scheduling algorithms can be described by a common set of characteristics as defined by \textcite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective function, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used to test.
 
 % subsection algclassification (end)
+\subsection{Algorithm Traits} \label{sub:algtraits}
+
+Resource scheduling algorithms solve many different types of scheduling problems. Due to the breadth of problems and the many ways to solve them a number of common traits between algorithms are realized \cite{Singh2016}.
+
+\subsubsection*{Subtype} How the RSA can be further classified from it's main classification.
+
+\subsubsection*{Searching Mechanism} The method the algorithm uses to search for the best schedule to use.
+
+\subsubsection*{Application Type} This type refers to the size, shape and characteristics of the applications that the RSA will schedule resources for. For example: homogeneous/heterogeneous scientific workloads, high performance applications, scalable applications, map reduce, etc.
+
+\subsubsection*{Optimal} The objective that the RSA aims to maximize is considered optimal if the objective has been met, otherwise a non-optimal solution was used.
+
+\subsubsection*{Operational Environment} Is the environment where this algorithm can be implemented in. The environment categories used here are homogeneous, heterogeneous, distributed and dynamic.
+
+\subsubsection*{Objective Function} The purpose that drives the scheduling of resources to workloads. eg. minimizing makespan.
+
+\subsubsection*{Scheduling Criteria} The end result of the objective function, where the result can be compared to other solutions. eg. cost, energy, etc.
+
+\subsubsection*{Merits} Individual advantages that this RSA has to offer.
+
+\subsubsection*{Demerits} Individual disadvantages that come with the RSA.
+
+\subsubsection*{Technology} The technology used to implement the algorithm for testing. eg. simulators, data processing applications, etc.
+
+\subsubsection*{Number of Citations} Defines the importance and validity of the algorithm from other peers in the research community.
+
+
+
+
+% subsection algtraits (end)
 \subsection{User Concerns}
 
 \cite{Jennings2015}
