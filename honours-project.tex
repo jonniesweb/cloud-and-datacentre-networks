@@ -8,7 +8,7 @@
 
 \bibliography{research}
 
-\newcommand{\secref}[1]{Section \ref{#1} - \nameref{#1}}
+\newcommand{\secref}[1]{Section \ref{#1} - \emph{\nameref{#1}}}
 
 
 \iffalse
@@ -60,15 +60,15 @@ In this paper, the main topics of cloud and datacentre networking are explained 
 \subsection{Methodology} \label{sub:methodology}
 
 % update section names
-This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The results from the surveys are updated with newer articles that have come out since their respective publishing date.
+This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
 
 % end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
 
 % update organization with updated sections
 
-Cloud and datacentre networking is broken down into the following six sections:
-\secref{sec:network-structure} for the physical structure of the network, \secref{sec:sdn} discusses the networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} where services are able to discover each other in a dynamic and changing environment, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to scheduling multiple heterogeneous workloads across a pool of resources.
+Cloud and datacentre networking is broken down into the following seven sections:
+\secref{sec:cloud-services} breaks down the different types of services offered by cloud providers, \secref{sec:network-structure} shows different strategies of defining the physical structure of the datacentre network, \secref{sec:sdn} discusses the virtual networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} is where batch and stream processing of data is explained, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to assigning resources to workloads.
 
 \subsection{Resources} \label{sub:resources}
 
@@ -110,7 +110,7 @@ There are four main ways to reduce power consumption for datacentres as defined 
 % end subsection Resources
 \section{Cloud Services} \label{sec:cloud-services}
 
-Cloud computing can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
+Cloud services can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
 
 \subsection{Infrastructure as a Service} \label{sub:iaas}
 
@@ -137,7 +137,7 @@ Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topolo
 
 \section{Software Defined Networks} \label{sec:sdn}
 
-Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the TCP protocol is holding back network performance \cite{Jennings2015}.
+Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}.
 
 \section{Data Processing} \label{sec:data-processing}
 
@@ -162,7 +162,8 @@ Software Defined Networks (SDN) is the virtualization of physical networks. With
 
 There is no one size fits all scheduler for properly scheduling jobs to their resources. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
 
-Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
+%Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
+
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
 
 \subsection{Algorithms} \label{sub:schedalgorithms}
@@ -198,12 +199,12 @@ With VM, SLAs are used to schedule resources based on violations of the SLA.
 
 % non-provider, migrateable workloads (dynamic)
 \textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal.
-\textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preeemptable jobs with deadline constraints in hybrid clouds.
+\textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preemptable jobs with deadline constraints in hybrid clouds.
 
 % distributed
 A genetic cost-based algorithm that takes into account the SLA was built by \textcite{liu2013cost}. It considers a low and high budget to effectively schedule resources, ultimately lowering the SLA violations, increasing utilization and profit while lowering cost.
-\textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using pareto dominance, and another to de-prioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
-\textcite{ioannis2011cost} determined a way to handle starvations and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
+\textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using Pareto dominance, and another to deprioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
+\textcite{ioannis2011cost} determined a way to handle starvation and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
 
 
 % subsubsection algCost (end)
@@ -224,6 +225,8 @@ QoS has many unique parameters that have been explored before. Based on requirem
     \item Scalability
     \item Migration Cost
 \end{itemize}
+
+Will expand on each QoS parameter.
 
 % subsection schedQosParams (end)
 \subsection{Algorithm Classification} \label{sub:algclassification}
@@ -263,25 +266,29 @@ Resource scheduling algorithms solve many different types of scheduling problems
 
 \subsection{Aspects of Resource Scheduling} \label{sub:schedulingaspects}
 
-\subsubsection*{Group of Tasks}
+\textcite{Singh2016} broke down resource scheduling algorithms into a descriptive set of aspects. Unscheduled task groups, workflow with many instances, service and task level scheduling, multiple workflows, and group of tasks are described.
 
-Large groups of tasks or applications may face conditions where the transfer of data is high, the dataset is very large or the execution time is very long. Algorithms that optimize for cost can reduce the completion time and decrease the resource utilization.
+
+
+\subsubsection*{Unscheduled Task Groups}
+
+The need to schedule new tasks at runtime may be difficult if the set of tasks is heterogeneous. Classifying each task using a model of the resource requirements built from previous tasks can provide an adequate estimate for the execution cost. The cost and performance of the system can be improved through scheduling resources based on the estimated task execution cost.
 
 \subsubsection*{Workflow with Many Instances}
 
-Realtime applications that run on a large number of nodes are cost constrained when processing large volumes of transactional workloads. Minimizing execution cost and time make up the criteria for the RSA. Objectively balancing the resource utilization results in cost savings.
+Relative applications that run on a large number of nodes are cost constrained when processing large volumes of transactional workloads. Minimizing execution cost and time make up the criteria for the RSA. Objectively balancing the resource utilization results in cost savings.
 
 \subsubsection*{Service and Task Level Scheduling}
 
-Local, node level scheduling of resources to workload at runtime results in cost savings from minimizing the time taken to schedule resources. Makespan, cost and CPU time are all reduced. Global scheduler does not focus on managing resources on each machine. Particulairly useful in assigning tasks and services to VMs.
+Local, node level scheduling of resources to workload at runtime results in cost savings from minimizing the time taken to schedule resources. Makespan, cost and CPU time are all reduced. Particularly useful in assigning tasks and services to VMs.
 
 \subsubsection*{Multiple Workflows}
 
 Workflows with differing QoS parameters may be dynamically scheduled, resulting in the ability for those applications or workloads to dynamically scale at runtime. This aspect's criteria consists of CPU utilization, execution time, makespan, and scheduling success.
 
-\subsubsection*{Unscheduled Task Groups}
+\subsubsection*{Group of Tasks}
 
-The need to schedule new tasks at runtime may be difficult if the set of tasks is heterogeneous. Classifying each task using a model of the resource requirements built from previous tasks can provide an adequate estimate for the execution cost. The cost and performance of the system can be improved through scheduling resources based on the estimated task execution cost.
+Large groups of tasks or applications may face conditions where the transfer of data is high, the data set is very large or the execution time is very long. Algorithms that optimize for cost can reduce the completion time and decrease the resource utilization.
 
 
 % subsection schedulingaspects (end)
