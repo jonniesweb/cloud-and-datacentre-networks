@@ -110,7 +110,6 @@ There are four main ways to reduce power consumption for datacentres as defined 
 % end subsection Resources
 \section{Cloud Services} \label{sec:cloud-services}
 
-Cloud services can be broadly categorized into three major categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
 
 
 
@@ -118,36 +117,45 @@ Cloud services can be broadly categorized into three major categories: Infrastru
 % taxonomy (2009) - cloud architecture, virtualization management, service (iaas,paas, etc), fault tolerance, security
 
 \subsection{Essential Elements} \label{sub:essential-elements}
-% Essential elements - on-demand self service, broad network access, resource pooling, rapid elasticity, measured service,
+% Essential elements - on-demand self service, broad network access, resource pooling, rapid elasticity, measured service
+
+Cloud computing can be characterized by the five distinct elements that separate it from traditional computing. Those five elements are on-demand self service, broad network access, resource pooling, rapid elasticity, and measured service.
 
 \subsubsection{On-Demand Self Service} \label{ssub:on-demand}
+
+Consumers are able to request and receive computing resources at any time from the service provider without having to interact with a human. This means that humans and other systems are able to automatically obtain and release computing resources depending on their needs.
 
 
 % subsubsection on-demand (end)
 \subsubsection{Broad Network Access} \label{ssub:net-access}
 
+Customers of the consumer are able to access and interact with the computing resources over a network, such as the Internet. Heterogeneous customers are all able to access the resources if they are able to access the network.
+
 
 % subsubsection net-access (end)
 \subsubsection{Resource Pooling} \label{ssub:resource-pooling}
+
+Resources of the provider are pooled together such that the consumer is unaware of the underlying organization of the physical hardware. The resource pooling is achieved either through multi-tenancy or virtualization of the computing resources. This enables flexibility for the provider as they are able to flexibly grow or shrink their physical infrastructure without affecting the consumer's resource allocations. Consumers also benefit by being able to dynamically change their resource allocations and not have to worry about the placement of those resources.
 
 
 % subsubsection resource-pooling (end)
 \subsubsection{Rapid Elasticity} \label{ssub:elasticity}
 
+Consumers of the cloud service are able to change their resource allocation at any time without any prior commitment or contracts. The maximum amount of resources that can be allocated should appear to be infinite to the consumer. Consumers are freely able to scale up and scale down resource allocation according to their needs.
+
 
 % subsubsection elasticity (end)
 \subsubsection{Measured Service} \label{ssub:measured-service}
 
+Pooled resources that are shared among many consumers (possibly multiple consumers sharing the same physical hardware) are able to be measured by other cloud infrastructure. The provider may simply track it for driving business decisions or additionally use this information to bill the consumer.
 
 
 % subsubsection measured-service (end)
 
-
-
 % subsection essential-elements (end)
-
-
 \subsection{Service Models} \label{sub:servicemodels}
+
+Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
 
 \subsubsection{Infrastructure as a Service} \label{ssub:iaas}
 
