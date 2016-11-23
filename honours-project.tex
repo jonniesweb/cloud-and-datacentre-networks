@@ -113,7 +113,7 @@ There are four main ways to reduce power consumption for datacentres as defined 
 
 
 
-% deployment model - public,private, community, hybrid
+
 % taxonomy (2009) - cloud architecture, virtualization management, service (iaas,paas, etc), fault tolerance, security
 
 \subsection{Essential Elements} \label{sub:essential-elements}
@@ -153,6 +153,38 @@ Pooled resources that are shared among many consumers (possibly multiple consume
 % subsubsection measured-service (end)
 
 % subsection essential-elements (end)
+\subsection{Deployment Model} \label{sub:deployment-model}
+% deployment model - public,private, community, hybrid
+
+Orthogonal to the \nameref{sub:servicemodels} section is the deployment model. Different types of cloud services can be deployed in different scenarios based on policy, ownership, cost, and security. To the customer of the consumer, the deployment model of the cloud service is completely transparent.
+
+\subsubsection{Public} \label{ssub:deploy-public}
+
+The most prominent type of cloud deployment is the public cloud. Public clouds enable any person or organization to use computing resources. The cloud provider is usually an organization which in charge of the cloud's availability, policies, billing models and operation.
+
+
+% subsubsection deploy-public (end)
+\subsubsection{Private} \label{ssub:deploy-private}
+
+Many different types of organizations would consider to run a private cloud. These clouds are either operated by the organization or a third party on behalf of the organization. Organizations and enterprises run their own private cloud if they have sensitive data or mission critical services that require full control over the entire computing stack, to maximize the utilization of their current computing resources, or if it's not economical to send large amounts of data off premise to a computing provider. Additionally, researchers may also build their own for their research and teaching.
+
+
+% subsubsection deploy-private (end)
+\subsubsection{Community} \label{ssub:deploy-community}
+
+A group of organizations contribute to the building and management of a cloud infrastructure. Policies and other rules are decided by the group. Each organization would get a proportion of the computing resources according to their agreement. The cloud could be hosted remotely or in the premises of one of the organizations.
+
+
+
+% subsubsection deploy-community (end)
+\subsubsection{Hybrid} \label{ssub:deploy-hybrid}
+
+Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization is in peak demand.
+
+
+% subsubsection deploy-hybrid (end)
+
+% subsection deployment-model (end)
 \subsection{Service Models} \label{sub:servicemodels}
 
 Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
