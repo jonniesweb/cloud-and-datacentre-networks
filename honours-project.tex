@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{nameref,csquotes,hyperref}
 \usepackage[english]{babel}
-\usepackage[backend=bibtex,style=numeric]{biblatex}
+\usepackage[backend=biber,style=numeric]{biblatex}
 \urlstyle{sf}
 
 
@@ -103,23 +103,28 @@ These NoSQL database systems do well for many use cases which don't require stro
 \subsubsection{Power} \label{ssub:power}
 
 Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting.
-There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (see section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems.
+There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (see section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems \cite{norwaydatacentre}.
 
 % subsubsection power (end)
 
 % end subsection Resources
 \section{Cloud Services} \label{sec:cloud-services}
 
+The definition of cloud services (also known as cloud computing) is best described by the National Institute of Standards and Technology (NIST):
+
+\begin{displayquote}
+Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction. This cloud model is composed of five essential characteristics, three service models, and four deployment models \cite{mell2011nist}.
+\end{displayquote}
+
+In the next three sections the essential characteristics, service models, and deployment models are explained.
 
 
+% future subsection: taxonomy (2009) - cloud architecture, virtualization management, service (iaas,paas, etc), fault tolerance, security
 
+\subsection{Essential Characteristics} \label{sub:essential-characteristics}
+% Essential characteristics - on-demand self service, broad network access, resource pooling, rapid elasticity, measured service
 
-% taxonomy (2009) - cloud architecture, virtualization management, service (iaas,paas, etc), fault tolerance, security
-
-\subsection{Essential Elements} \label{sub:essential-elements}
-% Essential elements - on-demand self service, broad network access, resource pooling, rapid elasticity, measured service
-
-Cloud computing can be characterized by the five distinct elements that separate it from traditional computing. Those five elements are on-demand self service, broad network access, resource pooling, rapid elasticity, and measured service.
+Cloud computing can be characterized by the five distinct characteristics that separate it from traditional computing. Those five characteristics are on-demand self service, broad network access, resource pooling, rapid elasticity, and measured service \cite{alam2015comprehensive, dillon2010cloud}.
 
 \subsubsection{On-Demand Self Service} \label{ssub:on-demand}
 
@@ -152,8 +157,30 @@ Pooled resources that are shared among many consumers (possibly multiple consume
 
 % subsubsection measured-service (end)
 
-% subsection essential-elements (end)
-\subsection{Deployment Model} \label{sub:deployment-model}
+% subsection essential-characteristics (end)
+\subsection{Service Models} \label{sub:servicemodels}
+
+Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
+
+\subsubsection{Infrastructure as a Service} \label{ssub:iaas}
+
+IaaS utilizes virtualization of the hardware to make the on-demand creation, configuration and removal of computing, storage and network equipment faster than the same process using physical hardware. The providers of IaaS are able to rent their virtualized hardware to customers as needed. Basic services such as server images, storage, and resource information are provided by the IaaS provider to make management simpler for customers.
+
+% subsubsection iaas (end)
+\subsubsection{Platform as a Service} \label{ssub:paas}
+
+PaaS builds on top of IaaS by giving the customer the ability to build and run applications on top of a platform provided by the cloud provider. PaaS leaves the management of infrastructure up to the provider, leaving the customer to only worry about their application. PaaS usually have their support multiple programming languages and provide a Source Development Kit (SDK) to customers for building their apps. A management console may be provided to manage resources, configure PaaS services and view operational information. Notable companies in this space are Heroku \cite{heroku} and Google App Engine \cite{googleappengine}.
+
+% subsubsection paas (end)
+\subsubsection{Software as a Service} \label{ssub:saas}
+
+SaaS is a piece of software that is hosted by the provider and accessed over a network by the customer. SaaS reduces the need for the customer to maintain the hardware and software required to run the software product since the provider takes care of that. General pricing models for SaaS applications follow usage per month or per-user per month. Other types of SaaS have emerged from the expanding functionality of websites. Many websites may offer feature-rich services through the user's web browser. Examples of SaaS include various social networks \cite{facebook}, business applications \cite{salesforce} and interactive websites \cite{netflix}.
+
+% subsubsection saas (end)
+
+
+% subsection servicemodels (end)
+\subsection{Deployment Models} \label{sub:deployment-model}
 % deployment model - public,private, community, hybrid
 
 Orthogonal to the \nameref{sub:servicemodels} section is the deployment model. Different types of cloud services can be deployed in different scenarios based on policy, ownership, cost, and security. To the customer of the consumer, the deployment model of the cloud service is completely transparent.
@@ -179,36 +206,14 @@ A group of organizations contribute to the building and management of a cloud in
 % subsubsection deploy-community (end)
 \subsubsection{Hybrid} \label{ssub:deploy-hybrid}
 
-Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization is in peak demand.
+Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization is in peak demand \cite{dillon2010cloud}.
 
 
 % subsubsection deploy-hybrid (end)
 
 % subsection deployment-model (end)
-\subsection{Service Models} \label{sub:servicemodels}
 
-Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
-
-\subsubsection{Infrastructure as a Service} \label{ssub:iaas}
-
-IaaS utilizes virtualization of the hardware to make the on-demand creation, configuration and removal of computing, storage and network equipment faster than the same process using physical hardware. The providers of IaaS are able to rent their virtualized hardware to customers as needed. Basic services such as server images, storage, and resource information are provided by the IaaS provider to make management simpler for customers.
-
-% subsubsection iaas (end)
-\subsubsection{Platform as a Service} \label{ssub:paas}
-
-PaaS builds on top of IaaS by giving the customer the ability to build and run applications on top of a platform provided by the cloud provider. PaaS leaves the management of infrastructure up to the provider, leaving the customer to only worry about their application. PaaS usually have their support multiple programming languages and provide a Source Development Kit (SDK) to customers for building their apps. A management console may be provided to manage resources, configure PaaS services and view operational information. Notable companies in this space are Heroku \cite{heroku} and Google App Engine \cite{googleappengine}.
-
-% subsubsection paas (end)
-\subsubsection{Software as a Service} \label{ssub:saas}
-
-SaaS is a piece of software that is hosted by the provider and accessed over a network by the customer. SaaS reduces the need for the customer to maintain the hardware and software required to run the software product since the provider takes care of that. General pricing models for SaaS applications follow usage per month or per-user per month. Other types of SaaS have emerged from the expanding functionality of websites. Many websites may offer feature-rich services through the user's web browser. Examples of SaaS include various social networks \cite{facebook}, business applications \cite{salesforce} and interactive websites \cite{netflix}.
-
-% subsubsection saas (end)
-
-
-% subsection servicemodels (end)
-
-% subsection cloud-services (end)
+% section cloud-services (end)
 \section{Network Structure} \label{sec:network-structure}
 
 Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
