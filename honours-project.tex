@@ -267,90 +267,97 @@ The design of the topology should take into account where bottlenecks could occu
 % subsubsection net-load-balance (end)
 
 % subsection topology-features (end)
-\subsection{Network Topologies} \label{sub:net-topologies}
-
-Current network topologies can be grouped into three main types: hierarchical, recursive and rack-to-rack. Each type share a similar number of features and topology layout \cite{wang2015survey, xia2016survey}.
 
 
-\subsubsection{Hierarchical Model} \label{sub:net-hierarchical}
+\subsection{Hierarchical Model} \label{sub:net-hierarchical}
 
-Hierarchical models are the most commonly used since they offer simple deployment and straightforward comprehension of the multiple layers that comprise it. Each layer in a hierarchical network treats traffic differently. Congestion is reduced from the lower layers by sending data through the upper layers, which are better suited to route traffic from point-to-point. Described here are three-tier \cite{kliazovich2012greencloud}, Fat-tree \cite{al2008scalable}, and VL2 \cite{greenberg2009vl2}.
+Hierarchical models are the most commonly used since they offer simple deployment and straightforward comprehension of the multiple layers that comprise it \cite{wang2015survey, xia2016survey}. Each layer in a hierarchical network treats traffic differently. Congestion is reduced from the lower layers by sending data through the upper layers, which are better suited to route traffic from point-to-point. Described here are three-tier \cite{kliazovich2012greencloud}, Fat-tree \cite{al2008scalable}, and VL2 \cite{greenberg2009vl2}.
 
-\subparagraph{Three-tier} \label{subp:three-tier}
+\subsubsection{Three-tier} \label{subp:three-tier}
 
 One of the most common hierarchical models is the three-tier hierarchical topology. It consists of the core, aggregation and edge layers, where the edge layer is the layer directly connected to the servers (also known as the top of rack switch (ToR)), the aggregation layer which interfaces between the edge layer and the core layer, and the core layer directly connects to the Internet as well as to every aggregation layer. This layout enables the addition or removal of edge switches and aggregation switches with the minimal amount of modification to the existing network.
-% subparagraph three-tier (end)
+% subsubsection three-tier (end)
 
-\subparagraph{Fat-tree} \label{subp:fat-tree}
+\subsubsection{Fat-tree} \label{subp:fat-tree}
 
 The Fat-tree hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with it's associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
-% subparagraph fat-tree (end)
+% subsubsection fat-tree (end)
 
 % VL2
-\subparagraph{VL2} \label{subp:vl2}
+\subsubsection{VL2} \label{subp:vl2}
 
 VL2 is a creation by Microsoft which performs addressing using two addresses: one called the Location-specific IP address (LA), and the other being the Application-specfic IP address (AA). The LA is used by the switches to forward the packet to the proper machine while the AA is encapsulated in the LA header and provides a never changing address to the application or VM that should receive the packet. This split address design allows the application to change the physical machines that it runs on while still retaining the same AA, thereby supporting application or VM migrations. The underlying network routes the AA to the proper LA. Once a packet egresses the edge router it is encapsulated with a LA header. When a packet ingresses the edge router the LA header is decapsulated.
 
-% subparagraph vl2 (end)
+% subsubsection vl2 (end)
 
 % hierarchical conclusion
+\subsubsection{Conclusion} \label{ssub:hierarchical-concl}
+
 
 Hierarchical models of network topology is the simplest to use since most commodity hardware supports it. Minimal setup and configuration is required for these networks. At a point scalability of these networks becomes a problem. Analysis of real-world systems show that hierarchical topologies have load-balancing issues at large scales \cite{singla2012jellyfish}.
 
 
+% subsubsection hierarchical-concl (end)
 
-% subsubsection net-hierarchical (end)
-\subsubsection{Recursive Model} \label{sub:net-recursive}
+% subsection net-hierarchical (end)
+\subsection{Recursive Model} \label{sub:net-recursive}
 
-Network topologies involving recursive models are characteristic of their recursive nature when scaling the number of nodes on the network. They also incorporate the use of servers to perform routing between different groups of the network as each server has two or more network interfaces. Described here is DCell \cite{guo2008dcell} and BCube \cite{guo2009bcube}, two recursive network topologies.
+Network topologies involving recursive models are characteristic of their recursive nature when scaling the number of nodes on the network. They also incorporate the use of servers to perform routing between different groups of the network as each server has two or more network interfaces \cite{wang2015survey, xia2016survey}. Described here is DCell \cite{guo2008dcell} and BCube \cite{guo2009bcube}, two recursive network topologies.
 
 % DCell
-\subparagraph{DCell} \label{subp:dcell}
+\subsubsection{DCell} \label{subp:dcell}
 
 DCell is able to use inexpensive commodity switches to exponentially scale the number of nodes in the network. DCells are logically arranged in groups consisting of a switch and a number of servers. The switch connects to all servers in the group and each server connects to one other DCell group. If each DCell is considered a virtual node in a graph, the connecting links between each node form a complete graph. The servers and switches require more advanced configuration as servers are forwarding data to and from other DCells. The robustness achieved through the DCell topology allows a larger amount of failures to partition the network. DCell can suffer from unbalanced workloads causing congestion over certain links due to oversubscription.
 
-% subparagraph dcell (end)
+% subsubsection dcell (end)
 
 
 % BCube
-\subparagraph{BCube} \label{subp:bcube}
+\subsubsection{BCube} \label{subp:bcube}
 
 Slightly differing from DCell, BCube connects different cells to each other through a switch instead of directly to the host. This topology allows one-to-all communication to be very efficient. Links are more oversubscribed than DCell, at 1:256. The downside of BCube is that expanding the network requires recabling the existing topology and thus changing the switch and server configuration.
 
-% subparagraph bcube (end)
+% subsubsection bcube (end)
+
+\subsubsection{Conclusion} \label{ssub:recursive-concl}
+
+
 
 % recursive conclusion
 Recursive topologies enable providers to cheaply and efficiently scale their networks compared to hierarchical networks. As more research is performed on recursive topologies it is becoming apparent that this model is not well suited for cloud computing. Particulairly the fact that since servers are performing more advanced routing than in hierarchical networks the overhead involved competes with the resources given to the applications and VMs that run on the service.
 
+% subsubsection recursive-concl (end)
 
-% subsubsection net-recursive (end)
-\subsubsection{Rack-to-Rack Model} \label{sub:net-rack}
+% subsection net-recursive (end)
+\subsection{Rack-to-Rack Model} \label{sub:net-rack}
 
-Characterized by the lack of a switch connecting multiple ToR switches, the rack-to-rack model connects racks directly to each other to help prevent bottlenecks in higher layers. Jellyfish \cite{singla2012jellyfish} and Scafida \cite{gyarmati2010scafida} are both topologies that fit under the rack-to-rack model.
+Characterized by the lack of a switch connecting multiple ToR switches, the rack-to-rack model connects racks directly to each other to help prevent bottlenecks in higher layers \cite{wang2015survey, xia2016survey}. Jellyfish \cite{singla2012jellyfish} and Scafida \cite{gyarmati2010scafida} are both topologies that fit under the rack-to-rack model.
 
 
 % Jellyfish
-\subparagraph{Jellyfish} \label{subp:jellyfish}
+\subsubsection{Jellyfish} \label{subp:jellyfish}
 
 In the Jellyfish topology, each switch has a fixed number of ports to connect to other switches and servers. All of the switches are then randomly connected with one another. The random links between switches provide the necessary incremental expansion by being able to unplug and plug back in a new random section of the network. Any server in the Jellyfish topology can reach more servers in fewer hops compared to the Fat-tree hierarchical topology.
 
-% subparagraph jellyfish (end)
+% subsubsection jellyfish (end)
 
 % Scafida
-\subparagraph{Scafida} \label{subp:scafida}
+\subsubsection{Scafida} \label{subp:scafida}
 
 Scafida topologies, just like Jellyfish topologies, also include randomness in it's graph. Scafida imposes an upper bound on the length of the longest path to prevent the communication time from becoming too long. Each server and switch in the network doesn't follow any order when it comes to its addressing and routing information. Because of this, the node's routing table is programmatically determined from its surrounding neighbours.
 
 
-% subparagraph scafida (end)
+% subsubsection scafida (end)
 
 % rack conclusion
+\subsubsection{Conclusion} \label{ssub:rack-concl}
+
 
 Traffic complexity can be greatly balanced in rack-to-rack models compared to hierarchical and recursive based models due to its random routes between nodes. Another benefit is the minimal modification to the existing network when expanding the topology. The robustness of the network also increases as it takes multiple failures to partition a network. Rack-to-rack networks hasn't emerged as a useful topology to cloud providers as it has a number of drawbacks: addressing and routing of a random network of switches and servers makes it harder for servers to route to and from the Internet, additionally the redundant paths and loops reduce the throughput and increases overheads on the routing tables.
 
+% subsubsection rack-concl (end)
 
-% subsubsection net-rack (end)
-% subsection net-topologies (end)
+% subsection net-rack (end)
 
 % Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
 
