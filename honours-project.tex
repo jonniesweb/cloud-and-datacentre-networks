@@ -206,7 +206,7 @@ A group of organizations contribute to the building and management of a cloud in
 % subsubsection deploy-community (end)
 \subsubsection{Hybrid} \label{ssub:deploy-hybrid}
 
-Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization is in peak demand \cite{dillon2010cloud}.
+Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization's own computing resources are in peak demand \cite{dillon2010cloud}.
 
 
 % subsubsection deploy-hybrid (end)
@@ -215,6 +215,124 @@ Public-private, private-community, public-community, and public-private-communit
 
 % section cloud-services (end)
 \section{Network Structure} \label{sec:network-structure}
+
+Cloud and datacentres require an interconnect for servers to communicate with each other and for providing service to consumers on the Internet. Many different types of structures are possible but all offer their benefits and weaknesses. Described next are the features of network topologies, then the different network topology types themselves.
+
+
+\subsection{Topology Features} \label{sub:topology-features}
+
+Network topologies come in many different shapes and sizes. Based on the cloud or datacentre's use cases and the organization's budget some topologies are better than others. The following features break down the different network structures available. Those features are: parallel traffic, bandwidth oversubscription, backwards capability, scalability, automatic renaming, robustness, and load balance.
+
+
+\subsubsection{Parallel Traffic} \label{ssub:parallel-traffic}
+
+Workloads which require different types of communication such as one-to-all, one-to-many, or all-to-all should be taken into consideration as the bandwidth required for these communication styles can be high depending on the number of servers processing the workload. An example of the all-to-all communication style would be the Hadoop MapReduce shuffle phase, where data is transferred from the map task running on many servers to the reduce stage which also runs on many servers.
+
+% subsubsection parallel-traffic (end)
+\subsubsection{Bandwidth Oversubscription} \label{ssub:bandwidth-oversubscription}
+
+The more servers that are connected with each other the more expensive it is to provide a full bisection bandwidth. Topology design then cost are the main drivers of bisection bandwidth.  Bandwidth oversubscription occurs when the network topology doesn't provide full bandwidth bisection. The oversubscription can be expressed as a ratio for quantitative comparison. Some providers may choose a topology which performs bandwidth oversubscription on the premise that the network bandwidth will not be the bottleneck resource.
+
+
+% subsubsection bandwidth-oversubscription (end)
+\subsubsection{Backwards Capability} \label{ssub:backwards-capability}
+
+The ability to communicate in one direction should be possible and as performant in the other direction as well. An example would be workloads which require two servers being able to use their full bisection bandwidth in both directions to communicate with each other.
+
+
+% subsubsection backwards-capability (end)
+\subsubsection{Scalability} \label{ssub:net-scalability}
+
+As cloud and datacentre computing demand grows, so does the ability to scale existing computing resources and the networks that interconnect them. The ease at which adding on or removing from an existing network is defined as the scalability. Two important factors with scaling is the ability to interconnect servers on the order of thousands together, as well as the possibility of expanding the network size in the future without requiring substantial reorganization of the existing network.
+
+
+% subsubsection net-scalability (end)
+\subsubsection{Automatic Renaming} \label{ssub:auto-renaming}
+
+Each switch and node in the network should automatically be able to determine where it is and setup its routing table respective to its adjacent nodes, whether that is other servers or switches. This is opposite to offline configuration, where a human or program configures the routing information for each switch and node in the network.
+
+
+% subsubsection auto-renaming (end)
+\subsubsection{Robustness} \label{ssub:net-robustness}
+
+A topology should provide a way to route traffic around a failed switch or link. The more robust a network topology is the more failure it can tolerate before part of it becomes unavailable. Redundant paths in the network increase the robustness by providing an additional way for communication to occur between servers in the network.
+
+
+% subsubsection net-robustness (end)
+\subsubsection{Load Balance} \label{ssub:net-load-balance}
+
+The design of the topology should take into account where bottlenecks could occur because this could lead to performance problems such as congestion. Congestion can occur at the bottleneck from too much data being sent in to the switch and there being not enough bandwidth to send back out. The switch would either slow down the consumption of incoming data or drop input data entirely. The result of congestion is increased latency and communication timeouts. In workloads with high data exchange it may be important to have a stable latency in presence of high bandwidth usage across the network.
+
+
+% subsubsection net-load-balance (end)
+
+% subsection topology-features (end)
+\subsection{Network Topologies} \label{sub:net-topologies}
+
+Current network topologies can be grouped into three main types: hierarchical, recursive and rack-to-rack. Each type share a similar number of features and topology layout.
+
+
+\subsubsection{Hierarchical Model} \label{sub:net-hierarchical}
+
+Hierarchical models are the most commonly used since they offer simple deployment and straightforward comprehension of the multiple layers that comprise it. Each layer in a hierarchical network treats traffic differently. Congestion is reduced from the lower layers by sending data through the upper layers, which are better suited to route traffic from point-to-point.
+
+\subparagraph{Three-tier} \label{subp:three-tier}
+
+One of the most common hierarchical models is the three-tier hierarchical topology. It consists of the core, aggregation and edge layers, where the edge layer is the layer directly connected to the servers (also known as the top of rack switch (ToR)), the aggregation layer which interfaces between the edge layer and the core layer, and the core layer directly connects to the Internet as well as to every aggregation layer. This layout enables the addition or removal of edge switches and aggregation switches with the minimal amount of modification to the existing network.
+% subparagraph three-tier (end)
+
+\subparagraph{Fat-tree} \label{subp:fat-tree}
+
+The Fat-tree hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with it's associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
+% subparagraph fat-tree (end)
+
+% VL2
+\subparagraph{VL2} \label{subp:vl2}
+
+% subparagraph vl2 (end)
+
+% hierarchical conclusion
+
+
+
+% subsubsection net-hierarchical (end)
+\subsubsection{Recursive Model} \label{sub:net-recursive}
+
+% DCell
+\subparagraph{DCell} \label{subp:dcell}
+
+% subparagraph dcell (end)
+
+
+% BCube
+\subparagraph{BCube} \label{subp:bcube}
+
+% subparagraph bcube (end)
+
+% recursive conclusion
+
+
+% subsubsection net-recursive (end)
+\subsubsection{Rack-to-Rack Model} \label{sub:net-rack}
+
+% Jellyfish
+\subparagraph{Jellyfish} \label{subp:jellyfish}
+
+% subparagraph jellyfish (end)
+
+% Scafida
+\subparagraph{Scafida} \label{subp:scafida}
+
+
+% subparagraph scafida (end)
+
+% rack conclusion
+
+
+
+
+% subsubsection net-rack (end)
+% subsection net-topologies (end)
 
 Googlescale networks: \cite{singh2015jupiter} % jupiter is a clos network topology
 
