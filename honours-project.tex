@@ -365,6 +365,62 @@ Traffic complexity can be greatly balanced in rack-to-rack models compared to hi
 
 Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}.
 
+\cite{yan2016software}
+
+\subsection{Architecture}
+
+The Open Network Foundation (ONF) is a consortium consisting of multiple members of industry and academia whose purpose is to standardize and develop SDN-based technologies. Their definition best explains what SDN is: ``In the SDN architecture, the control and data planes are decoupled, network intelligence and state are logically centralized, and the underlying network infrastructure is abstracted
+from the applications'' \cite{onfSDNdef}. More of their definition explains how the SDN architecture is split into three main layers, namely: the infrastructure, control, and application layers.
+
+% infrastructure layer
+\subsubsection{Infrastructure Layer}
+
+This layer consists of the physical infrastructure that supports the other two layers of SDN. The infrastructure layer consists of physical switches, forwarding elements, and virtual switches. Their use is characterized by their ability to send and receive packets to their destination or another switch.
+
+
+% control layer
+\subsubsection{Control Layer}
+
+Multiple pieces of software make up the control layer, also known as the control plane. Open APIs enable control and monitoring of the physical and virtual network. This layer ties together the infrastructure and application layer by defining the communication paths. It also interfaces laterally between different control layer software components.
+
+
+% application layer
+\subsubsection{Application Layer}
+
+The application layer mainly consists of the user's applications that interact with the services provided by the SDN network. Examples include security applications like virtual firewalls, DDoS mitigation, and intrusion detection systems, management applications like metered usage and traffic management, mobility applications such as virtual resource migration, and virtualization applications such as virtual load balancers \cite{larsen2012architecture}.
+
+
+
+% use in clouds
+\subsection{Uses in Clouds}
+
+SDN enables clouds to easily configure and automate the management processes for networked applications. SDN brings the new paradigm of network-as-a-service. It continues the X-as-a-service model seen in infrastructure-, platform- and software-as-a-service. With the power gained from SDN, clouds gain more control, scalability, dynamism, and management, which can result in better energy savings \cite{yen2014sdn,lin2013flow}, load balancing \cite{yen2014sdn}, monitoring \cite{yen2014sdn}, QoS \cite{akella2014quality}, performance \cite{cziva2014sdn, lin2013flow}, policy \cite{banikazemi2013meridian,akella2014quality}, and security \cite{seeber2014improving}.
+
+
+
+\cite{wang2015survey}
+
+% Openflow
+
+% ForCES
+
+% cisco ONE
+
+% use cases - add to use in clouds section
+
+% techniques - server virtu, net i/o virt, net virt, resource virt.
+
+% virtualized infrastructure
+% VM, vNIC, vLink, vSwitch, vNet
+
+% routing schemes - maybe
+
+
+
+
+
+
+
 \section{Data Processing} \label{sec:data-processing}
 
 % focus on stream/batch processing and combinations of the two
