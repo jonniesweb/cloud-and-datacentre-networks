@@ -433,9 +433,22 @@ Virtualization of infrastructure can come in the form of virtual servers, switch
 
 \subsubsection{Virtual Machine (VM)}
 
-VMs are created by partitioning physical resources of the host server. A hypervisor performs this virtualization by translating the guest operating system's binary hardware calls to ones that run on the host. Hypervisors offer the front line integration with virtual networks through virtual NICs. Examples include Xen and VMWare. Strong isolation between the other VMs and the host server is achieved at a slight performance cost. This cost has spurred development of lighter weight machine virtualization such as Kernel VMs (KVM)/containers \cite{oci,docker}.
+VMs are created by partitioning physical resources of the host server. A hypervisor performs this virtualization by translating the guest operating system's binary hardware calls to ones that run on the host. Hypervisors offer the front line integration with virtual networks through virtual NICs \cite{wang2015survey}. Examples include Xen and VMWare. Strong isolation between the other VMs and the host server is achieved at a slight performance cost. This cost has spurred development of lighter weight machine virtualization such as Kernel VMs (KVM)/containers \cite{oci,docker} where each virtual machine takes up less of the host's resources.
 
 \subsubsection{Virtual NIC}
+
+Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{wang62} are able to provide close to naitive speeds. Incoming packets are read and directed to the proper vNIC in silicon.
+
+
+
+\subsubsection{Virtual Switch and Link}
+
+
+
+
+
+\subsubsection{Virtual Network}
+
 
 
 
