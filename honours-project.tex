@@ -363,9 +363,9 @@ Traffic complexity can be greatly balanced in rack-to-rack models compared to hi
 
 \section{Software Defined Networks} \label{sec:sdn}
 
-Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}.
+Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}. Technologies such as virtual LANs (VLAN) \cite{vlan} and Virtual Private Networks (VPN) \cite{vlan} predate the definition of cloud environments. Both continue to exist in the majority of all layer 3 switches but are designed with the physical hardware in mind, preventing adoption in large-scale networks where greater than 4096 VLANs are required \cite{wang2015survey}. In the post-cloud world both technologies have been reinvented as VXLAN \cite{vxlan} and NVGRE \cite{nvgre}, respectively.
 
-\cite{yan2016software}
+
 
 \subsection{Architecture}
 
@@ -375,19 +375,19 @@ from the applications'' \cite{onfSDNdef}. More of their definition explains how 
 % infrastructure layer
 \subsubsection{Infrastructure Layer}
 
-Also known as the forwarding layer, the infrastructure layer consists of the physical infrastructure that supports the other two layers of SDN. This layer consists of physical switches, forwarding elements, and virtual switches. Their use is characterized by their ability to send and receive packets to their destination or another switch.
+Also known as the forwarding layer, the infrastructure layer consists of the physical infrastructure that supports the other two layers of SDN. This layer consists of physical switches, forwarding elements, and virtual switches \cite{yan2016software}. Their use is characterized by their ability to send and receive packets to their destination or another switch.
 
 
 % control layer
 \subsubsection{Control Layer}
 
-Multiple pieces of software make up the control layer, also known as the control plane. Open APIs enable control and monitoring of the physical and virtual network. This layer ties together the infrastructure and application layer by defining the communication paths. It also interfaces laterally between different control layer software components.
+Multiple pieces of software make up the control layer, also known as the control plane. Open APIs enable control and monitoring of the physical and virtual network. This layer ties together the infrastructure and application layer by defining the communication paths \cite{yan2016software}. It also interfaces laterally between different control layer mechanisms.
 
 
 % application layer
 \subsubsection{Application Layer}
 
-The application layer mainly consists of the user's applications that interact with the services provided by the SDN network. Examples include security applications like virtual firewalls, DDoS mitigation, and intrusion detection systems, management applications like metered usage and traffic management, mobility applications such as virtual resource migration, virtualization applications such as virtual load balancers, and business applications. \cite{larsen2012architecture}.
+The application layer mainly consists of the user's applications that interact with the services provided by the SDN network \cite{yan2016software}. Examples include security applications like virtual firewalls, DDoS mitigation, and intrusion detection systems, management applications like metered usage and traffic management, mobility applications such as virtual resource migration, virtualization applications such as virtual load balancers, and business applications  \cite{larsen2012architecture}.
 
 
 
@@ -408,24 +408,37 @@ Many organizations have developed and managed SDN standards and implementations.
 % Openflow
 \subsubsection{OpenFlow}
 
-OpenFlow \cite{openflow} is commonly mentioned when SDN is discussed as it is the most popular standard of SDN. OpenFlow is an open standard which enables switches to perform flow-level control. It also consists of the OpenFlow controller, OpenFlow-enabled switch, OpenFlow protocol, and the OpenFlow channel. It was created to standardize the way switches and the control software communicate with each other. It is implemented  both in hardware on the switch and as software. Each switch operates a flow table containing routing rules for packets. Incoming packets are forwarded according to the table or if no rule exists then the control layer decides what to do with it.
+OpenFlow \cite{openflow} is commonly mentioned when SDN is discussed as it is the most popular standard of SDN. OpenFlow is an open standard which enables switches to perform flow-level control. It also consists of the OpenFlow controller, OpenFlow-enabled switch, OpenFlow protocol, and the OpenFlow channel. It was created to standardize the way switches and the control software communicate with each other. It is implemented  both in hardware on the switch and as software. Each switch operates a flow table containing routing rules for packets. Incoming packets are forwarded according to the table or if no rule exists then the control layer decides what to do with it \cite{wang2015survey}.
 
 % ForCES
 \subsubsection{ForCES}
 
-Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standard built into hardware and software that allow for external control, all within the same device. Control and forwarding layers are separated but kept within the same device. ForCES defines devices called Network Elements (NE) which consist of a Control Element (CE) and a Forwarding Element (FE), much like OpenFlow's switch and controller model. The ForCES protocol is used in the CEs for controlling the FE's forwarding. Much like the OpenFlow flow table, the FEs have Logical Function Blocks (LFBs) for forwarding packets. Configuration of the FEs and CEs is done externally of the NE via a FE manager and a CE manager. The biggest difference from OpenFlow is the separation of control for FEs and CEs through their respective managers.
+Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standard built into hardware and software that allow for external control, all within the same device. Control and forwarding layers are separated but kept within the same device. ForCES defines devices called Network Elements (NE) which consist of a Control Element (CE) and a Forwarding Element (FE), much like OpenFlow's switch and controller model. The ForCES protocol is used in the CEs for controlling the FE's forwarding. Much like the OpenFlow flow table, the FEs have Logical Function Blocks (LFBs) for forwarding packets. Configuration of the FEs and CEs is done externally of the NE via a FE manager and a CE manager \cite{wang2015survey}. The biggest difference from OpenFlow is the separation of control for FEs and CEs through their respective managers.
 
 
 % cisco ONE
 \subsubsection{ONE}
 
-Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It's able to utilize mobile and 60 Ghz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow.
+Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It's able to utilize mobile and 60 Ghz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow \cite{wang2015survey}.
 
 
 % techniques - server virtu, net i/o virt, net virt, resource virt.
 
 % virtualized infrastructure
-% VM, vNIC, vLink, vSwitch, vNet
+\subsection{Virtualized Infrastructure}
+
+Virtualization of infrastructure can come in the form of virtual servers, switches, Network Interface Cards (NICs), links, and topologies. Clouds utilize virtualized infrastructure to partition physical resources across many users and to enable fast changes in architecture \cite{wang2015survey}.
+
+% VM, vNIC, vLink vSwitch, vNet
+
+\subsubsection{Virtual Machine (VM)}
+
+VMs are created by partitioning physical resources of the host server. A hypervisor performs this virtualization by translating the guest operating system's binary hardware calls to ones that run on the host. Hypervisors offer the front line integration with virtual networks through virtual NICs. Examples include Xen and VMWare. Strong isolation between the other VMs and the host server is achieved at a slight performance cost. This cost has spurred development of lighter weight machine virtualization such as Kernel VMs (KVM)/containers \cite{oci,docker}.
+
+\subsubsection{Virtual NIC}
+
+
+
 
 % routing schemes - maybe
 
