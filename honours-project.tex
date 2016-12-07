@@ -363,7 +363,7 @@ Traffic complexity can be greatly balanced in rack-to-rack models compared to hi
 
 \section{Software Defined Networks} \label{sec:sdn}
 
-Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}. Technologies such as virtual LANs (VLAN) \cite{vlan} and Virtual Private Networks (VPN) \cite{vlan} predate the definition of cloud environments. Both continue to exist in the majority of all layer 3 switches but are designed with the physical hardware in mind, preventing adoption in large-scale networks where greater than 4096 VLANs are required \cite{wang2015survey}. In the post-cloud world both technologies have been reinvented as VXLAN \cite{vxlan} and NVGRE \cite{nvgre}, respectively.
+Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}. Technologies such as virtual LANs (VLAN) \cite{vlan} and Virtual Private Networks (VPN) \cite{vlan} predate the cloud paradigm. Both continue to exist in the majority of all layer 3 switches but are designed with the physical hardware in mind, preventing adoption in large-scale networks where greater than 4096 VLANs are required \cite{wang2015survey}. In the post-cloud world both technologies have been reinvented as Virtual Extensible Local Area Network (VXLAN) \cite{vxlan} and Network Virtualization Using Generic Routing Encapsulation (NVGRE) \cite{nvgre}, respectively.
 
 
 
@@ -437,21 +437,27 @@ VMs are created by partitioning physical resources of the host server. A hypervi
 
 \subsubsection{Virtual NIC}
 
-Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{wang62} are able to provide close to naitive speeds. Incoming packets are read and directed to the proper vNIC in silicon.
+Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{dong2012renic} are able to provide close to naitive speeds. Incoming packets are read and directed to the proper vNIC in silicon.
 
 
 
 \subsubsection{Virtual Switch and Link}
 
+Virtual switches (vSwitches) are characterized by being defined in software instead of hardware. A vSwitch would run on each hypervisor host, providing forwarding between the vNICs and the network outside of the host. vSwitches are able to copy packets of data directly from one vNIC buffer to another vNIC buffer if they reside on the same host, otherwise the vSwitch interfaces with the physical NIC. vSwitches also implement packet loss through configurable buffer sizes, emulating the same results as a physical switch. Customization of the vSwitch includes routing control with OpenFlow modules, custom layer 2 routing, and port management \cite{wang2015survey}. Open vSwitch \cite{crisan2013openvswitch}, VALE \cite{rizzo2012vale}, and Click Router \cite{wang2013clickrouter} are all technologies that provide vSwitch functionality.
 
+Virtual links (vLinks) virtualize the physical link between two network components. They typically use tunneling technologies such as GRE or IPSec to create links between vNIC-vNIC or vNIC-vSwitch. These tunnels provide traffic isolation as no other devices communicate on the same link.
 
-
+Both vSwitches and vLinks share the common problem of memory and CPU contention when communication buffers and traffic increase in size. Since the forwarding and routing is performed in software the speed is a magnitude less than the same operations in hardware. In a positive light, the physical switch and link sees less traffic and usage because communication between VMs on the same host can occur on the host.
 
 \subsubsection{Virtual Network}
 
+As mentioned earlier, VLANs and VPNs predate the cloud paradigm. From the large-scale needs of clouds emerged newer virtual networking technologies which were more scalable, efficient, secure, and easier to manage \cite{wang2015survey}. VLANs enable multiple virtual networks at layer 2 of the OSI model, while sharing the same physical network. The number of virtual networks is limited to 4096 (12 bits) due to the protocol design, a constraint for large clouds. Multitenancy with VLAN is not recommended as
 
+VXLAN \cite{vxlan} is the successor to VLANs for cloud computing environments. It performs network segmentation by tunneling communications through MAC-in-UDP. 16 million virtual networks (24 bits) are possible due to the increase in address size. Broadcasts on the virtual network are implemented as UDP multicasts since a broadcast on the physical network is constrained to its local subnet. Newer technology is needed that supports VXLAN in layer 3 switchces. Higher latency is also prevalent due to the extra overhead when forwarding packets across a far hop distance \cite{wang2015survey}.
 
+VPNs in cloud environments are more commonly implemented using NVGRE \cite{nvgre}. NVGRE uses GRE to tunnel MAC-in-GRE. Each layer 2 network is differentiated by a 24 bit Virtual Subnet Identifier (VSID). Broadcast isolation is achieved without burdening the underlying network.
 
+OpenContrail \cite{opencontrail} is an OpenFlow controller which provides methods to encapsulate MAC-in-UDP and MAC-in-IP for creating layer 2 and layer 3 VPNs. OpenContrail provides an high-level SDN interface for managing and automating isolated virtual networks. The number of virtual networks are limited to 4096 based on the OpenFlow header segment number.
 
 % routing schemes - maybe
 
