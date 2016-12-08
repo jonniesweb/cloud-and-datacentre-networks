@@ -286,7 +286,7 @@ The Fat-tree hierarchical network structure takes the existing three-tier topolo
 % VL2
 \subsubsection{VL2} \label{subp:vl2}
 
-VL2 is a creation by Microsoft which performs addressing using two addresses: one called the Location-specific IP address (LA), and the other being the Application-specfic IP address (AA). The LA is used by the switches to forward the packet to the proper machine while the AA is encapsulated in the LA header and provides a never changing address to the application or VM that should receive the packet. This split address design allows the application to change the physical machines that it runs on while still retaining the same AA, thereby supporting application or VM migrations. The underlying network routes the AA to the proper LA. Once a packet egresses the edge router it is encapsulated with a LA header. When a packet ingresses the edge router the LA header is decapsulated.
+VL2 is a creation by Microsoft which performs addressing using two addresses: one called the Location-specific IP address (LA), and the other being the Application-specific IP address (AA). The LA is used by the switches to forward the packet to the proper machine while the AA is encapsulated in the LA header and provides a never changing address to the application or VM that should receive the packet. This split address design allows the application to change the physical machines that it runs on while still retaining the same AA, thereby supporting application or VM migrations. The underlying network routes the AA to the proper LA. Once a packet egresses the edge router it is encapsulated with a LA header. When a packet ingresses the edge router the LA header is decapsulated.
 
 % subsubsection vl2 (end)
 
@@ -315,7 +315,7 @@ DCell is able to use inexpensive commodity switches to exponentially scale the n
 % BCube
 \subsubsection{BCube} \label{subp:bcube}
 
-Slightly differing from DCell, BCube connects different cells to each other through a switch instead of directly to the host. This topology allows one-to-all communication to be very efficient. Links are more oversubscribed than DCell, at 1:256. The downside of BCube is that expanding the network requires recabling the existing topology and thus changing the switch and server configuration.
+Slightly differing from DCell, BCube connects different cells to each other through a switch instead of directly to the host. This topology allows one-to-all communication to be very efficient. Links are more oversubscribed than DCell, at 1:256. The downside of BCube is that expanding the network requires re-cabling the existing topology and thus changing the switch and server configuration.
 
 % subsubsection bcube (end)
 
@@ -324,7 +324,7 @@ Slightly differing from DCell, BCube connects different cells to each other thro
 
 
 % recursive conclusion
-Recursive topologies enable providers to cheaply and efficiently scale their networks compared to hierarchical networks. As more research is performed on recursive topologies it is becoming apparent that this model is not well suited for cloud computing. Particulairly the fact that since servers are performing more advanced routing than in hierarchical networks the overhead involved competes with the resources given to the applications and VMs that run on the service.
+Recursive topologies enable providers to cheaply and efficiently scale their networks compared to hierarchical networks. As more research is performed on recursive topologies it is becoming apparent that this model is not well suited for cloud computing. Particularly the fact that since servers are performing more advanced routing than in hierarchical networks the overhead involved competes with the resources given to the applications and VMs that run on the service.
 
 % subsubsection recursive-concl (end)
 
@@ -396,7 +396,7 @@ The application layer mainly consists of the user's applications that interact w
 
 SDN enables clouds to easily configure and automate the management processes for network services by decoupling the configuration from the network device and centralizing its configuration and management \cite{yan2016software}. SDN presents the new paradigm of network-as-a-service. It continues the X-as-a-service model seen in infrastructure-, platform- and software-as-a-service. With the power gained from SDN, clouds gain more control, scalability, dynamism, and management, which can result in better energy savings \cite{yen2014sdn,lin2013flow}, load balancing \cite{yen2014sdn}, monitoring \cite{yen2014sdn}, QoS \cite{akella2014quality}, performance \cite{cziva2014sdn, lin2013flow}, policy \cite{banikazemi2013meridian,akella2014quality}, and security \cite{seeber2014improving}.
 
-Switches are not required to know of the entire network topology, as message tunneling implemented through the control layer enables performance improvements of VLAN communications with any scale and complexity of physical network topology. Technologies such as OpenFlow, ForCES and ONE will be discussed as providers of virtual isolated multitenant networks \cite{wang2015survey}.
+Switches are not required to know of the entire network topology, as message tunnelling implemented through the control layer enables performance improvements of VLAN communications with any scale and complexity of physical network topology. Technologies such as OpenFlow, ForCES and ONE will be discussed as providers of virtual isolated multitenant networks \cite{wang2015survey}.
 
 
 
@@ -437,7 +437,7 @@ VMs are created by partitioning physical resources of the host server. A hypervi
 
 \subsubsection{Virtual NIC}
 
-Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{dong2012renic} are able to provide close to naitive speeds. Incoming packets are read and directed to the proper vNIC in silicon.
+Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{dong2012renic} are able to provide close to native speeds. Incoming packets are read and directed to the proper vNIC in silicon.
 
 
 
@@ -445,7 +445,7 @@ Through software, the hardware-based NIC can be virtualized as a virtual NIC (vN
 
 Virtual switches (vSwitches) are characterized by being defined in software instead of hardware. A vSwitch would run on each hypervisor host, providing forwarding between the vNICs and the network outside of the host. vSwitches are able to copy packets of data directly from one vNIC buffer to another vNIC buffer if they reside on the same host, otherwise the vSwitch interfaces with the physical NIC. vSwitches also implement packet loss through configurable buffer sizes, emulating the same results as a physical switch. Customization of the vSwitch includes routing control with OpenFlow modules, custom layer 2 routing, and port management \cite{wang2015survey}. Open vSwitch \cite{crisan2013openvswitch}, VALE \cite{rizzo2012vale}, and Click Router \cite{wang2013clickrouter} are all technologies that provide vSwitch functionality.
 
-Virtual links (vLinks) virtualize the physical link between two network components. They typically use tunneling technologies such as GRE or IPSec to create links between vNIC-vNIC or vNIC-vSwitch. These tunnels provide traffic isolation as no other devices communicate on the same link.
+Virtual links (vLinks) virtualize the physical link between two network components. They typically use tunnelling technologies such as GRE or IPSec to create links between vNIC-vNIC or vNIC-vSwitch. These tunnels provide traffic isolation as no other devices communicate on the same link.
 
 Both vSwitches and vLinks share the common problem of memory and CPU contention when communication buffers and traffic increase in size. Since the forwarding and routing is performed in software the speed is a magnitude less than the same operations in hardware. In a positive light, the physical switch and link sees less traffic and usage because communication between VMs on the same host can occur on the host.
 
@@ -453,7 +453,7 @@ Both vSwitches and vLinks share the common problem of memory and CPU contention 
 
 As mentioned earlier, VLANs and VPNs predate the cloud paradigm. From the large-scale needs of clouds emerged newer virtual networking technologies which were more scalable, efficient, secure, and easier to manage \cite{wang2015survey}. VLANs enable multiple virtual networks at layer 2 of the OSI model, while sharing the same physical network. The number of virtual networks is limited to 4096 (12 bits) due to the protocol design, a constraint for large clouds. Multitenancy with VLAN is not recommended as
 
-VXLAN \cite{vxlan} is the successor to VLANs for cloud computing environments. It performs network segmentation by tunneling communications through MAC-in-UDP. 16 million virtual networks (24 bits) are possible due to the increase in address size. Broadcasts on the virtual network are implemented as UDP multicasts since a broadcast on the physical network is constrained to its local subnet. Newer technology is needed that supports VXLAN in layer 3 switchces. Higher latency is also prevalent due to the extra overhead when forwarding packets across a far hop distance \cite{wang2015survey}.
+VXLAN \cite{vxlan} is the successor to VLANs for cloud computing environments. It performs network segmentation by tunnelling communications through MAC-in-UDP. 16 million virtual networks (24 bits) are possible due to the increase in address size. Broadcasts on the virtual network are implemented as UDP multicasts since a broadcast on the physical network is constrained to its local subnet. Newer technology is needed that supports VXLAN in layer 3 switches. Higher latency is also prevalent due to the extra overhead when forwarding packets across a far hop distance \cite{wang2015survey}.
 
 VPNs in cloud environments are more commonly implemented using NVGRE \cite{nvgre}. NVGRE uses GRE to tunnel MAC-in-GRE. Each layer 2 network is differentiated by a 24 bit Virtual Subnet Identifier (VSID). Broadcast isolation is achieved without burdening the underlying network.
 
