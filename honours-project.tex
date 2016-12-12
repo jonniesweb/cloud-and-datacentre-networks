@@ -518,39 +518,47 @@ The logical workflow for MapReduce jobs work as follows:
 
 \subsubsection{Comparison to DBMS}
 
-Big data systems and Data Base Management Systems (DBMS) share some common characteristics. The authors of \cite{zhang74} concluded that DBMS and MapReduce are complementary to each other. DBMSs optimize for efficiency whereas MapReduce optimize for fault tolerance and scalability.
+Big data systems and Data Base Management Systems (DBMS) share some common characteristics. The authors of \cite{stonebreaker2010mapreduce} concluded that DBMS and MapReduce are complementary to each other. DBMSs optimize for efficiency whereas MapReduce optimize for fault tolerance and scalability.
 
-MapReduce is slower at executing tasks than DBMS, but is able to load data into its internal storage representation much faster than DBMS systems \cite{zhang70}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce doesn't change the data layout at all. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defense, MapReduce is still in its infancy and has not had enough time to mature.
+MapReduce is slower at executing tasks than DBMS, but is able to load data into its internal storage representation much faster than DBMS systems \cite{pavlo2009mapreduce}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce doesn't change the data layout at all. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defense, MapReduce is still in its infancy and has not had enough time to mature.
 
 DBMS use indexes and schemas for speeding up queries and automatically performing optimizations, for example, using data types on columns to enable efficient comparison of data. Higher level abstractions are put into place where users can declaratively write queries to the schema and get data in return. MapReduce has no concept of schemas or indexes therefore the programmer is left to writing how to parse the input and implement their own optimizations. Simple operations such as selection and projection are not included and result in possibly suboptimal and difficult to reuse.
 
-MapReduce excels at problems where complex analysis is required. Examples are where map tasks are too difficult to express in SQL queries such as text analysis. One-off analysis of data is also preferential in MapReduce since it is quicker to use as there is no schema to define and the data load time is generally faster.
+MapReduce excels at problems where complex analysis is required. An example being where map tasks are too difficult to express in SQL queries such as text analysis. One-off analysis of data is also preferential in MapReduce since it is quicker to use as there is no schema to define and the data load time is generally faster.
 
+
+% TODO other batch processing frameworks
+% general purpose and sql-like
 
 
 
 % subsection batch (end)
 \subsection{Stream Processing} \label{sub:stream}
 
+\cite{zhang2016survey,toshniwal2014storm,neumeyer2010s4}
+
+
+
 \subsection{Graph Processing}
+
+\cite{zhang2016survey,low2012distributed,malewicz2010pregel}
 
 \subsection{Machine Learning Processing}
 
+\cite{zhang2016survey,xing2015petuum}
 
 
 
-\subsection{DataFlow} \label{sub:dataflow}
-
-% subsection dataflow (end)
-% subsection stream (end)
-% section data processing (end)
 \section{Hadoop} \label{sec:hadoop}
 
-% wang2016 - 55,57,72,73
+\cite{zhang2016survey,polato2014hadoop,sakr2013hadoop}
+% zhang2016 - 55,57,72,73
 
 \section{Security} \label{sec:security}
 
-\cite{liu2015survey}
+\cite{liu2015survey,kazim2015survey,kalpana2015brief}
+
+
 
 \section{Scheduling} \label{sec:scheduling}
 
@@ -634,27 +642,27 @@ Resource scheduling algorithms can be described by a common set of characteristi
 
 Resource scheduling algorithms solve many different types of scheduling problems. Due to the breadth of problems and the many ways to solve them a number of common traits between algorithms are realized \cite{Singh2016}.
 
-\subsubsection*{Subtype} How the RSA can be further classified from it's main classification.
+\subsubsection{Subtype} How the RSA can be further classified from it's main classification.
 
-\subsubsection*{Searching Mechanism} The method the algorithm uses to search for the best schedule to use.
+\subsubsection{Searching Mechanism} The method the algorithm uses to search for the best schedule to use.
 
-\subsubsection*{Application Type} This type refers to the size, shape and characteristics of the applications that the RSA will schedule resources for. For example: homogeneous/heterogeneous scientific workloads, high performance applications, scalable applications, map reduce, etc.
+\subsubsection{Application Type} This type refers to the size, shape and characteristics of the applications that the RSA will schedule resources for. For example: homogeneous/heterogeneous scientific workloads, high performance applications, scalable applications, map reduce, etc.
 
-\subsubsection*{Optimal} The objective that the RSA aims to maximize is considered optimal if the objective has been met, otherwise a non-optimal solution was used.
+\subsubsection{Optimal} The objective that the RSA aims to maximize is considered optimal if the objective has been met, otherwise a non-optimal solution was used.
 
-\subsubsection*{Operational Environment} Is the environment where this algorithm can be implemented in. The environment categories used here are homogeneous, heterogeneous, distributed and dynamic.
+\subsubsection{Operational Environment} Is the environment where this algorithm can be implemented in. The environment categories used here are homogeneous, heterogeneous, distributed and dynamic.
 
-\subsubsection*{Objective Function} The purpose that drives the scheduling of resources to workloads. eg. minimizing makespan.
+\subsubsection{Objective Function} The purpose that drives the scheduling of resources to workloads. eg. minimizing makespan.
 
-\subsubsection*{Scheduling Criteria} The end result of the objective function, where the result can be compared to other solutions. eg. cost, energy, etc.
+\subsubsection{Scheduling Criteria} The end result of the objective function, where the result can be compared to other solutions. eg. cost, energy, etc.
 
-\subsubsection*{Merits} Individual advantages that this RSA has to offer.
+\subsubsection{Merits} Individual advantages that this RSA has to offer.
 
-\subsubsection*{Demerits} Individual disadvantages that come with the RSA.
+\subsubsection{Demerits} Individual disadvantages that come with the RSA.
 
-\subsubsection*{Technology} The technology used to implement the algorithm for testing. eg. simulators, data processing applications, etc.
+\subsubsection{Technology} The technology used to implement the algorithm for testing. eg. simulators, data processing applications, etc.
 
-\subsubsection*{Number of Citations} Defines the importance and validity of the algorithm from other peers in the research community.
+\subsubsection{Number of Citations} Defines the importance and validity of the algorithm from other peers in the research community.
 
 % subsection algtraits (end)
 
