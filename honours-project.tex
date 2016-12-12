@@ -1,9 +1,19 @@
-\documentclass[fullapage,12pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{nameref,csquotes,hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    pdftitle={Cloud and Datacentre Networks},
+}
 \usepackage[english]{babel}
 \usepackage[backend=biber,style=numeric]{biblatex}
 \urlstyle{sf}
+
+\usepackage{enumitem}
+\setlist{nolistsep}
 
 
 \bibliography{research}
@@ -39,12 +49,19 @@
 
 
 \begin{document}
+\pagenumbering{roman}
 
-
-\begin{titlepage}
 \maketitle
 \thispagestyle{empty}
-\end{titlepage}
+
+\begin{abstract}
+    Foo
+\end{abstract}
+\newpage
+
+\tableofcontents
+
+\pagenumbering{arabic}
 
 \section{Introduction} \label{sec:introduction}
 
@@ -469,13 +486,52 @@ OpenContrail \cite{opencontrail} is an OpenFlow controller which provides method
 
 \section{Data Processing} \label{sec:data-processing}
 
+With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, healthcare, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks.
+
+Big data processing systems are characteristic of their horizontal scalability of nodes while almost linearly increasing performance. Simple programming APIs and query languages make it easy to interface with these systems. These systems can be categorized into a number of types based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
+
+\subsection{Comparison to DBMS}
+
+% TODO discuss benefit over traditional DBMS
+Traditional Data Base Management Systems (DBMS)
+
+
 % focus on stream/batch processing and combinations of the two
 
 \subsection{Batch Processing} \label{sub:batch}
 
+Batch processing is characterized by grouping data together then processing it as a whole to maximize throughput. MapReduce-based systems inherently use map and reduce operators on the data to perform the processing. Newer frameworks offer more operators and functionality such as iteration and recursion.
+
+MapReduce is famed for its successful abstraction of running a distributed parallel program that is fault tolerant, load balanced and has a distributed data model. Graph processing, text processing, data mining, statistical machine translation, and machine learning algorithms have all been implemented using MapReduce frameworks \cite{dean2008mapreduce}. Out of all MapReduce frameworks, the open source Hadoop by Apache is the most popular and widely used.
+
+MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing the entire job needing to be restarted and minimizes the lost work by breaking down the job into mutliple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
+
+
+\subsubsection{Workflow}
+
+The logical workflow for MapReduce jobs work as follows:
+\begin{enumerate}
+    \item The user's input data is partitioned into equal sized blocks and then multiple copies of each block is stored across a distributed file system on a cluster of machines to increase data redundancy and fault tolerance.
+    \item MapReduce then reads the MapReduce program to determine the number of map and reduce tasks are required. The master node assigns work to the slaves that are part of the cluster. The MapReduce scheduler will try to assign tasks to the nodes which have a copy of the data partition for a task, thereby maximizing locality \footnote{Locality has been shown in \cite{ousterhout2015making} to not matter in clusters with a suitably performant network.}.
+    \item Nodes which are processing map tasks will run the specified map function to create key-value pairs. Those pairs are then grouped into $r$ partitions based on the number of reduce tasks there are. The results of the map function are stored in the global file system. The master is then notified of where the locations of each partition are. The master forwards the location information to the nodes processing the reduce tasks.
+    \item Nodes that are processing the reduce tasks gather the intermediate data from the map tasks and then sorts the results by the value of the key. The values will then be aggregated by the key according to the user-defined reduce function. The results of the reduce function are stored in the global file system.
+    \item The master monitors for node or task failure and reschedules those tasks to any available slave node.
+    \item After all tasks complete, the user program that initiated the MapReduce job will finish.
+\end{enumerate}
+
+
+
+
 
 % subsection batch (end)
 \subsection{Stream Processing} \label{sub:stream}
+
+\subsection{Graph Processing}
+
+\subsection{Machine Learning Processing}
+
+
+
 
 \subsection{DataFlow} \label{sub:dataflow}
 
@@ -483,6 +539,8 @@ OpenContrail \cite{opencontrail} is an OpenFlow controller which provides method
 % subsection stream (end)
 % section data processing (end)
 \section{Hadoop} \label{sec:hadoop}
+
+% wang2016 - 55,57,72,73
 
 \section{Security} \label{sec:security}
 
