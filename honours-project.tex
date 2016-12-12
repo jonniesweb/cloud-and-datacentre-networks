@@ -535,13 +535,40 @@ MapReduce excels at problems where complex analysis is required. An example bein
 % subsection batch (end)
 \subsection{Stream Processing} \label{sub:stream}
 
-\cite{zhang2016survey,toshniwal2014storm,neumeyer2010s4}
+% \cite{zhang2016survey}
+
+The use cases for stream processing differ from batch processing in that stream processing caters to processing high rates of incoming data at near real-time speeds. The long latency between updates for batch processing can be too slow for some applications. Both Storm and S4 are discussed as stream processing systems.
+
+\subsubsection{Storm}
+
+Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and realtime requirements.
+
+Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: tuples flow into the graph from \textit{spouts} and \textit{bolts} are where a given function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
+
+Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronizaiton.
+
+Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of failure. A backflow mechanism relays information to the originating \textit{spout} to notify it of it's progress. Trident, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
+
+
+
+\subsubsection{S4}
+
+S4 \cite{neumeyer2010s4} is a distributed and decentralized architecture which takes design decisions from the Actor model and MapReduce. Streams of data are structured as events that look like $(K, A)$, where $K$ is a key consisting of a tuple and $A$ is an attribute to that key. For example, a word count program could have an event structure such as $(word, count)$.
+
+Applications built on top of S4 consist of a graph of Processing Elements (PE). Each processing element is a function written by a programmer. Streams interconnect the PEs. The key of each event determines which node an event goes to. External streams exist where events can be sent and recieved from external applications.
+
+PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runtime to a physical node by the communication layer. The PNs are in charge of receiving events, executing the respective PEs on the events, and sending out new events. The communication layer is managed by ZooKeeper to maintain configuration information and coordinate between nodes of the system. Besides mapping PNs to physical nodes the communication layer generally manages the cluster and handles failures.
 
 
 
 \subsection{Graph Processing}
 
 \cite{zhang2016survey,low2012distributed,malewicz2010pregel}
+
+
+
+
+
 
 \subsection{Machine Learning Processing}
 
