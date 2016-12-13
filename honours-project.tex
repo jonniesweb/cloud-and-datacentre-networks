@@ -436,7 +436,7 @@ Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standa
 % cisco ONE
 \subsubsection{ONE}
 
-Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It's able to utilize mobile and 60 Ghz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow \cite{wang2015survey}.
+Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It's able to utilize mobile and 60 GHz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow \cite{wang2015survey}.
 
 
 % techniques - server virtu, net i/o virt, net virt, resource virt.
@@ -486,9 +486,9 @@ OpenContrail \cite{opencontrail} is an OpenFlow controller which provides method
 
 \section{Data Processing} \label{sec:data-processing}
 
-With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, healthcare, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks.
+With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, health care, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks. Google has also presented the DataFlow Model \cite{akidau2015dataflow}, a new bridge between batch and stream systems for processing unbounded streams of data while balancing correctness, latency, and cost.
 
-Big data processing systems are characteristic of their horizontal scalability of nodes while almost linearly increasing performance. Simple programming APIs and query languages make it easy to interface with these systems. These systems can be categorized into a number of types based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
+Big data processing systems are characteristic of their horizontal scalability of nodes while almost linearly increasing performance. Simple programming APIs and query languages make it easy to interface with these systems. Data processing systems can be categorized into a few categories based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
 
 
 
@@ -500,7 +500,7 @@ Batch processing is characterized by grouping data together then processing it a
 
 MapReduce is famed for its successful abstraction of running a distributed parallel program that is fault tolerant, load balanced and has a distributed data model. Graph processing, text processing, data mining, statistical machine translation, and machine learning algorithms have all been implemented using MapReduce frameworks \cite{dean2008mapreduce}. Out of all MapReduce frameworks, the open source Hadoop by Apache is the most popular and widely used.
 
-MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing the entire job needing to be restarted and minimizes the lost work by breaking down the job into mutliple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
+MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing the entire job needing to be restarted and minimizes the lost work by breaking down the job into multiple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
 
 
 \subsubsection{Workflow}
@@ -520,11 +520,20 @@ The logical workflow for MapReduce jobs work as follows:
 
 Big data systems and Data Base Management Systems (DBMS) share some common characteristics. The authors of \cite{stonebreaker2010mapreduce} concluded that DBMS and MapReduce are complementary to each other. DBMSs optimize for efficiency whereas MapReduce optimize for fault tolerance and scalability.
 
-MapReduce is slower at executing tasks than DBMS, but is able to load data into its internal storage representation much faster than DBMS systems \cite{pavlo2009mapreduce}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce doesn't change the data layout at all. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defense, MapReduce is still in its infancy and has not had enough time to mature.
+MapReduce is slower at executing tasks than DBMS, but is able to load data into its internal storage representation much faster than DBMS systems \cite{pavlo2009mapreduce}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce doesn't change the data layout at all. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defence, MapReduce is still in its infancy and has not had enough time to mature.
 
 DBMS use indexes and schemas for speeding up queries and automatically performing optimizations, for example, using data types on columns to enable efficient comparison of data. Higher level abstractions are put into place where users can declaratively write queries to the schema and get data in return. MapReduce has no concept of schemas or indexes therefore the programmer is left to writing how to parse the input and implement their own optimizations. Simple operations such as selection and projection are not included and result in possibly suboptimal and difficult to reuse.
 
 MapReduce excels at problems where complex analysis is required. An example being where map tasks are too difficult to express in SQL queries such as text analysis. One-off analysis of data is also preferential in MapReduce since it is quicker to use as there is no schema to define and the data load time is generally faster.
+
+
+\subsubsection{Spark}
+
+Spark \cite{zaharia2010spark} is an open source batch processing framework that builds on top of Hadoop MapReduce. Spark was designed for iterative dataflow and easy extensibility. Multiple frameworks work seamlessly with Spark such Streaming for streaming, MLbase for machine learning, and GraphX for graph processing. Because of this, it is one of the most popular and active data processing frameworks \cite{zhang2016survey}. Its architecture is the same as MapReduce - a master and multiple workers.
+
+Resilient distributed datasets (RDD) is an abstraction for storing read-only data in a distributed filesystem. These RDDs are used as inputs to operations, and new RDDs are created as the output of intermediate steps. Resiliency is achieved by being able to rebuild a RDD if it is lost. RDDs are primarily stored in memory as to reduce the overhead of disk data access. An LRU cache controls the RDDs kept in memory. Intermediate RDDs use the \textit{cache} operator to keep the data in memory for more processing, whereas the \textit{save} operation saves the RDD to the distributed filesystem.
+
+Like MapReduce, a job is given to the master and tasks are created from it and then assigned to workers based on the locality of the task's data. The programmer can use a sequence of parallel operations to manipulate the input RDDs. Those are \emph{map}, \emph{reduce}, \emph{collect}, \emph{filter}, and \emph{foreach}. \emph{Map} and \emph{reduce} are the standard MapReduce commands. \emph{Collect} aggregates values at the master based on a function. \emph{Filter} reduces the data size by programmatically excluding elements. Lastly, \emph{foreach} performs a user defined function on each piece of data.
 
 
 % TODO other batch processing frameworks
@@ -537,66 +546,77 @@ MapReduce excels at problems where complex analysis is required. An example bein
 
 % \cite{zhang2016survey}
 
-The use cases for stream processing differ from batch processing in that stream processing caters to processing high rates of incoming data at near real-time speeds. The long latency between updates for batch processing can be too slow for some applications. Both Storm and S4 are discussed as stream processing systems.
+The use cases for stream processing differ from batch processing in that stream processing caters to processing high rates of incoming data at near real-time speeds. The long latency between updates for batch processing can be too slow for some applications. Both Storm \cite{toshniwal2014storm} and S4 \cite{neumeyer2010s4} are discussed as stream processing systems.
 
 \subsubsection{Storm}
 
-Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and realtime requirements.
+Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and real-time requirements.
 
 Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: tuples flow into the graph from \textit{spouts} and \textit{bolts} are where a given function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
 
-Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronizaiton.
+Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronization.
 
-Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of failure. A backflow mechanism relays information to the originating \textit{spout} to notify it of it's progress. Trident, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
+Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of failure. A backflow mechanism relays information to the originating \textit{spout} to notify it of it's progress. Trident \cite{toshniwal2014storm}, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
 
 
 
 \subsubsection{S4}
 
-S4 \cite{neumeyer2010s4} is a distributed and decentralized architecture which takes design decisions from the Actor model and MapReduce. Streams of data are structured as events that look like $(K, A)$, where $K$ is a key consisting of a tuple and $A$ is an attribute to that key. For example, a word count program could have an event structure such as $(word, count)$.
+S4 \cite{neumeyer2010s4} is a distributed and decentralized architecture which takes design decisions from the Actor model and MapReduce. Streams of data are structured as events that look like $(K, A)$, where $K$ is a key consisting of a tuple and $A$ is an attribute to that key. For example, a word count program could have an event structure such as $(word, count)$ \cite{zhang2016survey}.
 
-Applications built on top of S4 consist of a graph of Processing Elements (PE). Each processing element is a function written by a programmer. Streams interconnect the PEs. The key of each event determines which node an event goes to. External streams exist where events can be sent and recieved from external applications.
+Applications built on top of S4 consist of a graph of Processing Elements (PE). Each processing element is a function written by a programmer. Streams interconnect the PEs. The key of each event determines which node an event goes to. External streams exist where events can be sent and received from external applications.
 
-PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runtime to a physical node by the communication layer. The PNs are in charge of receiving events, executing the respective PEs on the events, and sending out new events. The communication layer is managed by ZooKeeper to maintain configuration information and coordinate between nodes of the system. Besides mapping PNs to physical nodes the communication layer generally manages the cluster and handles failures.
+PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runtime to a physical node by the communication layer. The PNs are in charge of receiving events, executing the respective PEs on the events, and sending out new events. The communication layer is managed by ZooKeeper to maintain configuration information and coordinate between nodes of the system \cite{neumeyer2010s4}. Besides mapping PNs to physical nodes the communication layer generally manages the cluster and handles failures.
 
 
 
 \subsection{Graph Processing}
 
-Graph processing is a specialization on the data model for MapReduce jobs. GraphLab and Pregel both offer optimizations for processing large graphs of data in parallel. Some machine learning problems define their domain in the form of a graph of dependencies, therefore it is fluid to use graph processing systems to solve those kinds of problems.
+Graph processing is a specialization on the data model for MapReduce jobs. GraphLab \cite{low2012graphlab} and Pregel \cite{malewicz2010pregel} both offer optimizations for processing large graphs of data in parallel. Some machine learning problems define their domain in the form of a graph of dependencies, therefore it is fluid to use graph processing systems to solve those kinds of problems.
 
-\cite{zhang2016survey,low2012graphlab,malewicz2010pregel}
+% \cite{zhang2016survey,low2012graphlab,malewicz2010pregel}
 
 \subsubsection{GraphLab}
 
-Graphs in GraphLab use the vertex-centric model where operations are performed on vertexes. GraphLab uses concepts such as a data graph, a sync mechanism, and an update function. The data graph contains the user-defined data for vertices and edges, intermediate data used by the graph algorithm, model parameters, and statistical data. The sync mechanism is used to perform aggregate calculations over the entire graph. It is analogous to the reduce function in MapReduce, but can run concurrently with the update functions. Update functions are analogous to the map part of MapReduce, but in addition to modify its own data, update functions are permitted to modify data of adjacent edges and nodes. The output of the update functions is the updated data and the vertices that need to be modified in the next iteration round.
+Graphs in GraphLab \cite{low2012graphlab} use the vertex-centric model where operations are performed on vertexes. GraphLab uses concepts such as a data graph, a sync mechanism, and an update function. The data graph contains the user-defined data for vertices and edges, intermediate data used by the graph algorithm, model parameters, and statistical data. The sync mechanism is used to perform aggregate calculations over the entire graph. It is analogous to the reduce function in MapReduce, but can run concurrently with the update functions. Update functions are analogous to the map part of MapReduce, but in addition to modify its own data, update functions are permitted to modify data of adjacent edges and nodes. The output of the update functions is the updated data and the vertices that need to be modified in the next iteration round.
 
 Work is broken down into iterations where an update function or a sync mechanism operates at most once on a vertice. GraphLab synchronizes iterations between all nodes and coordinates updates between partitions. Data is partitioned across the cluster using either domain specific knowledge or partition heuristics.
 
-Depending on the style of algorithm executed, different schedulers for running the update functions and sync mechanisms for an iteration is required. Jacobi style algorithms can use the synchronous scheduler, where all vertices are updated at the same time, or for Gauss-Seidel algorithms, a round robin scheduler can be used.
+Depending on the style of algorithm executed, different schedulers for running the update functions and sync mechanisms for an iteration is required. Jacobi style algorithms can use the synchronous scheduler, where all vertices are updated at the same time, or for Gauss-Seidel algorithms, a round robin scheduler can be used \cite{zhang2016survey}.
 
-Fault tolerance is designed into GraphLab by a transparent checkpointing system that can incrementally create snapshots across the cluster. Execution is not suspended while this is occuring. When a failure occurs GraphLab will resume from the last snapshot.
+Fault tolerance is designed into GraphLab by a transparent checkpointing system that can incrementally create snapshots across the cluster. Execution is not suspended while this is occurring. When a failure occurs GraphLab will resume from the last snapshot.
 
 
 
 \subsubsection{Pregel}
 
-Pregel was designed to allow any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vectice identifier for a source and target.
+Pregel \cite{malewicz2010pregel} was designed to allow any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vertice identifier for a source and target.
 
-Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of the edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself.
+Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of the edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself \cite{zhang2016survey}.
 
 Each iteration blocks until all nodes have finished computing whereas GraphLab allows asynchronous iterations due to sufficient scheduling algorithms and dependency management. Each iteration Pregel runs the user defined function on each vertice in parallel. Simpler reasoning can be performed due to the synchronous nature of Pregel. Race conditions and deadlocks are not an issue.
 
-Fault tolerance is implemented similairly like GraphLab. At the beginning of each iteration each node saves the state of its graph partition to a persistent storage medium. The master of the cluster saves aggregate values calculated over the entire cluster. In case of failure the cluster is rolled back to the latest checkpoint, minimizing the loss of state to the last complete iteration.
+Fault tolerance is implemented similarly like GraphLab. At the beginning of each iteration each node saves the state of its graph partition to a persistent storage medium. The master of the cluster saves aggregate values calculated over the entire cluster. In case of failure the cluster is rolled back to the latest checkpoint, minimizing the loss of state to the last complete iteration.
 
 
 \subsection{Machine Learning Processing}
 
+Scalability is one of the major hurdles affecting machine learning research. Data sizes are growing at an exponential rate and the machine learning models and problems are deemed ``Big Model on Big Data'' \cite{xing2015petuum}. The problems faced are multiplied by the complexity of developing complex mathematical models and algorithms while implementing them in parallel distributed systems. At the same time avoiding the typical pitfalls such as deadlocks and race conditions.
+
+Regular MapReduce is not able to solve a category of machine learning problems therefore new frameworks have been specifically made. Petuum \cite{xing2015petuum} is an example of a framework developed to efficiently solve large machine learning problems.
 
 
-\cite{zhang2016survey,xing2015petuum}
 
 \subsubsection{Petuum}
+
+Petuum \cite{xing2015petuum} is a distributed framework for solving machine learning problems that other data processing systems such as GraphLab \cite{low2012graphlab} and Spark \cite{zaharia2010spark} are unable to. Machine learning algorithms built with Petuum are turned into distributed iterative-convergent programs. Parallelization is exploited in both the data and the algorithms to enable performant execution. Additionally, non-uniform convergence, task dependencies, and error tolerance are understood by Petuum, separating it from a general purpose data processing system.
+
+The architecture consists of a scheduler, workers and a parameter server. Three functions are also defined - \textit{push}, \textit{pull}, and \textit{schedule}. The scheduler controls the parameters that are updated by each worker according to the user-defined \textit{schedule} function. This enables determining the task dependencies at runtime, enabling for better selection of parameters for parallel updates to prevent error and non-convergence. Parameters which need more iterations to converge are prioritized using the user defined \textit{schedule} function. Lastly, the scheduler handles aggregation across the workers whenever the \textit{pull} function is used.
+
+All workers in the cluster receive parameters from the scheduler and run the \textit{push} function in parallel. Parameters are synchronized with the parameter server automatically. The workers achieve low communication and synchronization overhead with the parameter server by being tolerant to small consistency errors as machine learning algorithms are able to handle small inconsistencies. Convergence guarantees are still maintained.
+
+Fault tolerance is implemented using checkpoints and will restart back to the latest checkpoint in case of a failure. This strategy works up to hundreds of machines \cite{xing2015petuum}.
+
 
 
 
