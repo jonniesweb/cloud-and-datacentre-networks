@@ -550,7 +550,7 @@ The use cases for stream processing differ from batch processing in that stream 
 
 \subsubsection{Storm}
 
-Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and real-time requirements.
+Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and real-time requirements \cite{toshniwal2014storm}.
 
 Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: tuples flow into the graph from \textit{spouts} and \textit{bolts} are where a given function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
 
