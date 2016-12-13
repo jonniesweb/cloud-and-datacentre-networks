@@ -486,7 +486,7 @@ OpenContrail \cite{opencontrail} is an OpenFlow controller which provides method
 
 \section{Data Processing} \label{sec:data-processing}
 
-With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, health care, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks. Google has also presented the DataFlow Model \cite{akidau2015dataflow}, a new bridge between batch and stream systems for processing unbounded streams of data while balancing correctness, latency, and cost.
+With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, healthcare, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks. Google has also presented the DataFlow Model \cite{akidau2015dataflow}, a new bridge between batch and stream systems for processing unbounded streams of data while balancing correctness, latency, and cost.
 
 Big data processing systems are characteristic of their horizontal scalability of nodes while almost linearly increasing performance. Simple programming APIs and query languages make it easy to interface with these systems. Data processing systems can be categorized into a few categories based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
 
@@ -622,6 +622,41 @@ Fault tolerance is implemented using checkpoints and will restart back to the la
 
 
 \section{Hadoop} \label{sec:hadoop}
+
+Hadoop \footnote{Homepage: \url{https://hadoop.apache.org/}} is an open source project that belongs to the Apache Software Foundation. Growing volumes of collected data prompted the need for storing and analysing large amounts of this data efficiently. All of this business data is analysed to better understand the customer and perform less riskier decision making. This motive has spawned the concept of Big Data and has now found it's way into almost every field: retail, telecommunications, healthcare, academia, manufacturing, government, and finance. Hadoop enables the efficient processing of big data on clusters with thousands of commodity servers, provides a simple abstraction for harnessing the power of parallel computing without requiring knowledge with distributed systems or parallel programming, and enables reliable processing with built-in fault tolerance \cite{zhang2016survey,singh2015survey}.
+
+Hadoop can be categorized into a few primary components, the Hadoop Distributed File System (HDFS), Yet Another Resource Scheduler (YARN), and the MapReduce framework. Each component is covered in the following subsection (\ref{sub:components}). Following that is the broader Hadoop ecosystem, where other systems integrate or build on top of the main Hadoop components (\ref{sub:ecosystem}).
+
+
+
+\subsection{Main Components} \label{sub:components}
+
+Hadoop can be described by its four main components. Those are Common, HDFS \cite{hdfs}, YARN \cite{yarn}, and MapReduce \cite{dean2008mapreduce}. Commons is a collection of utility and structural components which wont be descibed here. HDFS is Hadoop's distributed filesystem that is capable of storing petabytes of data reliably and in a performant manner. YARN is the resource management layer which takes care of resource management and job scheduling across a cluster of machines. Last is MapReduce, which is discussed in detail in Section \ref{sub:batch} and will not be reiterated here.
+
+
+\subsubsection{HDFS}
+
+HDFS \cite{hdfs} is a highly resilient and distributed filesystem for storing extremely large files and petabytes of data. HDFS achieves these goals by breaking down files into blocks (usually of 128 MB) and storing one or more replicas of that each block across a cluster of commodity servers for tolerance of node failure. This ensures that data is not lost and is available to be read from multiple nodes, thereby increasing performance. HDFS also includes a resiliency mechanism by keeping metadata checksums of each block. If a block's checksum is invalid, HDFS will replace that block with the healthy block from one of the other replicas. Additionally, heartbeats are sent from each DataNode to the NameNode for tracking node availability. Files stored with HDFS are write once, read many, including the ability to append and truncate. Hard and soft deletions are also supported \cite{singh2015survey}.
+
+The HDFS architecture consists of a single master called the NameNode and multiple slaves called DataNodes \cite{hdfsarchitecture}. The NameNode keeps track of filesystem namespaces and access control. DataNodes manage the physical storage which HDFS uses to store data in. Files are split into blocks and stored across a set of DataNodes. Operations such as opening, closing and renaming files and directories go through the one NameNode. Reading and writing data occurs directly at the DataNodes. The NameNode performs only metadata operations so that the high bandwidth data operations are only go through DataNodes.
+
+Clients of HDFS include MapReduce, HBase, and other big data systems. Clients will first communicate with the NameNode to open or create files \cite{hdfsarchitecture}. The NameNode responds with either creating a new block or providing the address of an existing block, and includes the address of the DataNode that it resides on. The HDFS client will then communicate directly with the DataNode to read or write a file to a block. When reading or writing to a block, if the next block in the sequence is needed the client asks the NameNode for the next available block, and then proceeds just like another communication with the DataNode.
+
+
+
+\subsubsection{YARN}
+
+\cite{yarn}
+
+
+
+\subsection{Ecosystem} \label{sub:ecosystem}
+
+\cite{thusoo2009hive,olston2008pig,chang2008bigtable}
+% Hive, Pig, HBase
+
+
+
 
 \cite{zhang2016survey,polato2014hadoop,sakr2013hadoop}
 % zhang2016 - 55,57,72,73
