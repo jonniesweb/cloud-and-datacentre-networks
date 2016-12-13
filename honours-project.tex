@@ -581,10 +581,18 @@ Fault tolerance is designed into GraphLab by a transparent checkpointing system 
 
 \subsubsection{Pregel}
 
+Pregel was designed to allow any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vectice identifier for a source and target.
 
+Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of the edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself.
+
+Each iteration blocks until all nodes have finished computing whereas GraphLab allows asynchronous iterations due to sufficient scheduling algorithms and dependency management. Each iteration Pregel runs the user defined function on each vertice in parallel. Simpler reasoning can be performed due to the synchronous nature of Pregel. Race conditions and deadlocks are not an issue.
+
+Fault tolerance is implemented similairly like GraphLab. At the beginning of each iteration each node saves the state of its graph partition to a persistent storage medium. The master of the cluster saves aggregate values calculated over the entire cluster. In case of failure the cluster is rolled back to the latest checkpoint, minimizing the loss of state to the last complete iteration.
 
 
 \subsection{Machine Learning Processing}
+
+
 
 \cite{zhang2016survey,xing2015petuum}
 
