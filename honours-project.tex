@@ -563,9 +563,23 @@ PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runt
 
 \subsection{Graph Processing}
 
-\cite{zhang2016survey,low2012distributed,malewicz2010pregel}
+Graph processing is a specialization on the data model for MapReduce jobs. GraphLab and Pregel both offer optimizations for processing large graphs of data in parallel. Some machine learning problems define their domain in the form of a graph of dependencies, therefore it is fluid to use graph processing systems to solve those kinds of problems.
+
+\cite{zhang2016survey,low2012graphlab,malewicz2010pregel}
+
+\subsubsection{GraphLab}
+
+Graphs in GraphLab use the vertex-centric model where operations are performed on vertexes. GraphLab uses concepts such as a data graph, a sync mechanism, and an update function. The data graph contains the user-defined data for vertices and edges, intermediate data used by the graph algorithm, model parameters, and statistical data. The sync mechanism is used to perform aggregate calculations over the entire graph. It is analogous to the reduce function in MapReduce, but can run concurrently with the update functions. Update functions are analogous to the map part of MapReduce, but in addition to modify its own data, update functions are permitted to modify data of adjacent edges and nodes. The output of the update functions is the updated data and the vertices that need to be modified in the next iteration round.
+
+Work is broken down into iterations where an update function or a sync mechanism operates at most once on a vertice. GraphLab synchronizes iterations between all nodes and coordinates updates between partitions. Data is partitioned across the cluster using either domain specific knowledge or partition heuristics.
+
+Depending on the style of algorithm executed, different schedulers for running the update functions and sync mechanisms for an iteration is required. Jacobi style algorithms can use the synchronous scheduler, where all vertices are updated at the same time, or for Gauss-Seidel algorithms, a round robin scheduler can be used.
+
+Fault tolerance is designed into GraphLab by a transparent checkpointing system that can incrementally create snapshots across the cluster. Execution is not suspended while this is occuring. When a failure occurs GraphLab will resume from the last snapshot.
 
 
+
+\subsubsection{Pregel}
 
 
 
@@ -573,6 +587,9 @@ PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runt
 \subsection{Machine Learning Processing}
 
 \cite{zhang2016survey,xing2015petuum}
+
+\subsubsection{Petuum}
+
 
 
 
