@@ -503,7 +503,7 @@ MapReduce is famed for its successful abstraction of running a distributed paral
 MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing the entire job needing to be restarted and minimizes the lost work by breaking down the job into multiple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
 
 
-\subsubsection{Workflow}
+\subsubsection{MapReduce Workflow}
 
 The logical workflow for MapReduce jobs work as follows:
 \begin{enumerate}
@@ -527,7 +527,7 @@ DBMS use indexes and schemas for speeding up queries and automatically performin
 MapReduce excels at problems where complex analysis is required. An example being where map tasks are too difficult to express in SQL queries such as text analysis. One-off analysis of data is also preferential in MapReduce since it is quicker to use as there is no schema to define and the data load time is generally faster.
 
 
-\subsubsection{Spark}
+\subsubsection{Spark} \label{ssub:spark}
 
 Spark \cite{zaharia2010spark} is an open source batch processing framework that builds on top of Hadoop MapReduce. Spark was designed for iterative dataflow and easy extensibility. Multiple frameworks work seamlessly with Spark such Streaming for streaming, MLbase for machine learning, and GraphX for graph processing. Because of this, it is one of the most popular and active data processing frameworks \cite{zhang2016survey}. Its architecture is the same as MapReduce - a master and multiple workers.
 
@@ -648,7 +648,7 @@ Clients of HDFS include MapReduce, HBase, and other big data systems. Clients wi
 
 First introduced in Hadoop 2.0, YARN \cite{yarn} is the next generation resource scheduler for Hadoop. It replaces the previous resource scheduler which tightly coupled resource and job control flow, leading to scalability issues for large clusters. Hadoop originally catered towards MapReduce job processing but soon became synonymous with big data processing which lead to less than ideal uses of MapReduce. YARN was designed to alleviate these issues by decoupling the resource management components and empowers the applications to perform their own application-specific scheduling and fault tolerance. The result is more performant clusters and an extensible framework for building new big data processing applications.
 
-The YARN architecture \cite{yarnarchitecture} is composed of a global ResourceManager and one ApplicationMaster per application. The ResourceManager runs an agent on each machine in the cluster called the NodeManager. The NodeManager monitors the machine's resources such as CPU, memory, disk, and network and relays that information back to the ResourceManager. The ResourceManager has two primary components: the scheduler and the ApplicationsManager \footnote{The ApplicationsManager should not be confused with the ApplicationMaster}. The ApplicationsManager accepts jobs which then create new ApplicationMasters, creating the first container for new ApplicationMasters, and restarting the ApplicationMaster on failure. The scheduler is in charge of allocating resources to the ApplicationMasters. It is fully replaceable with other resource schedulers (see Section \ref{sec:scheduling}).
+The YARN architecture \cite{yarnarchitecture} is composed of a global ResourceManager and one ApplicationMaster per application. The ResourceManager runs an agent on each machine in the cluster called the NodeManager. The NodeManager monitors the machine's resources such as CPU, memory, disk, and network and relays that information back to the ResourceManager. The ResourceManager has two primary components: the scheduler and the ApplicationsManager \footnote{The ApplicationsManager should not be confused with the ApplicationMaster.}. The ApplicationsManager accepts jobs which then create new ApplicationMasters, creating the first container for new ApplicationMasters, and restarting the ApplicationMaster on failure. The scheduler is in charge of allocating resources to the ApplicationMasters. It is fully replaceable with other resource schedulers (see Section \ref{sec:scheduling}).
 
 The ApplicationMaster can be the master node for a MapReduce, Storm, Spark, etc. application. It is responsible for communicating with the ResourceManager to allocate and free resources such as CPU, memory, disk and network as needed, as well as monitoring the running tasks within containers for completion or errors. The ApplicationMaster also interacts with the NodeManagers for executing and monitoring tasks on that node. In case of application or node failures it is up to the ApplicationManager to reschedule any lost resources, the ResourceManager does not concern itself with this.
 
@@ -658,8 +658,31 @@ When an ApplicationMaster requests resources from the ResourceManager, if succes
 
 \subsection{Ecosystem} \label{sub:ecosystem}
 
-\cite{thusoo2009hive,olston2008pig,chang2008bigtable}
+% \cite{thusoo2009hive,olston2008pig,chang2008bigtable}
+The Hadoop ecosystem is very active with a number of projects using Hadoop to solve big data problems. Notable systems are Hive \cite{thusoo2009hive}, Pig \cite{olston2008pig}, HBase \cite{chang2008bigtable}, and Spark \cite{zaharia2010spark}. Hive is a distributed data warehousing system with a SQL interface, Pig is a high level language for analysing large datasets which compiles down to sequences of MapReduce programs, HBase is a distributed operational database for massive tables, and Spark is a flexible general purpose framework for performing batch, stream, graph, and machine learning processing. Hive, Pig, and HBase are discussed below. Spark has been covered previously in Section \ref{ssub:spark}.
+
+
 % Hive, Pig, HBase
+
+\subsubsection{Hive}
+
+Apache Hive \cite{thusoo2009hive,sakr2013hadoop} was originally built by the Facebook Data Infrastructure Team on top of the Hadoop environment. It presents a SQL interface to a relational data warehouse built on top of Hadoop MapReduce and HDFS. What is gained is the scalability and fault tolerance that characterizes Hadoop. HiveQL is the subset of SQL that is used for querying. Queries are transformed into MapReduce jobs and then dispatched across the cluster for execution. Custom MapReduce programs can also be processed besides using HiveQL.
+
+HiveQL allows only allows load and insert Data Manipulation Language (DML) statements and disallows insert into, update and delete DML statements. This is to enable simple concurrent read and write mechanisms without the extra locking complexity that would otherwise be required. Tables can be created, dropped and altered using standard Data Definition Language (DDL) statements.
+
+The Hive metastore separates this system from a traditional data processing system built ontop of Hadoop. Its purpose is to store the metadata about each table and how it maps to HDFS. This metadata is derived from the DDL statements when they are created and is used every time a query is processed \cite{sakr2013hadoop}.
+
+Hive can handle petabytes of data reliably but is not suitable for interactive queries due to the time it takes to perform multiple map-reduce stages and the intermediate saving of data to HDFS \cite{zhang2016survey}. Therefore Hive serves well as a data warehouse, where data size and parallelism take precedence over performance.
+
+
+\subsubsection{Pig}
+
+
+
+
+
+\subsubsection{HBase}
+
 
 
 
