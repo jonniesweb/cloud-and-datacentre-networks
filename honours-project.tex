@@ -677,8 +677,9 @@ Hive can handle petabytes of data reliably but is not suitable for interactive q
 
 \subsubsection{Pig}
 
+Pig \cite{pig} is a platform and a dynamically typed high level language for data analysis on top of Hadoop MapReduce. Pig uses the Pig Latin \cite{piglatin} language for programming MapReduce queries and Pig manages the execution of those programs. Both Pig and Pig Latin are used interchangeably. Pig takes language ideas such as SQL's declarative statements and functional programming. As described in \cite{sakr2013hadoop}, writing Pig can be described as being similar to a SQL query execution plan. Experienced programmers are drawn towards using Pig because it is better than writing SQL and persuading the optimizer to write an efficient query plan.
 
-
+Pig has primitives that perform filtering, grouping, and aggregation. It also allows the programmer to define their own functions that can be included in the control flow. Pig programs are parsed by an interpreter, checked for valid syntax, and then transformed into a logical plan of dependencies which is then optimized. The resulting Directed Acyclic Graph (DAG) is converted to a sequence of MapReduce jobs, which is very similar to Hive. Another optimization round is completed and then the resulting DAG of MapReduce jobs is run in topological order on Hadoop MapReduce \cite{sakr2013hadoop,polato2014hadoop}.
 
 
 \subsubsection{HBase}
@@ -687,7 +688,8 @@ Hive can handle petabytes of data reliably but is not suitable for interactive q
 
 
 
-\cite{zhang2016survey,polato2014hadoop,sakr2013hadoop}
+
+% \cite{zhang2016survey,polato2014hadoop,sakr2013hadoop}
 % zhang2016 - 55,57,72,73
 
 \section{Security} \label{sec:security}
