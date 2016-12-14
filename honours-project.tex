@@ -646,7 +646,13 @@ Clients of HDFS include MapReduce, HBase, and other big data systems. Clients wi
 
 \subsubsection{YARN}
 
-\cite{yarn}
+First introduced in Hadoop 2.0, YARN \cite{yarn} is the next generation resource scheduler for Hadoop. It replaces the previous resource scheduler which tightly coupled resource and job control flow, leading to scalability issues for large clusters. Hadoop originally catered towards MapReduce job processing but soon became synonymous with big data processing which lead to less than ideal uses of MapReduce. YARN was designed to alleviate these issues by decoupling the resource management components and empowers the applications to perform their own application-specific scheduling and fault tolerance. The result is more performant clusters and an extensible framework for building new big data processing applications.
+
+The YARN architecture \cite{yarnarchitecture} is composed of a global ResourceManager and one ApplicationMaster per application. The ResourceManager runs an agent on each machine in the cluster called the NodeManager. The NodeManager monitors the machine's resources such as CPU, memory, disk, and network and relays that information back to the ResourceManager. The ResourceManager has two primary components: the scheduler and the ApplicationsManager \footnote{The ApplicationsManager should not be confused with the ApplicationMaster}. The ApplicationsManager accepts jobs which then create new ApplicationMasters, creating the first container for new ApplicationMasters, and restarting the ApplicationMaster on failure. The scheduler is in charge of allocating resources to the ApplicationMasters. It is fully replaceable with other resource schedulers (see Section \ref{sec:scheduling}).
+
+The ApplicationMaster can be the master node for a MapReduce, Storm, Spark, etc. application. It is responsible for communicating with the ResourceManager to allocate and free resources such as CPU, memory, disk and network as needed, as well as monitoring the running tasks within containers for completion or errors. The ApplicationMaster also interacts with the NodeManagers for executing and monitoring tasks on that node. In case of application or node failures it is up to the ApplicationManager to reschedule any lost resources, the ResourceManager does not concern itself with this.
+
+When an ApplicationMaster requests resources from the ResourceManager, if successful, the ApplicationMaster will be given a container on a node to use. A container is a abstract concept of a group of resources such as CPU, disk, network, and memory. The ApplicationMaster will then bootstrap the container with the necessary configuration to function as it's own worker. Under high load situations containers can be preempted from ApplicationMasters to schedule new containers or requests for new containers can fail. It is up to the ResourceManager's scheduler as to what the behaviour is.
 
 
 
