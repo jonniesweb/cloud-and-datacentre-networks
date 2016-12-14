@@ -554,7 +554,7 @@ Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distribute
 
 Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: tuples flow into the graph from \textit{spouts} and \textit{bolts} are where a given function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
 
-Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronization.
+Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper \cite{zookeeper}. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronization.
 
 Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of failure. A backflow mechanism relays information to the originating \textit{spout} to notify it of it's progress. Trident \cite{toshniwal2014storm}, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
 
@@ -566,7 +566,7 @@ S4 \cite{neumeyer2010s4} is a distributed and decentralized architecture which t
 
 Applications built on top of S4 consist of a graph of Processing Elements (PE). Each processing element is a function written by a programmer. Streams interconnect the PEs. The key of each event determines which node an event goes to. External streams exist where events can be sent and received from external applications.
 
-PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runtime to a physical node by the communication layer. The PNs are in charge of receiving events, executing the respective PEs on the events, and sending out new events. The communication layer is managed by ZooKeeper to maintain configuration information and coordinate between nodes of the system \cite{neumeyer2010s4}. Besides mapping PNs to physical nodes the communication layer generally manages the cluster and handles failures.
+PEs run on logical nodes called Processing Nodes (PN). Each PN is mapped at runtime to a physical node by the communication layer. The PNs are in charge of receiving events, executing the respective PEs on the events, and sending out new events. The communication layer is managed by ZooKeeper \cite{zookeeper} to maintain configuration information and coordinate between nodes of the system \cite{neumeyer2010s4}. Besides mapping PNs to physical nodes the communication layer generally manages the cluster and handles failures.
 
 
 
@@ -664,7 +664,7 @@ The Hadoop ecosystem is very active with a number of projects using Hadoop to so
 
 % Hive, Pig, HBase
 
-\subsubsection{Hive}
+\subsubsection{Hive} \label{ssub:hive}
 
 Apache Hive \cite{thusoo2009hive,sakr2013hadoop} was originally built by the Facebook Data Infrastructure Team on top of the Hadoop environment. It presents a SQL interface to a relational data warehouse built on top of Hadoop MapReduce and HDFS. What is gained is the scalability and fault tolerance that characterizes Hadoop. HiveQL is the subset of SQL that is used for querying. Queries are transformed into MapReduce jobs and then dispatched across the cluster for execution. Custom MapReduce programs can also be processed besides using HiveQL.
 
@@ -684,7 +684,23 @@ Pig has primitives that perform filtering, grouping, and aggregation. It also al
 
 \subsubsection{HBase}
 
+Originally based off of Google BigTable \cite{chang2008bigtable}, Apache HBase is an open source NoSQL database supporting massive sparse tables and petabytes of data. HBase is built on top of MapReduce and HDFS for its scalability and fault tolerance primitives. It supports read and write operations and random access of data \cite{hbaseanalysis}.
 
+It is best to think of HBase as a multi-dimensional map. Data in HBase is organized into tables, each of which have a name. Data in tables are stored in the following form: $(\mathbf{row}:string, \ \mathbf{column}:string, \ \mathbf{time}:int64) \rightarrow \mathbf{value}:string$ \cite{chang2008bigtable,hbasedocs}. The \textit{row} is the unique key used for the row. It can be up to 64k, but 10-100 bytes are suitable for most cases. Cells are stored in sorted order by row-key, thereby ensuring that items of greatest interest are near each other.
+
+The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family phsically groups together it's column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
+
+The \textit{time} is a timestamp that enables versioning of the data. Column families can specify limits to how many historical versions should be kept by specifying either a number of versions back to keep or the number of days back to keep. When querying for data if no timestamp is specified then the most recent value will be returned. If a timestamp is specified, the value that is equal to or less than that timestamp is returned \cite{hbasedocs,hbasejimbojw}.
+
+The \textit{value} is the actual data that is stored for the row-column-time entry. It is simply an array of bytes.
+
+Any table scans are implemented using MapReduce jobs whereas accessing a single row-key require only finding its location in the index. Updates to rows are atomic on the row, thereby enabling reading and writing to occur at the same time \cite{hbaseanalysis}.
+
+To achieve distributed and redundant storage HBase uses HDFS to automatically partition tables into regions. Each region is a chunk of rows identified by its starting and ending row and its own random identifier \cite{hbaseanalysis}.
+
+The architecture for HBase consists of a master node called the HMaster and multiple slave nodes called HRegionServers. The HMaster assigns regions to the HRegionServers and performs recovery when a HRegionServer is down. HRegionServers interface with clients to perform the reading and writing to regions. A ZooKeeper \cite{zookeeper} instance is used to manage the HBase cluster's configuration \cite{hbaseanalysis}.
+
+The SQL language is not supported with HBase, but a project exists to integrate Hive (Section \ref{ssub:hive}) with HBase to run Hive SQL queries on HBase tables \cite{hivehbaseintegration}.
 
 
 
