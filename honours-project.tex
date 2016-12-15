@@ -774,12 +774,17 @@ Fine grained access controls on data comes with increased amounts of computation
 \subsubsection{Denial of Service Protection}
 
 
+Proactive testing of the security of systems and implementing basic security mechanisms for databases, applications, and other services help prevent loopholes from being found and exploited by attackers. DDoS attacks can be handled using a number of methods. Running an Intrusion Detection System (IDS) can verify network requests before they reach the cloud servers. Extra network bandwidth can cope with the increase in bandwidth caused by the DDoS. Additionally, having backup IPs can still allow access to critical resources.
 
+The authors in \cite{jin2003hop} present an industrial solution to DDoS attack prevention called hop count filtering where spoofed IP packets are filtered out of the incoming network requests based on the time to live (TTL) information of incoming packets. An IP to hop count table is built to compare the expected number of hops for a given IP range. Spoofed incoming packets will often have a different hop count than the expected number of hops. This method has shown to reduce the DDoS attack by 90\%.
 
+Another method is introduced in \cite{bakshi2010securing} where an IDS monitors the traffic flows coming into VMs. When a traffic spike occurs the IDS checks that the senders are acknowledging their connections. If no acknowledgement happens a honeypot pings the suspicious IP address. No reply from the ping request signifies a DDoS attack. The attacker IP addresses are blocked and the VM is migrated to a different datacentre.
 
+Bohatei \cite{fayaz2015bohatei} is the name of a mechanism which uses software defined networking (SDN) and network functions virtualization (NFV) to flexibly and elastically defend against DDoS attacks. CSPs can add Bohatei to their network to dynamically filter and block DDoS attacks directed towards their CSUs. The authors show that many different attack types can be mitigated within one minute and can handle up to 500 Gbps of bandwidth.
 
 
 \subsubsection{Third Party Audit}
+
 
 
 
