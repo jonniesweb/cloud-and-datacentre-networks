@@ -705,10 +705,46 @@ The SQL language is not supported with HBase, but a project exists to integrate 
 
 
 
-% \cite{zhang2016survey,polato2014hadoop,sakr2013hadoop}
-% zhang2016 - 55,57,72,73
 
 \section{Security} \label{sec:security}
+
+The advantages of cloud computing is quite clear: infinitely scalable, on-demand computing resources, reduced costs, and quicker product development. More benefits of the cloud can be found in Section \ref{sec:cloud-services}. Users of cloud services expect their data to be secure and only accessible through allowed methods. Breaches of this trust has resulted in the cloud service users (CSUs) losing confidence in the abilities of the cloud service provider (CSP), ultimately affecting the CSP's reputation and unknowable damage to the CSU. Discussed next are the threats that CSPs or CSUs should be aware of and, if applicable, put in the proper safeguards.
+
+\subsection{Threats}
+
+Certain threats to users and operators of cloud services are discussed next. The specific types to be mentioned are the following: data loss is the irrevocable result of data being deleted, data breach is the unauthorized access of data, hypervisor attacks can result in unauthorized access to business or customer information, and Denial of Service (DoS) is the loss of service availability.
+
+
+
+\subsubsection{Data Loss and Breach}
+
+By definition, cloud computing means that valuable business data is stored on the servers of the service providers. If this data were to be deleted or accessed due to an accident or for malicious purposes the effects can be detrimental to the CSU. A survey that was conducted on customers of cloud services has shown that 63\% will be less likely to buy a cloud service if the CSP reported that private customer data was breached \cite{microsoftdata}. Causes of data loss can be due to the actions of malicious attackers, corruption, loss of encryption keys, natural disasters, deletion and faults in software \cite{kazim2015survey}.
+
+Data breaches can be the result of application bugs, infrastructure issues, insufficient authorization or authentication, and operational issues. Breaches can also occur in unexpected ways such as a malicious virtual machine running on the same hypervisor as the targeted virtual machine \cite{zhang2012cross}.
+
+Social engineering customer service agents has resulted in numerous leakages of data and unauthorized access \cite{amazonse,icloudse}. Brute forcing of authentication methods can also result in unauthorized access and the possibility of data loss and breaches \cite{alertlogicsecurity}.
+
+CSPs create multiple dispersed copies of customer's data for resiliency. The more copies of the data out there, the more attack surfaces that exist for hackers to target. Problems in data synchronization across environments can lead to inconsistencies and corruption in data. Additionally, heterogeneous security settings across the multiple copies of data is only as secure as its weakest link in the chain \cite{liu2015survey}.
+
+
+\subsubsection{Hypervisor}
+
+
+
+
+
+\subsubsection{Denial of Service}
+
+
+
+% data loss, data breach, hypervisor, multitenancy, managerial, account hijacking, DoS, insecure APIs
+
+
+
+\subsection{Defenses}
+
+% encryption, access control, third-party audit, isolation, TPM, trust, DoS protection, malicious insiders
+
 
 \cite{liu2015survey,kazim2015survey,kalpana2015brief}
 
