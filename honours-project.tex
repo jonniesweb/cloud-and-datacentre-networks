@@ -729,9 +729,15 @@ CSPs create multiple dispersed copies of customer's data for resiliency. The mor
 
 \subsubsection{Hypervisor}
 
+Hypervisors enable the virtualization of complete operating systems on top of a physical system. CSPs often run multiple virtual machines alongside eachother in a multitenant environment. The hypervisor should provide adequate segregation between virtual machines but they can have vulnerabilities or leak information.
 
+VM escape occurs when a malicious user breaks the security mechanisms of the hypervisor and gains access to the host or other virtual machines running on the same hypervisor, leading to unauthorized access to sensitive data and abuse of resources \cite{owens2009securing}. A priviledge escallation vulnerability in Xen, the open source hypervisor, gave attackers in a virtual machine unauthorized access to the host \cite{xenprivilege}.
 
+VM hopping can occur when an attacker has gained access to the hypervisor, and manipulates network traffic, configuration files, or performs a man-in-the-middle attack to the running VMs \cite{hyde2009survey}.
 
+VMs can become infected and remotely controlled when the configuration and data files of the VM are changed and then migrated to a different host. Once the VM starts up on the new host the infected VM can infect that host and its VMs. This kind of attack is called VM mobility \cite{hyde2009survey,zhang2011virtualization}.
+
+Lastly, VMs that have  been forgotten can quickly become vulnerable to new security flaws that would otherwise be patched in an actively maintained system. Attackers are able to exploit unpatched vulnerabilities and gain access to the system and its data \cite{jasti2010security}.
 
 \subsubsection{Denial of Service}
 
