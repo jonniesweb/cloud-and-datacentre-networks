@@ -751,9 +751,36 @@ Single machines or hundreds of thousands of compromised devices in a botnet can 
 
 % data loss, data breach, hypervisor, multitenancy, managerial, account hijacking, DoS, insecure APIs
 
-
-
 \subsection{Defenses}
+
+\subsubsection{Encryption}
+
+Encryption offers integrity and confidentiality of data. Data at rest inside of a VM, in a backup system, or transiting across a network can be encrypted to hide the sensitive information within. Data can also be encrypted before it is even placed in the cloud. Proper key management infrastructure may be required. Encrypting the data at rest and in transit can thwart man-in-the-middle attacks and prevent the reading of data if access to the encrypted data has been compromised.
+
+CloudProof \cite{popa2011enabling} is a system for encrypting data for storage on Amazon S3 and Azure Blob Storage. It tracks the integrity of all files stored for detecting tampering and access violations. When CSP's break their data security SLA by witnessing misbehaviour, CloudProof can provide proof of the misbehaviour and gives the CSU leverage at demanding some sort of compensation.
+
+Encryption is not perfect, with the fact that a legitimate person could decrypt the encrypted information. In multitenant systems encryption provides an extra layer of security in case a tenant breaks outside of their virtualized environment. Additional complexity is encountered due to having to manage multiple encryption keys and the access control around those keys. One of the major limitations which is gradually being overcome with Moore's Law is the computational overhead imposed by encryption \cite{liu2015survey}.
+
+\subsubsection{Access Control}
+
+Access control enables CSPs to define which users have the privilege to perform an action on a resource at a fine grained level. CSPs can put access controls into place to control DDoS attacks by restricting the resources they are able to access or to prevent unauthorized users from accessing private data \cite{liu2015survey}.
+
+Access controls are limited by the added complexity that they introduce. Sufficiently complicated access control schemes can result in limited scalability and heterogeneous policies can result in weak link in the chain scenarios which could break and expose the resources to unauthorized access. Access controls can be simply bypassed if flaws exist in the system that implements it, access controls that are too open, or to CSPs that enable unfettered access to their employees \cite{kazim2015survey}.
+
+Fine grained access controls on data comes with increased amounts of computation overhead from data management and key distribution. The authors in \cite{access2010} provide a mechanism for enforcing fine grained access control policies based on data attributes and hand off most of the 
+
+
+
+\subsubsection{Denial of Service Protection}
+
+
+
+\subsubsection{Third Party Audit}
+
+
+
+
+
 
 % encryption, access control, third-party audit, isolation, TPM, trust, DoS protection, malicious insiders
 
