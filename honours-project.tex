@@ -55,7 +55,7 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-    Foo
+    Enterprises and organizations are having larger and more dynamic workloads. The technologies that enable the efficient scaling of computing resources is needed to keep up with the requirements of these workloads. The field of cloud and datacentre networking has been evolving to tackle the challenges with building and operating cheap, efficient, and scalable internetworked computing resources. Workloads, such as big data processing, is unfeasible to run on a single server, therefore large networks of computers are needed. This survey covers the main topics of cloud and datacentre networking - cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
 \end{abstract}
 \newpage
 
@@ -804,7 +804,7 @@ Third party auditors can verify the integrity of data through mechanisms such as
 
 \section{Scheduling} \label{sec:scheduling}
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
+There is no one size fits all scheduler for properly scheduling jobs to their resources. Data processing systems such as MapReduce (Section \ref{sub:batch}), infrastructure as a service providers (Section \ref{ssub:iaas}), and software defined networks (Section \ref{sec:sdn}) all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
 
 %Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
 
@@ -812,34 +812,13 @@ Cloud Providers typically have to balance their resources according to current d
 
 \subsection{Algorithms} \label{sub:schedalgorithms}
 
-A number of resource scheduling algorithm (RSA) types have been researched thus far \cite{Singh2016}:
-\begin{itemize}
-    \item Cost
-    \item Time
-    \item Energy
-    \item Dynamic
-    \item Priority
-    \item Optimization
-    \item SLA and QoS
-    \item Compromised Cost Time
-    \item Profit Based
-    \item Hybrid
-    \item Bargaining
-    \item Virtual Machines
-    \item Nature Inspired and Bio-Inspired
-\end{itemize}
-
+A number of resource scheduling algorithm (RSA) types have been researched so far \cite{Singh2016}. Those include: cost, time, energy, priority, optimization, SLA and QoS, profit, and bargaining.
 
 
 \subsubsection{Cost} \label{ssub:algCost}
 
 % taxonomy
-Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and virtual machine (VM).
-Bag of tasks consists of first come first serve scheduling based on QoS of task.
-Hybrid algorithm designs try to balance the overloading and underloading of resources.
-Algorithms concerned with SLAs of both the user and provider take into account their respective QoS requirements like energy, makespan or monetary cost etc.
-Task-based cost algorithms group subtasks together, then that group is scheduled the needed resources.
-With VM, SLAs are used to schedule resources based on violations of the SLA.
+Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and virtual machine (VM). Bag of tasks consists of first come first serve scheduling based on QoS of task. Hybrid algorithm designs try to balance the overloading and underloading of resources. Algorithms concerned with SLAs of both the user and provider take into account their respective QoS requirements like energy, makespan or monetary cost etc. Task-based cost algorithms group subtasks together, then that group is scheduled the needed resources. With VM, SLAs are used to schedule resources based on violations of the SLA.
 
 % non-provider, migrateable workloads (dynamic)
 \textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal.
@@ -856,19 +835,7 @@ A genetic cost-based algorithm that takes into account the SLA was built by \tex
 
 \subsection{QoS Parameters} \label{sub:schedQosParams}
 
-QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by Singh \cite{Singh2016}:
-\begin{itemize}
-    \item Cost
-    \item Energy
-    \item Execution Time
-    \item Response Time
-    \item Resource Utilization
-    \item Deadline
-    \item Throughput
-    \item Availability
-    \item Scalability
-    \item Migration Cost
-\end{itemize}
+QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by \textcite{Singh2016}. Those are: cost, energy, execution time, response time, utilization, deadline, throughput, availability, and scalability.
 
 Will expand on each QoS parameter.
 
@@ -938,8 +905,9 @@ Large groups of tasks or applications may face conditions where the transfer of 
 % subsection schedulingaspects (end)
 \subsection{User Concerns}
 
-\cite{Jennings2015}
-Likely to have their own SLA for it's end users.
+
+
+
 
 
 \subsection{Provider Concerns} \label{provider-concerns}
