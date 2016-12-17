@@ -45,7 +45,12 @@
 
 \title{Cloud and Datacentre Networks}
 \author{Jon Simpson}
-\date{Fall 2016}
+
+\date{
+\small{Supervisors: Dr. Wei Shi, Dr. J-P Corriveau\\
+Carleton University\\
+COMP 4905 - Honours Project\\
+Fall 2016}}
 
 
 \begin{document}
@@ -55,7 +60,7 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-    Enterprises and organizations are having larger and more dynamic workloads. The technologies that enable the efficient scaling of computing resources is needed to keep up with the requirements of these workloads. The field of cloud and datacentre networking has been evolving to tackle the challenges with building and operating cheap, efficient, and scalable internetworked computing resources. Workloads, such as big data processing, is unfeasible to run on a single server, therefore large networks of computers are needed. This survey covers the main topics of cloud and datacentre networking - cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
+    Enterprises and organizations are having larger and increasingly dynamic workloads. The technologies that enable the efficient scaling of computing resources is needed to keep up with the requirements of these workloads. The field of cloud and datacentre networking has been evolving to tackle the challenges with building and operating cheap, efficient, and scalable internetworked computing resources. Workloads, such as big data processing, is unfeasible to run on a single server, therefore clusters of computers are needed. This survey covers the main topics of cloud and datacentre networking - cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
 \end{abstract}
 \newpage
 
@@ -70,14 +75,10 @@ Cloud and datacentres are becoming larger and more advanced in the race to provi
 In this paper, the main topics of cloud and datacentre networking are explained with the most up to date information available.
 
 
-% reference google networking paper with 100-fold increase in speed
-
-\subsection{Contribution} \label{sub:contribution}
-
 \subsection{Methodology} \label{sub:methodology}
 
 % update section names
-This article is a meta-survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
+This article is a survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security, and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
 
 % end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
@@ -623,7 +624,7 @@ Fault tolerance is implemented using checkpoints and will restart back to the la
 
 \section{Hadoop} \label{sec:hadoop}
 
-Hadoop \footnote{Homepage: \url{https://hadoop.apache.org/}} is an open source project that belongs to the Apache Software Foundation. Growing volumes of collected data prompted the need for storing and analysing large amounts of this data efficiently. All of this business data is analysed to better understand the customer and perform less riskier decision making. This motive has spawned the concept of Big Data and has now found it's way into almost every field: retail, telecommunications, healthcare, academia, manufacturing, government, and finance. Hadoop enables the efficient processing of big data on clusters with thousands of commodity servers, provides a simple abstraction for harnessing the power of parallel computing without requiring knowledge with distributed systems or parallel programming, and enables reliable processing with built-in fault tolerance \cite{zhang2016survey,singh2015survey}.
+Hadoop \footnote{Homepage: \url{https://hadoop.apache.org/}} is an open source project that belongs to the Apache Software Foundation. Growing volumes of collected data prompted the need for storing and analyzing large amounts of this data efficiently. All of this business data is analysed to better understand the customer and perform less riskier decision making. This motive has spawned the concept of Big Data and has now found it's way into almost every field: retail, telecommunications, healthcare, academia, manufacturing, government, and finance. Hadoop enables the efficient processing of big data on clusters with thousands of commodity servers, provides a simple abstraction for harnessing the power of parallel computing without requiring knowledge with distributed systems or parallel programming, and enables reliable processing with built-in fault tolerance \cite{zhang2016survey,singh2015survey}.
 
 Hadoop can be categorized into a few primary components, the Hadoop Distributed File System (HDFS), Yet Another Resource Scheduler (YARN), and the MapReduce framework. Each component is covered in the following subsection (\ref{sub:components}). Following that is the broader Hadoop ecosystem, where other systems integrate or build on top of the main Hadoop components (\ref{sub:ecosystem}).
 
@@ -631,7 +632,7 @@ Hadoop can be categorized into a few primary components, the Hadoop Distributed 
 
 \subsection{Main Components} \label{sub:components}
 
-Hadoop can be described by its four main components. Those are Common, HDFS \cite{hdfs}, YARN \cite{yarn}, and MapReduce \cite{dean2008mapreduce}. Commons is a collection of utility and structural components which wont be descibed here. HDFS is Hadoop's distributed filesystem that is capable of storing petabytes of data reliably and in a performant manner. YARN is the resource management layer which takes care of resource management and job scheduling across a cluster of machines. Last is MapReduce, which is discussed in detail in Section \ref{sub:batch} and will not be reiterated here.
+Hadoop can be described by its four main components. Those are Common, HDFS \cite{hdfs}, YARN \cite{yarn}, and MapReduce \cite{dean2008mapreduce}. Commons is a collection of utility and structural components which wont be described here. HDFS is Hadoop's distributed filesystem that is capable of storing petabytes of data reliably and in a performant manner. YARN is the resource management layer which takes care of resource management and job scheduling across a cluster of machines. Last is MapReduce, which is discussed in detail in Section \ref{sub:batch} and will not be reiterated here.
 
 
 \subsubsection{HDFS}
@@ -670,7 +671,7 @@ Apache Hive \cite{thusoo2009hive,sakr2013hadoop} was originally built by the Fac
 
 HiveQL allows only allows load and insert Data Manipulation Language (DML) statements and disallows insert into, update and delete DML statements. This is to enable simple concurrent read and write mechanisms without the extra locking complexity that would otherwise be required. Tables can be created, dropped and altered using standard Data Definition Language (DDL) statements.
 
-The Hive metastore separates this system from a traditional data processing system built ontop of Hadoop. Its purpose is to store the metadata about each table and how it maps to HDFS. This metadata is derived from the DDL statements when they are created and is used every time a query is processed \cite{sakr2013hadoop}.
+The Hive metastore separates this system from a traditional data processing system built on top of Hadoop. Its purpose is to store the metadata about each table and how it maps to HDFS. This metadata is derived from the DDL statements when they are created and is used every time a query is processed \cite{sakr2013hadoop}.
 
 Hive can handle petabytes of data reliably but is not suitable for interactive queries due to the time it takes to perform multiple map-reduce stages and the intermediate saving of data to HDFS \cite{zhang2016survey}. Therefore Hive serves well as a data warehouse, where data size and parallelism take precedence over performance.
 
@@ -688,7 +689,7 @@ Originally based off of Google BigTable \cite{chang2008bigtable}, Apache HBase i
 
 It is best to think of HBase as a multi-dimensional map. Data in HBase is organized into tables, each of which have a name. Data in tables are stored in the following form: $(\mathbf{row}:string, \ \mathbf{column}:string, \ \mathbf{time}:int64) \rightarrow \mathbf{value}:string$ \cite{chang2008bigtable,hbasedocs}. The \textit{row} is the unique key used for the row. It can be up to 64k, but 10-100 bytes are suitable for most cases. Cells are stored in sorted order by row-key, thereby ensuring that items of greatest interest are near each other.
 
-The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family phsically groups together it's column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
+The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family physically groups together it's column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
 
 The \textit{time} is a timestamp that enables versioning of the data. Column families can specify limits to how many historical versions should be kept by specifying either a number of versions back to keep or the number of days back to keep. When querying for data if no timestamp is specified then the most recent value will be returned. If a timestamp is specified, the value that is equal to or less than that timestamp is returned \cite{hbasedocs,hbasejimbojw}.
 
@@ -729,9 +730,9 @@ CSPs create multiple dispersed copies of customer's data for resiliency. The mor
 
 \subsubsection{Hypervisor}
 
-Hypervisors enable the virtualization of complete operating systems on top of a physical system. CSPs often run multiple virtual machines alongside eachother in a multitenant environment. The hypervisor should provide adequate segregation between virtual machines but they can have vulnerabilities or leak information.
+Hypervisors enable the virtualization of complete operating systems on top of a physical system. CSPs often run multiple virtual machines alongside each other in a multitenant environment. The hypervisor should provide adequate segregation between virtual machines but they can have vulnerabilities or leak information.
 
-VM escape occurs when a malicious user breaks the security mechanisms of the hypervisor and gains access to the host or other virtual machines running on the same hypervisor, leading to unauthorized access to sensitive data and abuse of resources \cite{owens2009securing}. A priviledge escallation vulnerability in Xen, the open source hypervisor, gave attackers in a virtual machine unauthorized access to the host \cite{xenprivilege}.
+VM escape occurs when a malicious user breaks the security mechanisms of the hypervisor and gains access to the host or other virtual machines running on the same hypervisor, leading to unauthorized access to sensitive data and abuse of resources \cite{owens2009securing}. A privilege escalation vulnerability in Xen, the open source hypervisor, gave attackers in a virtual machine unauthorized access to the host \cite{xenprivilege}.
 
 VM hopping can occur when an attacker has gained access to the hypervisor, and manipulates network traffic, configuration files, or performs a man-in-the-middle attack to the running VMs \cite{hyde2009survey}.
 
@@ -741,7 +742,7 @@ Lastly, VMs that have  been forgotten can quickly become vulnerable to new secur
 
 \subsubsection{Denial of Service}
 
-Denial of service (DoS) and distributed DoS (DDoS) attacks of high profile companies and public figures are becomming more common and more powerful \cite{verisignddos}. In 2016 a 1 Terabit per second attack was performed using a botnet of IoT devices \cite{arsddos}. These attacks are performed to prevent legitimate users from using the service by overwhelming the networking and computing equipment of a website or online service. 81\% of CSU consider DDoS attacks a serious threat in clouds \cite{top2013notorious}.
+Denial of service (DoS) and distributed DoS (DDoS) attacks of high profile companies and public figures are becoming more common and more powerful \cite{verisignddos}. In 2016 a 1 Terabit per second attack was performed using a botnet of IoT devices \cite{arsddos}. These attacks are performed to prevent legitimate users from using the service by overwhelming the networking and computing equipment of a website or online service. 81\% of CSU consider DDoS attacks a serious threat in clouds \cite{top2013notorious}.
 
 Single machines or hundreds of thousands of compromised devices in a botnet can be remotely controlled to perform various bandwidth-heavy attacks directed at a target. Examples of methods use technologies from many layers of the OSI networking model. Some include continually making expensive to process HTTP requests, opening many TCP connections, and performing DNS amplification attacks with spoofed IP addresses all directed at the victim's cloud service.
 
@@ -928,6 +929,8 @@ Any of the above may be optimized in whichever matter makes the most sense for t
 
 % end scheduling
 \section{Conclusion} \label{sec:conclusion}
+
+Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it's more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across the nodes of a cluster. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
 
 
 % end conclusion
