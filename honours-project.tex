@@ -805,11 +805,52 @@ Third party auditors can verify the integrity of data through mechanisms such as
 
 \section{Scheduling} \label{sec:scheduling}
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. Data processing systems such as MapReduce (Section \ref{sub:batch}), infrastructure as a service providers (Section \ref{ssub:iaas}), and software defined networks (Section \ref{sec:sdn}) all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
+
+
+% zhan - scheduling for infra, virtualization, application
+% - 3.1 scheduling for user QoS
+% - 3.2 scheduling for provider efficiency
+
+% singh - RSA and QoS schedulers
+
+
+
+
+
+
+
+There is no one size fits all scheduler for properly scheduling jobs to their resources. Applications such as MapReduce (Section \ref{sub:batch}), virtual resources such as those offered by IaaS (Section \ref{ssub:iaas}), and the underlying physical hardware all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
 
 %Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
 
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
+
+
+
+\subsection{Scheduling Resources in the Cloud}
+
+The cloud architecture exhibits a separation of concerns.  The architecture can be effectively grouped into three major layers based on the type of scheduling that occurs at each layer: the deployment (infrastructure) layer, the virtualization (platform) layer, and the application (software) layer \cite{zhan2015cloud}. This follows the IaaS, PaaS, and SaaS models outlined in Section \ref{sec:cloud-services}. Each layer has different scheduling concerns, as discussed below.
+
+
+\subsubsection{Deployment Layer}
+
+The deployment layer focuses on the physical resources such as networking, storage, server hardware and low-level cloud services. It is concerned with the optimal scheduling of data routing, application migrations, multi-datacentre, service placement, and strategic infrastructure.
+
+
+
+\subsubsection{Virtualization Layer}
+
+The virtualization layer concerns itself with the virtualized infrastructure that runs on top of the deployment layer. It consists of virtualized machines, databases, networking, security, and storage. Scheduling on this layer is to optimally map the virtual resources to its physical counterpart, taking into consideration load balancing, energy efficiency, etc.
+
+
+
+\subsubsection{Application Layer}
+
+Applications are deployed on top of the virtualization layer for use by the cloud service user (CSU) or their end users. Applications, user tasks, workflows, and frameworks all run on this layer. Scheduling of this software is primarily concerned with optimizing efficiency and QoS.
+
+
+
+
 
 \subsection{Algorithms} \label{sub:schedalgorithms}
 
