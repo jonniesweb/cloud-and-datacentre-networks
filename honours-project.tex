@@ -883,11 +883,16 @@ When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on th
 
 \subsection{Virtualization Layer Scheduling}
 
-Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud}.
+Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Many of the schedulers below mentioned use this abstraction for managing resources. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud}.
 
 
 \subsubsection{Cost Effectiveness}
 
+In a environment where the cloud computing resources have heterogeneous costs, monetary savings can be had by scheduling for cost effectiveness. The authors of \cite{mark2011evolutionary} present a hybrid algorithm consisting of ant conlony optimization, genetic, and particle swarm optimization to schedule VMs to physical machines. Their method included a demand forecaster to predict the expected demand in the future. The scheduler was optimized to guarantee the lowest cost depending on the availability of resources and resource price, including  a heuristic to place VMs of the same customer close to each other.
+
+\textcite{ioannis2011cost} determined a way to handle starvation and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
+
+A genetic algorithm approach was taken by the authors of \cite{lee2010topology} to reduce application makespan, indirectly providing cost savings. Their method involved scheduling VMs based on the dependency graph that was made. The situation involved more physical machines than VMs that would run at a single time, therefore the chromosome was a binary string that was as long as the physical machines and the value for each bit of the string was whether the phsyical machine would run a VM, or not. A prediction algorithm analysed the VM dependency graph and the potential schedule to determine its effectiveness in reducing the makespan.
 
 
 
@@ -943,7 +948,7 @@ Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, ta
 % distributed
 A genetic cost-based algorithm that takes into account the SLA was built by \textcite{liu2013cost}. It considers a low and high budget to effectively schedule resources, ultimately lowering the SLA violations, increasing utilization and profit while lowering cost.
 \textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using Pareto dominance, and another to deprioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
-\textcite{ioannis2011cost} determined a way to handle starvation and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
+
 
 
 % subsubsection algCost (end)
