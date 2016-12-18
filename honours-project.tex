@@ -834,19 +834,72 @@ The cloud architecture exhibits a separation of concerns.  The architecture can 
 
 \subsubsection{Deployment Layer}
 
-The deployment layer focuses on the physical resources such as networking, storage, server hardware and low-level cloud services. It is concerned with the optimal scheduling of data routing, application migrations, multi-datacentre, service placement, and strategic infrastructure.
+The deployment layer focuses on the physical resources such as networking, storage, server hardware and low-level cloud services. It is concerned with the optimal scheduling of data routing, application migrations, multi-datacentre, service placement, and strategic infrastructure. When scheduling the deployment layer the three biggest concerns are scheduling for partner federation, data routing, and service placement.
 
 
 
 \subsubsection{Virtualization Layer}
 
-The virtualization layer concerns itself with the virtualized infrastructure that runs on top of the deployment layer. It consists of virtualized machines, databases, networking, security, and storage. Scheduling on this layer is to optimally map the virtual resources to its physical counterpart, taking into consideration load balancing, energy efficiency, etc.
+The virtualization layer concerns itself with the virtualized infrastructure that runs on top of the deployment layer. It consists of virtualized machines, databases, networking, security, and storage. Scheduling on this layer is to optimally map the virtual resources to its physical counterpart, taking into consideration load balancing, energy efficiency, etc. Scheduling on the virtualization layer can be categorized with the three following concerns: scheduling for cost effectiveness, load balance, and energy conservation.
 
 
 
 \subsubsection{Application Layer}
 
-Applications are deployed on top of the virtualization layer for use by the cloud service user (CSU) or their end users. Applications, user tasks, workflows, and frameworks all run on this layer. Scheduling of this software is primarily concerned with optimizing efficiency and QoS.
+Applications are deployed on top of the virtualization layer for use by the cloud service user (CSU) or their end users. Applications, user tasks, workflows, and frameworks all run on this layer. Scheduling of this software is primarily concerned with optimizing efficiency and QoS. This category of scheduling is broken down into three subcategories: scheduling for negotiation, CSU QoS, and CSP efficiency.
+
+
+
+
+\subsection{Infrastructure Layer Scheduling}
+
+The components that make up the physical infrastructure and the services that go on top of it need to be efficient as possible or else the virtualization layer and application layer will be constrained by it. Combining the services provided by multiple clouds is called partner federation, and can better balance the workload between clouds, deliver more efficient cloud services, or save energy. Additionally, finding cloud resources fast and efficiently, such as database services, are needed to provide responsive services for CSUs. Lastly, for CSPs to provide adequate and responsive cloud services to their customers and end users, proper geographical location of computing resources is necessary. Services that are closer to the users that they serve provide better QoS \cite{zhan2015cloud}.
+
+
+\subsubsection{Partner Federation}
+
+Partner federation is the act of CSPs interacting with each other to provide a unified service that CSUs interact with, abstracting the underlying CSP that is used. \cite{zhang2010load} uses an ant colony optimization method where the objective is to balance the complex and dynamic load balancing across the federated clouds while maximizing the user satisfaction to utilization across all clouds ratio.
+
+
+Similairly, the authors of \cite{liu2011declarative} present the COPE platform which automatically optimizes resource utilization across clouds based on each CSU's SLAs. Declarative policies are specified in which the SLAs are used as input to a optimization problem which finds the suitable resources to place each CSU's workloads on. \cite{macias2012client} analyses the case where not all SLAs are satisfied and gives policies where preferential CSUs can take priority over other CSUs.
+
+
+\subsubsection{Data Routing}
+
+Defined as the efficient finding of the shortest path to the cloud services and data after they have been deployed is called data routing. \cite{jia2010dynamic} describe a method of rapidly and efficiently finding the shortest route between a service and the database it interacts with by using an ant colony optimization algorithm.
+
+In \cite{yan2011optimization} used ant colony optimization and genetic algorithms to create a cloud database route scheduling algorithm that also prioritized efficient and effective discovery of the shortest path. Their findings showed that the routing load decreased and improved the efficiency of compute resources.
+
+
+
+\subsubsection{Service Placement}
+
+When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on the datacentre closest to the users. Placing the services close as possible to the users provides low latency and high bandwidth between them and the service. Placement of VMs on a federated cloud for PaaS was looked at in \cite{agostinho2011bio}. The authors optimized energy savings and load balancing among the CSP's datacentres.
+
+\cite{jindarak2011performance} took the approach of optimizing the average time it took users to access data and the balance of the workload across CSPs by placing data. Their approach used a genetic algorithm to optimally schedule the service placements to datacentres. \cite{guo2013data} took a different approach from \cite{jindarak2011performance} by optimally scheduling to minimize the distributed cooperation costs.
+
+
+
+
+\subsection{Virtualization Layer Scheduling}
+
+\subsubsection{Cost Effectiveness}
+\subsubsection{Load Balance}
+\subsubsection{Energy Conservation}
+
+
+
+
+
+\subsection{Application Layer Scheduling}
+
+\subsubsection{Negotiation}
+\subsubsection{User Quality of Service}
+\subsubsection{Provider Efficiency}
+
+
+
+
 
 
 
@@ -879,7 +932,6 @@ A genetic cost-based algorithm that takes into account the SLA was built by \tex
 
 QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by \textcite{Singh2016}. Those are: cost, energy, execution time, response time, utilization, deadline, throughput, availability, and scalability.
 
-Will expand on each QoS parameter.
 
 % subsection schedQosParams (end)
 \subsection{Algorithm Classification} \label{sub:algclassification}
