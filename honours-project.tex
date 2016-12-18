@@ -883,11 +883,32 @@ When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on th
 
 \subsection{Virtualization Layer Scheduling}
 
+Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud}.
+
+
 \subsubsection{Cost Effectiveness}
+
+
+
+
+
 \subsubsection{Load Balance}
+
+Optimizing for load balance involves allocating virtual reources evenly across the physical resources. Genetic algorithms have been proposed by many to balance different aspects of virtualized resources. \cite{hu2010scheduling} used a genetic algorithm to optimize the load balance for VMs to physical resources. VMs are encoded in a tree-type encoding on the physical resource to indicate how many VMs it contains. When the load balance changes the genetic algorithm redistributes the load while minimizing VM migration and optimizing load balance.
+
+The authors in \cite{zhou2012optimize} focused on load balancing the virtualized block storage resources. Their approach used a genetic algorithm to efficiently load balance the virtual block storage on to the physical storage system. The dynamic load balance stragegy resulted in higher I/O performance.
+
+Load balancing of VMs to physical resources by taking into account the memory, CPU, and network was looked at by \cite{zhao2011multi}. A genetic algorithm was used to take into account the three resources and objectively optimize the resource allocation. Their genetic coding involved defining the length of the chromosome as the number of VMs and each gene is an integer corresponding to the phsyical machine the VM belongs to. The NSGA-II algorithm was used to solve this multiobjective optimization problem.
+
+
+
 \subsubsection{Energy Conservation}
 
+Perpendicular to scheduling for load balance, energy conservation aims to optimize the energy saved by putting as many VMs onto phsyical machines as possible. This optimization benefits the CSP because they can reduce energy costs by putting unused computing resources into a power saving state.
 
+Maximizing the utilization of physical resources by packing VMs as tight as possible was achieved using a genetic algorithm in \cite{zhong2010approach}. This resulted in the minimum number of physical machines being used to run the virtual machine workload. Their chromosome encoding scheme consisted of the length of the chromosome being the number of VMs and the gene being the physical machine that the VM ran on. The scheduling runs every time the physical or virtual resources are added or removed.
+
+The authors of \cite{feller2011energy} modeled the energy conservation problem as a multidimensional bin-packing problem. An ant colony optimization algorithm was used to place VMs onto physical machines using pheremone information and a heuristic to place as many VMs on every physical node as possible, thus reducing the number of physical nodes used. The same work was followed up in \cite{feller2012autonomous} by using an ant colony optimization approach to perform autonomous scheduling of VMs in large cloud infrastructures to optimize for energy conservation and scalability. Unused physical machines are put into a low power mode to conserve energy.
 
 
 
