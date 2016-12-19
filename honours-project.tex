@@ -77,8 +77,7 @@ In this paper, the main topics of cloud and datacentre networking are explained 
 
 \subsection{Methodology} \label{sub:methodology}
 
-% update section names
-This article is a survey, constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security, and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
+This survey is constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security, and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. A representative sample of the technologies and research is presented in each section since reporting on all research is infeasible. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
 
 % end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
@@ -120,8 +119,7 @@ These NoSQL database systems do well for many use cases which don't require stro
 
 \subsubsection{Power} \label{ssub:power}
 
-Datacentres use a significant amount of the world's energy. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting.
-There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management (see section \ref{provider-concerns} for more information), designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems \cite{norwaydatacentre}.
+Datacentres use a significant amount of the world's energy \cite{datacentreenergy}. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting. There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management, designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems \cite{norwaydatacentre}.
 
 % subsubsection power (end)
 
@@ -955,128 +953,12 @@ In \cite{zhu2011hybrid}, the authors show a method to optimize for load balance 
 
 
 
-
-
-
-\subsection{Algorithms} \label{sub:schedalgorithms}
-
-A number of resource scheduling algorithm (RSA) types have been researched so far \cite{Singh2016}. Those include: cost, time, energy, priority, optimization, SLA and QoS, profit, and bargaining.
-
-
-\subsubsection{Cost} \label{ssub:algCost}
-
-% taxonomy
-Cost based RSAs consist of the following subtypes: bag of tasks, hybrid, SLA, task, and virtual machine (VM). Bag of tasks consists of first come first serve scheduling based on QoS of task. Hybrid algorithm designs try to balance the overloading and underloading of resources. Algorithms concerned with SLAs of both the user and provider take into account their respective QoS requirements like energy, makespan or monetary cost etc. Task-based cost algorithms group subtasks together, then that group is scheduled the needed resources. With VM, SLAs are used to schedule resources based on violations of the SLA.
-
-% non-provider, migrateable workloads (dynamic)
-\textcite{ana2010} describes a first come first serve budget constraint resource scheduling algorithm which minimizes cost, completion time and maximizes CPU utilization. The downside is that starvation may occur, resulting in this  method being non-optimal.
-\textcite{van2010cost} worked on optimizing communication, memory and CPU for non-preemptable jobs with deadline constraints in hybrid clouds.
-
-% distributed
-A genetic cost-based algorithm that takes into account the SLA was built by \textcite{liu2013cost}. It considers a low and high budget to effectively schedule resources, ultimately lowering the SLA violations, increasing utilization and profit while lowering cost.
-\textcite{su2013cost} used a DAG to map tasks with rules to map the most cost-effective resources using Pareto dominance, and another to deprioritize low priority tasks to minimize monetary cost. All of this lead to reducing makespan and monetary cost.
-
-
-
-% subsubsection algCost (end)
-% subsection schedalgorithms (end)
-
-\subsection{QoS Parameters} \label{sub:schedQosParams}
-
-QoS has many unique parameters that have been explored before. Based on requirements the following QoS parameters have been explored, in order of focus in research papers by \textcite{Singh2016}. Those are: cost, energy, execution time, response time, utilization, deadline, throughput, availability, and scalability.
-
-
-% subsection schedQosParams (end)
-\subsection{Algorithm Classification} \label{sub:algclassification}
-
-
-% May not want this section if not making a table
-Resource scheduling algorithms can be described by a common set of characteristics as defined by \textcite{Singh2016}. Those characteristics being sub type, searching mechanism, application type, optimality, operational environment, objective function, scheduling criteria, resource scheduling strategy, merits, demerits and the technology used to test.
-
-% subsection algclassification (end)
-\subsection{Algorithm Traits} \label{sub:algtraits}
-
-Resource scheduling algorithms solve many different types of scheduling problems. Due to the breadth of problems and the many ways to solve them a number of common traits between algorithms are realized \cite{Singh2016}.
-
-\subsubsection{Subtype} How the RSA can be further classified from it's main classification.
-
-\subsubsection{Searching Mechanism} The method the algorithm uses to search for the best schedule to use.
-
-\subsubsection{Application Type} This type refers to the size, shape and characteristics of the applications that the RSA will schedule resources for. For example: homogeneous/heterogeneous scientific workloads, high performance applications, scalable applications, map reduce, etc.
-
-\subsubsection{Optimal} The objective that the RSA aims to maximize is considered optimal if the objective has been met, otherwise a non-optimal solution was used.
-
-\subsubsection{Operational Environment} Is the environment where this algorithm can be implemented in. The environment categories used here are homogeneous, heterogeneous, distributed and dynamic.
-
-\subsubsection{Objective Function} The purpose that drives the scheduling of resources to workloads. eg. minimizing makespan.
-
-\subsubsection{Scheduling Criteria} The end result of the objective function, where the result can be compared to other solutions. eg. cost, energy, etc.
-
-\subsubsection{Merits} Individual advantages that this RSA has to offer.
-
-\subsubsection{Demerits} Individual disadvantages that come with the RSA.
-
-\subsubsection{Technology} The technology used to implement the algorithm for testing. eg. simulators, data processing applications, etc.
-
-\subsubsection{Number of Citations} Defines the importance and validity of the algorithm from other peers in the research community.
-
-% subsection algtraits (end)
-
-\subsection{Aspects of Resource Scheduling} \label{sub:schedulingaspects}
-
-\textcite{Singh2016} broke down resource scheduling algorithms into a descriptive set of aspects. Unscheduled task groups, workflow with many instances, service and task level scheduling, multiple workflows, and group of tasks are described.
-
-
-
-\subsubsection*{Unscheduled Task Groups}
-
-The need to schedule new tasks at runtime may be difficult if the set of tasks is heterogeneous. Classifying each task using a model of the resource requirements built from previous tasks can provide an adequate estimate for the execution cost. The cost and performance of the system can be improved through scheduling resources based on the estimated task execution cost.
-
-\subsubsection*{Workflow with Many Instances}
-
-Relative applications that run on a large number of nodes are cost constrained when processing large volumes of transactional workloads. Minimizing execution cost and time make up the criteria for the RSA. Objectively balancing the resource utilization results in cost savings.
-
-\subsubsection*{Service and Task Level Scheduling}
-
-Local, node level scheduling of resources to workload at runtime results in cost savings from minimizing the time taken to schedule resources. Makespan, cost and CPU time are all reduced. Particularly useful in assigning tasks and services to VMs.
-
-\subsubsection*{Multiple Workflows}
-
-Workflows with differing QoS parameters may be dynamically scheduled, resulting in the ability for those applications or workloads to dynamically scale at runtime. This aspect's criteria consists of CPU utilization, execution time, makespan, and scheduling success.
-
-\subsubsection*{Group of Tasks}
-
-Large groups of tasks or applications may face conditions where the transfer of data is high, the data set is very large or the execution time is very long. Algorithms that optimize for cost can reduce the completion time and decrease the resource utilization.
-
-
-% subsection schedulingaspects (end)
-\subsection{User Concerns}
-
-
-
-
-
-
-\subsection{Provider Concerns} \label{provider-concerns}
-
-% idea: SLA's/SLO's for users, see Jennings2015
-
-
-Balanced load - utilization balanced across all resources of a type
-
-fault tolerance - impact on sys performance is minimized
-
-energy consumption minimized - resources allocated to allow for minimum energy consumption for a workload
-
-Any of the above may be optimized in whichever matter makes the most sense for the organization \cite{Jennings2015}.
-
-
-
-
 % end scheduling
 \section{Conclusion} \label{sec:conclusion}
 
-Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it's more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across the nodes of a cluster. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
+% Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it's more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across the nodes of a cluster. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
+
+Cloud and datacentres are continuously evolving to serve competitive business needs, surges in users, and scalability. Clouds are enabling on-demand self service, broad network access, resource pooling, rapid elasticity, and measured service \cite{mell2011nist} to meet those needs. This survey has provided a representative sample of the current research in the biggest topics for cloud and datacentre networking: cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
 
 
 % end conclusion
