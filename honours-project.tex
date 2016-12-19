@@ -819,11 +819,11 @@ Third party auditors can verify the integrity of data through mechanisms such as
 
 
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. Applications such as MapReduce (Section \ref{sub:batch}), virtual resources such as those offered by IaaS (Section \ref{ssub:iaas}), and the underlying physical hardware all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}. Resource scheduling algorithms (RSA) can be classified into three major groups: static, dynamic and distributed. Static refers to algorithms that schedule resources before runtime whereas dynamic assigns resources at runtime. A third resource scheduling policy, distributed, is the act of scheduling resources at runtime for different environments.
-
-%Monitoring of the entire infrastructure is required to be able to plan and react quickly to changes in demand. Both Cloud Users and Cloud Providers have to do so according to their objectives.
+There is no one size fits all scheduler for properly scheduling jobs to their resources. Applications such as MapReduce (Section \ref{sub:batch}), virtual resources such as those offered by IaaS (Section \ref{ssub:iaas}), and the underlying physical hardware all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}.
 
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
+
+The organization of algorithms for scheduling of cloud resources is explained in the following section. Sections \ref{sub:infra-sched}, \ref{sub:virt-sched}, \ref{sub:appl-sched} then give a representative sample of the scheduling algorithms available.
 
 
 
@@ -851,7 +851,7 @@ Applications are deployed on top of the virtualization layer for use by the clou
 
 
 
-\subsection{Infrastructure Layer Scheduling}
+\subsection{Infrastructure Layer Scheduling} \label{sub:infra-sched}
 
 The components that make up the physical infrastructure and the services that go on top of it need to be efficient as possible or else the virtualization layer and application layer will be constrained by it. Combining the services provided by multiple clouds is called partner federation, and can better balance the workload between clouds, deliver more efficient cloud services, or save energy. Additionally, finding cloud resources fast and efficiently, such as database services, are needed to provide responsive services for CSUs. Lastly, for CSPs to provide adequate and responsive cloud services to their customers and end users, proper geographical location of computing resources is necessary. Services that are closer to the users that they serve provide better QoS \cite{zhan2015cloud}.
 
@@ -881,9 +881,11 @@ When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on th
 
 
 
-\subsection{Virtualization Layer Scheduling}
 
-Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Many of the schedulers below mentioned use this abstraction for managing resources. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud}.
+
+\subsection{Virtualization Layer Scheduling} \label{sub:virt-sched}
+
+Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Many of the schedulers below mentioned use this abstraction for managing resources. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud,Singh2016}.
 
 
 \subsubsection{Cost Effectiveness}
@@ -917,12 +919,37 @@ The authors of \cite{feller2011energy} modeled the energy conservation problem a
 
 
 
-\subsection{Application Layer Scheduling}
+\subsection{Application Layer Scheduling} \label{sub:appl-sched}
+
+Scheduling for the application layer can be considered the most important of the three layers as it directly interacts with the CSU or end users. Providers want to maximize utilization to get the most out of their resources per the work being done or reducing the energy spent. Users want to have certain performance objectives such as QoS, application makespan, user cost, or application performance \cite{zhan2015cloud,Jennings2015}. The balance of the two bring forth many different types of schedulers. Negotiation scheduling is the balance of both CSP's and CSU's concerns, while user QoS is purely scheduling for the user's concerns, and provider efficiency is scheduling purely for the provider's concerns.
+
 
 \subsubsection{Negotiation}
+
+CSPs can deal with the fluctuation of cloud resource demand throughout the day by changing the amount charged for the cloud resources. This strategy finds a balance between user cost and cloud utilization, which is called scheduling by negotiation. Additionally, reserving a VM for a period of time is cheaper than the same period of time using an on-demand VM. The scheduler can then optimize for cost by being able to pack VMs more efficiently together \cite{chaisiri2012optimization}.
+
+An ant colony optimization algorithm was used to negotiate the user concerns of response time and throughput, and the provider concerns of operational cost and energy usage \cite{chimakurthi2011power}. The research showed that both user's and provider's concerns were met using the adaptive ant colony optimization scheduler which scheduled resources on to the minimal number of resources required.
+
+
+
+
 \subsubsection{User Quality of Service}
+
+The primary objectives of scheduling for the user is QoS, user costs, application performance, reliability, and makespan. In the work performed by \textcite{kumar2012independent}, the makespan was optimized by using a genetic algorithm and combining it with Min-Min and Max-Min strategies to improve population initialization and speed up the algorithm.
+
+Multiple objective optimizations have been proposed by \cite{szabo2012evolving} which used a evolutionary computation algorithm to take into account the makespan and user costs. They applied their work to scheduling of workflow applications and VM scheduling. The NSGA-II algorithm was used to optimize and solve the multiobjective problem.
+
+
+
+
 \subsubsection{Provider Efficiency}
 
+
+Providers who schedule applications for their own efficiency can optimize for utilization, energy consumption, and load balancing. Optimal load balancing of resources across nodes of the cloud was performed in \cite{nishant2012load}. Their solution used an ant colony optimization algorithm to start at the node with the greatest number of neighbouring nodes so that the travelling ant has the greatest number of directions to travel in when attempting to find more nodes that are underloaded or overloaded. While the ant is travelling, it will move work on nodes that are overloaded to nodes which are underloaded.
+
+Another method was proposed by \cite{wang2012energy} to split one job into multiple tasks consisting of map and reduce stages. Energy consumption was optimized by using a genetic alogrithm that was modified to use a local search mechanism.
+
+In \cite{zhu2011hybrid}, the authors show a method to optimize for load balance using a multiagent genetic algorithm. To reduce the potentially large size of tasks to schedule, tasks were grouped together based on similarity. Groups of tasks are represented in the genetic algorithm as the length of the chromosome. A binary string is used to specify the VM the group of tasks go to.
 
 
 
