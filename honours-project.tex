@@ -87,7 +87,7 @@ This survey is constructed from a number of recent surveys and new articles focu
 % update organization with updated sections
 
 Cloud and datacentre networking is broken down into the following seven sections:
-\secref{sec:cloud-services} breaks down the different service types offered by cloud providers, \secref{sec:network-structure} shows different strategies of defining the physical structure of the datacentre network, \secref{sec:sdn} discusses the virtual networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} is where batch and stream processing of big data is explained, \secref{sec:hadoop} describes the leading big data processing framework and it's ecosystem, \secref{sec:security} explains the attacks and defences for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} goes into detail about resource scheduling algorithms for cloud-based workloads and its underlying systems.
+\secref{sec:cloud-services} breaks down the different service types offered by cloud providers, \secref{sec:network-structure} shows different strategies of defining the physical structure of the datacentre network, \secref{sec:sdn} discusses the virtual networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} is where batch and stream processing of big data is explained, \secref{sec:hadoop} describes the leading big data processing framework and its ecosystem, \secref{sec:security} explains the attacks and defences for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} goes into detail about resource scheduling algorithms for cloud-based workloads and its underlying systems.
 
 \subsection{Resources} \label{sub:resources}
 
@@ -111,7 +111,7 @@ Software Defined Networks (SDN) is making it possible to have more flexible netw
 
 
 % this paragraph is awkward
-Public cloud providers currently offer persistent storage through virtual disks, object storage, and various types of databases. Common types of databases available are relational SQL databases, while some newer databases follow the NoSQL type. These newer types of databases are more scalable but less consistent since they don't follow the ACID transactional properties \cite{Jennings2015}. The choice of database is application-specific.
+Public cloud providers currently offer persistent storage through virtual disks, object storage, and various types of databases. Common types of databases available are relational SQL databases, while some newer databases follow the NoSQL type. These newer types of databases are more scalable but less consistent since they do not follow the ACID transactional properties \cite{Jennings2015}. The choice of database is application-specific.
 
 NoSQL database systems do well for many use cases which do not require strong consistency. A few different types available are column stores, key-value stores, document stores, and graph databases \cite{graphDB2013}. Object stores are built on top of key-value stores, where a key is used to retrieve existing data, or new data is uploaded and a key for that data is returned. Both Amazon \cite{dynamodb}, Facebook \cite{cassandra}, and LinkedIn \cite{voldemort} have their own versions of a key-value datastore.
 
@@ -222,7 +222,7 @@ A group of organizations contribute to the building and management of a cloud in
 % subsubsection deploy-community (end)
 \subsubsection{Hybrid} \label{ssub:deploy-hybrid}
 
-Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching it's maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization's own computing resources are in peak demand \cite{dillon2010cloud}.
+Public-private, private-community, public-community, and public-private-community are all combinations of hybrid clouds. Hybrid clouds require the ability to seamlessly move workloads and data from one cloud to another. If free computing resources is reaching its maximum on a private cloud, a public cloud can be used to provide extra resources. This is called ``cloud bursting'' as it can provide extra computing resources when the organization's own computing resources are in peak demand \cite{dillon2010cloud}.
 
 
 % subsubsection deploy-hybrid (end)
@@ -247,7 +247,7 @@ Workloads which require different types of communication such as one-to-all, one
 % subsubsection parallel-traffic (end)
 \subsubsection{Bandwidth Oversubscription} \label{ssub:bandwidth-oversubscription}
 
-The more servers that are connected with each other the more expensive it is to provide a full bisection bandwidth. Topology design followed by cost are the main drivers of bisection bandwidth \cite{wang2015survey}. Bandwidth oversubscription occurs when the network topology doesn't provide full bandwidth bisection for the entire network. The oversubscription can be expressed as a ratio for quantitative comparison. Some providers may choose a topology which performs bandwidth oversubscription on the premise that the network bandwidth will not be the bottleneck resource.
+The more servers that are connected with each other the more expensive it is to provide a full bisection bandwidth. Topology design followed by cost are the main drivers of bisection bandwidth \cite{wang2015survey}. Bandwidth oversubscription occurs when the network topology does not provide full bandwidth bisection for the entire network. The oversubscription can be expressed as a ratio for quantitative comparison. Some providers may choose a topology which performs bandwidth oversubscription on the premise that the network bandwidth will not be the bottleneck resource.
 
 
 % subsubsection bandwidth-oversubscription (end)
@@ -296,7 +296,7 @@ One of the most common hierarchical models is the three-tier \cite{kliazovich201
 
 \subsubsection{Fat-tree} \label{subp:fat-tree}
 
-The Fat-tree \cite{al2008scalable} hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with it's associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
+The Fat-tree \cite{al2008scalable} hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with its associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
 % subsubsection fat-tree (end)
 
 % VL2
@@ -360,7 +360,7 @@ In the Jellyfish topology \cite{singla2012jellyfish}, each switch has a fixed nu
 % Scafida
 \subsubsection{Scafida} \label{subp:scafida}
 
-Scafida topologies \cite{gyarmati2010scafida}, just like Jellyfish topologies, also include randomness in it's graph. Scafida imposes an upper bound on the length of the longest route to prevent the communication time between two distant servers from becoming too long. Each server and switch in the network does not follow any order when it comes to its addressing and routing information. Because of this, the node's routing table is programmatically determined from its surrounding neighbours.
+Scafida topologies \cite{gyarmati2010scafida}, just like Jellyfish topologies, also include randomness in its graph. Scafida imposes an upper bound on the length of the longest route to prevent the communication time between two distant servers from becoming too long. Each server and switch in the network does not follow any order when it comes to its addressing and routing information. Because of this, the node's routing table is programmatically determined from its surrounding neighbours.
 
 
 % subsubsection scafida (end)
@@ -440,7 +440,7 @@ Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standa
 % cisco ONE
 \subsubsection{ONE}
 
-Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It's able to utilize mobile and 60 GHz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow \cite{wang2015survey}.
+Created by Cisco, ONE \cite{ciscoone} is a resource unifying SDN standard. It is able to utilize mobile and 60 GHz wireless networks in addition to regular physical networks. ONE is monetized to enterprises for its flexible use and application-driven customization of network devices for driving business goals, namely faster time to market and optimized resources. ONE provides APIs for its platform of agents, overlay networks, and network devices. By focusing on more of the technology stack, ONE is able to optimize SDN better than OpenFlow \cite{wang2015survey}.
 
 
 % techniques - server virtu, net i/o virt, net virt, resource virt.
@@ -596,7 +596,7 @@ Fault tolerance is designed into GraphLab by a transparent checkpointing system 
 
 Pregel \cite{malewicz2010pregel} was designed to allow for any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vertice identifier for a source and target.
 
-Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of its edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself \cite{zhang2016survey}.
+Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of its edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of its vertice and its outgoing edges, and change the structure of the graph itself \cite{zhang2016survey}.
 
 Each iteration blocks until all nodes have finished computing whereas GraphLab allows asynchronous iterations due to sufficient scheduling algorithms and dependency management. In each iteration Pregel runs the user defined function on each vertice in parallel. Simpler reasoning can be performed due to the synchronous nature of Pregel. Race conditions and deadlocks are not an issue.
 
@@ -692,7 +692,7 @@ Originally based off of Google BigTable \cite{chang2008bigtable}, Apache HBase i
 
 It is best to think of HBase as a multi-dimensional map. Data in HBase is organized into tables, each of which have a name. Data in tables are stored in the following form: $(\mathbf{row}:string, \ \mathbf{column}:string, \ \mathbf{time}:int64) \rightarrow \mathbf{value}:string$ \cite{chang2008bigtable,hbasedocs}. The \textit{row} is the unique key used for the row. It can be up to 64k, but 10-100 bytes are suitable for most cases \cite{chang2008bigtable}. Cells are stored in sorted order by row-key, thereby ensuring that items of greatest interest are near each other.
 
-The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family physically groups together it's column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
+The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family physically groups together its column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
 
 The \textit{time} is a timestamp that enables versioning of the data. Column families can specify limits to how many historical versions should be kept by specifying either a number of versions back to keep or the number of days back to keep. When querying for data if no timestamp is specified then the most recent value will be returned. If a timestamp is specified, the value that is equal to or less than that timestamp is returned \cite{hbasedocs,hbasejimbojw}.
 
