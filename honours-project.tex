@@ -60,24 +60,26 @@ Fall 2016}}
 \thispagestyle{empty}
 
 \begin{abstract}
-    Enterprises and organizations are having larger and increasingly dynamic workloads. The technologies that enable the efficient scaling of computing resources is needed to keep up with the requirements of these workloads. The field of cloud and datacentre networking has been evolving to tackle the challenges with building and operating cheap, efficient, and scalable internetworked computing resources. Workloads, such as big data processing, is unfeasible to run on a single server, therefore clusters of computers are needed. This survey covers the main topics of cloud and datacentre networking - cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
+    Enterprises and organizations are having larger and increasingly dynamic workloads. The technologies that enable the efficient scaling of computing resources is needed to keep up with the requirements of these workloads. The field of cloud and datacentre networking has been evolving to tackle the challenges with building and operating cheap, efficient, and scalable internetworked computing resources. Workloads, such as big data processing, are unfeasible to run on a single server, therefore clusters of computers are needed. This survey covers the main topics of cloud and datacentre networking: cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
 \end{abstract}
 \newpage
 
 \tableofcontents
+\newpage
 
 \pagenumbering{arabic}
 
+
 \section{Introduction} \label{sec:introduction}
 
-Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it's more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across the nodes of a cluster. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
+Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it is more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across a cluster of nodes. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
 
 In this paper, the main topics of cloud and datacentre networking are explained with the most up to date information available.
 
 
 \subsection{Methodology} \label{sub:methodology}
 
-This survey is constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security, and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. A representative sample of the technologies and research is presented in each section since reporting on all research is infeasible. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
+This survey is constructed from a number of recent surveys and new articles focused on the topics of cloud services, network structures, software defined networks, data processing, Hadoop, security, and scheduling. The main points and ideas are collected and explained then compared for their commonalities and differences. A representative sample of the technologies and research is presented in each section since reporting on all research is infeasible in a single paper. The information collected from the surveys are updated with newer articles that have come out since their respective publishing date.
 
 % end subsection methodology
 \subsection{Paper Organization} \label{sub:organization}
@@ -85,24 +87,22 @@ This survey is constructed from a number of recent surveys and new articles focu
 % update organization with updated sections
 
 Cloud and datacentre networking is broken down into the following seven sections:
-\secref{sec:cloud-services} breaks down the different types of services offered by cloud providers, \secref{sec:network-structure} shows different strategies of defining the physical structure of the datacentre network, \secref{sec:sdn} discusses the virtual networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} is where batch and stream processing of data is explained, \secref{sec:hadoop} being one of the leading big data processing frameworks, \secref{sec:security} for the importance and new attack vectors for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} discusses and classifies the algorithms and workload characteristics that go in to assigning resources to workloads.
+\secref{sec:cloud-services} breaks down the different service types offered by cloud providers, \secref{sec:network-structure} shows different strategies of defining the physical structure of the datacentre network, \secref{sec:sdn} discusses the virtual networking abstractions that can be built on top of the physical networks, \secref{sec:data-processing} is where batch and stream processing of big data is explained, \secref{sec:hadoop} describes the leading big data processing framework and it's ecosystem, \secref{sec:security} explains the attacks and defences for modern cloud and datacentre infrastructures, and lastly \secref{sec:scheduling} goes into detail about resource scheduling algorithms for cloud-based workloads and its underlying systems.
 
 \subsection{Resources} \label{sub:resources}
 
-At the bottom layer of every datacentre and cloud is the individual resources that power it. Single units of resources that when interconnected together form powerful networks of compute and storage. The compute, network and storage resources require a comparably sized power grid to keep all of the components powered.
+At the bottom layer of every datacentre and cloud is the individual resources that power it. Single units of resources that when interconnected together form powerful networks of compute and storage. The compute, network and storage resources require a comparably sized power grid to keep it all powered.
 
 \subsubsection{Compute} \label{ssub:compute}
 
-Compute is the main resource consisting of memory, CPU, network interface and local I/O. Many times the service provider runs virtual machines on top of the physical machines for the consumers to use. This provides a necessary level of abstraction to separate users in a cloud computing environment \cite{Jennings2015}.
+Compute is the main resource consisting of memory, CPU, network interface and local I/O. Many service providers abstract away the physical   Many times the service provider runs virtual machines on top of the physical machines for the consumers to use. This provides a necessary level of security and flexibility to separate users in a cloud computing environment \cite{Jennings2015}.
 
 % subsubsection compute (end)
 \subsubsection{Network} \label{ssub:network}
 
-Network equipment interconnect the computing resources to allow for high speed communication between other compute resources and the internet. Communicating effectively is constrained by cost \cite{Jennings2015}. A complete graph connects every compute resource to every other compute resource but the cost of each link grows by $n$, where $n$ is the number of compute resources, also known as nodes.
+Network equipment interconnects the computing resources to enable high speed communication between other resources and the Internet. Communicating effectively is constrained by cost as the number of links increase \cite{Jennings2015}. The goal of interconnecting compute resources is to provide a scalable topology where ``increasing the number of ports in the network should linearly increase the bisection bandwidth'' \cite{abts2012guided}.
 
-The goal of interconnecting compute resources is to provide a scalable topology where ``increasing the number of ports in the network should linearly increase the bisection bandwidth'' \cite{abts2012guided}.
-
-The most commonly used topology for datacentres is trees. Trees provide a high bisection bandwidth for all nodes connected to the same switch. Also well known is the hyper-cubes and meshes, which are more present in High Performance Computing (HPC) \cite{Jennings2015}. Another type of topology is the Clos network. % go into more detail
+The most commonly used topology for datacentres is trees. Trees provide a high bisection bandwidth for all nodes connected to the same switch. Also well known are hyper-cubes and meshes, which are more present in High Performance Computing (HPC) \cite{Jennings2015}. See Section \ref{sec:network-structure} for more details.
 
 Software Defined Networks (SDN) is making it possible to have more flexible networks. Custom protocols and different addressing schemes can be used where a physical network would be impractical otherwise.
 
@@ -111,15 +111,15 @@ Software Defined Networks (SDN) is making it possible to have more flexible netw
 
 
 % this paragraph is awkward
-Public cloud providers currently offer persistent storage through virtual disks, object storage and various types of databases. Common databases that are available are of the ACID type, while a newer type of database is of the NoSQL type. These newer types of databases are more scalable but less consistent since they don't follow the ACID transactional properties. The trade-off with these two different types of databases is performance and consistency, where performance caters to availability and response time, and consistency follows the ACID transactional properties \cite{Jennings2015}.
+Public cloud providers currently offer persistent storage through virtual disks, object storage, and various types of databases. Common types of databases available are relational SQL databases, while some newer databases follow the NoSQL type. These newer types of databases are more scalable but less consistent since they don't follow the ACID transactional properties \cite{Jennings2015}. The choice of database is application-specific.
 
-These NoSQL database systems do well for many use cases which don't require strong consistency. A few different types available are column stores, key-value stores, document stores, and graph databases \cite{graphDB2013}. Object stores are built on top of key-value stores, where a key is used to retrieve some data or new data is uploaded and a key corresponding to that data is returned. Both Amazon \cite{dynamodb}, Google \cite{cassandra} and LinkedIn \cite{voldemort} have their own version of a key-value datastore.
+NoSQL database systems do well for many use cases which do not require strong consistency. A few different types available are column stores, key-value stores, document stores, and graph databases \cite{graphDB2013}. Object stores are built on top of key-value stores, where a key is used to retrieve existing data, or new data is uploaded and a key for that data is returned. Both Amazon \cite{dynamodb}, Facebook \cite{cassandra}, and LinkedIn \cite{voldemort} have their own versions of a key-value datastore.
 
 % subsubsection storage (end)
 
 \subsubsection{Power} \label{ssub:power}
 
-Datacentres use a significant amount of the world's energy \cite{datacentreenergy}. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution and lighting. There are four main ways to reduce power consumption for datacentres as defined by Jennings \cite{Jennings2015}. Those are: creation of lower-power usage devices for hardware energy efficiency, energy-aware resource management, designing applications with awareness of it's energy use, and development of more efficient ancillary systems. Additionally, the climate of the location of a datacentre can aid greatly in cooling systems \cite{norwaydatacentre}.
+Datacentres use a significant amount of the world's energy \cite{datacentreenergy}. Powering the networking, compute and storage systems as well as the ancillary systems such as cooling, power distribution, security, and lighting. There are four main ways to reduce power consumption for datacentres as defined in \cite{Jennings2015}. Those are the creation of lower power usage devices for hardware energy efficiency, energy-aware resource management, designing applications with awareness of its energy use, and development of more efficient ancillary systems. Additionally, the climate of the datacentre's location can aid greatly in cooling the systems \cite{norwaydatacentre}.
 
 % subsubsection power (end)
 
@@ -156,7 +156,7 @@ Customers of the consumer are able to access and interact with the computing res
 % subsubsection net-access (end)
 \subsubsection{Resource Pooling} \label{ssub:resource-pooling}
 
-Resources of the provider are pooled together such that the consumer is unaware of the underlying organization of the physical hardware. The resource pooling is achieved either through multi-tenancy or virtualization of the computing resources. This enables flexibility for the provider as they are able to flexibly grow or shrink their physical infrastructure without affecting the consumer's resource allocations. Consumers also benefit by being able to dynamically change their resource allocations and not have to worry about the placement of those resources.
+Resources of the provider are pooled together such that the consumer is unaware of the underlying organization of the physical hardware. The resource pooling is achieved either through multi-tenancy or virtualization of the computing resources. This enables flexibility for the provider as they are able to grow or shrink their physical infrastructure without affecting the consumer's resource allocations. Consumers also benefit by being able to dynamically change their resource allocations and not have to worry about the placement of those resources.
 
 
 % subsubsection resource-pooling (end)
@@ -176,7 +176,7 @@ Pooled resources that are shared among many consumers (possibly multiple consume
 % subsection essential-characteristics (end)
 \subsection{Service Models} \label{sub:servicemodels}
 
-Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with is virtualized. In PaaS, customers use and build software on top of the providers platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about the underlying infrastructure. SaaS is a cloud classification where the provider manages the software, it's associated data and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure \cite{Manvi2014}.
+Cloud services can be broadly categorized into three major categories:\linebreak Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS), and\linebreak Software-as-a-Service (SaaS). Buying IaaS from a provider gives the customer the ability to not have to worry about managing the physical infrastructure. All the cloud resources that they deal with are virtualized and disposable without any harm. In PaaS, customers use and build software on top of the provider's platform. The use case solved by the platform is to make it easier and faster to build scalable software without having to worry about managing or scaling the underlying infrastructure. SaaS is a cloud model where the provider manages the software, its associated data, and the infrastructure it uses on behalf of the customer. The customer benefits by being able to use the service without having to deal with running and maintaining the infrastructure or software \cite{Manvi2014}.
 
 \subsubsection{Infrastructure as a Service} \label{ssub:iaas}
 
@@ -185,12 +185,12 @@ IaaS utilizes virtualization of the hardware to make the on-demand creation, con
 % subsubsection iaas (end)
 \subsubsection{Platform as a Service} \label{ssub:paas}
 
-PaaS builds on top of IaaS by giving the customer the ability to build and run applications on top of a platform provided by the cloud provider. PaaS leaves the management of infrastructure up to the provider, leaving the customer to only worry about their application. PaaS usually have their support multiple programming languages and provide a Source Development Kit (SDK) to customers for building their apps. A management console may be provided to manage resources, configure PaaS services and view operational information. Notable companies in this space are Heroku \cite{heroku} and Google App Engine \cite{googleappengine}.
+PaaS builds on top of IaaS by giving the customer the ability to build and run applications on top of a platform provided by the cloud provider. PaaS leaves the management of infrastructure up to the provider, leaving the customer to only worry about their application. PaaS usually support multiple programming languages and provide a Source Development Kit (SDK) to customers for building apps to run on the platform. A management console may be provided to manage resources, configure PaaS services, and view operational information. Notable companies in this space are Heroku \cite{heroku} and Google App Engine \cite{googleappengine}.
 
 % subsubsection paas (end)
 \subsubsection{Software as a Service} \label{ssub:saas}
 
-SaaS is a piece of software that is hosted by the provider and accessed over a network by the customer. SaaS reduces the need for the customer to maintain the hardware and software required to run the software product since the provider takes care of that. General pricing models for SaaS applications follow usage per month or per-user per month. Other types of SaaS have emerged from the expanding functionality of websites. Many websites may offer feature-rich services through the user's web browser. Examples of SaaS include various social networks \cite{facebook}, business applications \cite{salesforce} and interactive websites \cite{netflix}.
+SaaS is a piece of software that is hosted by the provider and accessed over a network by the customer. SaaS reduces the need for the customer to maintain the hardware and software required to run the software product since the provider takes care of that. General pricing models for SaaS applications follow usage per month or per-user per month. Other types of SaaS have emerged from the expanding functionality of websites. Many websites may offer feature-rich services through the user's web browser. Examples of SaaS include various social networks \cite{facebook}, business applications \cite{salesforce}, and interactive websites \cite{netflix}.
 
 % subsubsection saas (end)
 
@@ -199,17 +199,17 @@ SaaS is a piece of software that is hosted by the provider and accessed over a n
 \subsection{Deployment Models} \label{sub:deployment-model}
 % deployment model - public,private, community, hybrid
 
-Orthogonal to the \nameref{sub:servicemodels} section is the deployment model. Different types of cloud services can be deployed in different scenarios based on policy, ownership, cost, and security. To the customer of the consumer, the deployment model of the cloud service is completely transparent.
+Orthogonal to the \nameref{sub:servicemodels} section is the deployment model. Different types of cloud services can be deployed in different scenarios based on policy, ownership, cost, and security \cite{dillon2010cloud}. To the end user the deployment model of the cloud service is completely transparent.
 
 \subsubsection{Public} \label{ssub:deploy-public}
 
-The most prominent type of cloud deployment is the public cloud. Public clouds enable any person or organization to use computing resources. The cloud provider is usually an organization which in charge of the cloud's availability, policies, billing models and operation.
+The most prominent type of cloud deployment is the public cloud. Public clouds enable any person or organization to use computing resources. The cloud provider is usually an organization which in charge of the cloud's availability, policies, billing models, and operation.
 
 
 % subsubsection deploy-public (end)
 \subsubsection{Private} \label{ssub:deploy-private}
 
-Many different types of organizations would consider to run a private cloud. These clouds are either operated by the organization or a third party on behalf of the organization. Organizations and enterprises run their own private cloud if they have sensitive data or mission critical services that require full control over the entire computing stack, to maximize the utilization of their current computing resources, or if it's not economical to send large amounts of data off premise to a computing provider. Additionally, researchers may also build their own for their research and teaching.
+Many different types of organizations would consider to run a private cloud. These clouds are either operated by the organization or a third party on behalf of the organization. Organizations and enterprises run their own private cloud if they have sensitive data or mission critical services that require full control over the entire computing stack, maximize the utilization of their current computing resources, or if it is not economical to send large amounts of data off premise to a computing provider. Additionally, researchers may also build their own cloud for their research or teaching.
 
 
 % subsubsection deploy-private (end)
@@ -232,7 +232,7 @@ Public-private, private-community, public-community, and public-private-communit
 % section cloud-services (end)
 \section{Network Structure} \label{sec:network-structure}
 
-Cloud and datacentres require an interconnect for servers to communicate with each other and for providing service to consumers on the Internet. Many different types of structures are possible but all offer their benefits and weaknesses. Described next are the features of network topologies, then the different network topology types themselves.
+Cloud and datacentres require an interconnect for servers to communicate with each other and for providing service to consumers on the Internet. Many different types of structures are possible but all have their benefits and weaknesses. Described next are the features of network topologies then the different network topology types themselves.
 
 
 \subsection{Topology Features} \label{sub:topology-features}
@@ -247,7 +247,7 @@ Workloads which require different types of communication such as one-to-all, one
 % subsubsection parallel-traffic (end)
 \subsubsection{Bandwidth Oversubscription} \label{ssub:bandwidth-oversubscription}
 
-The more servers that are connected with each other the more expensive it is to provide a full bisection bandwidth. Topology design then cost are the main drivers of bisection bandwidth.  Bandwidth oversubscription occurs when the network topology doesn't provide full bandwidth bisection. The oversubscription can be expressed as a ratio for quantitative comparison. Some providers may choose a topology which performs bandwidth oversubscription on the premise that the network bandwidth will not be the bottleneck resource.
+The more servers that are connected with each other the more expensive it is to provide a full bisection bandwidth. Topology design followed by cost are the main drivers of bisection bandwidth \cite{wang2015survey}. Bandwidth oversubscription occurs when the network topology doesn't provide full bandwidth bisection for the entire network. The oversubscription can be expressed as a ratio for quantitative comparison. Some providers may choose a topology which performs bandwidth oversubscription on the premise that the network bandwidth will not be the bottleneck resource.
 
 
 % subsubsection bandwidth-oversubscription (end)
@@ -259,13 +259,13 @@ The ability to communicate in one direction should be possible and as performant
 % subsubsection backwards-capability (end)
 \subsubsection{Scalability} \label{ssub:net-scalability}
 
-As cloud and datacentre computing demand grows, so does the ability to scale existing computing resources and the networks that interconnect them. The ease at which adding on or removing from an existing network is defined as the scalability. Two important factors with scaling is the ability to interconnect servers on the order of thousands together, as well as the possibility of expanding the network size in the future without requiring substantial reorganization of the existing network.
+As cloud and datacentre computing usage grows, so does the ability to scale the existing computing resources and networks that interconnect them. The ease at which adding to or removing from an existing network is defined as the scalability. Two important factors with scaling is the ability to interconnect servers on the order of thousands together, as well as the possibility of expanding the network size in the future without requiring substantial reorganization of the existing network.
 
 
 % subsubsection net-scalability (end)
 \subsubsection{Automatic Renaming} \label{ssub:auto-renaming}
 
-Each switch and node in the network should automatically be able to determine where it is and setup its routing table respective to its adjacent nodes, whether that is other servers or switches. This is opposite to offline configuration, where a human or program configures the routing information for each switch and node in the network.
+Each switch and node in the network should automatically be able to determine where it is located and be able to setup its routing table respective to its adjacent nodes, whether those are other servers or switches. This is opposite to offline configuration, where a human or program configures the routing information for each switch and node in the network elsewhere \cite{wang2015survey}.
 
 
 % subsubsection auto-renaming (end)
@@ -277,7 +277,7 @@ A topology should provide a way to route traffic around a failed switch or link.
 % subsubsection net-robustness (end)
 \subsubsection{Load Balance} \label{ssub:net-load-balance}
 
-The design of the topology should take into account where bottlenecks could occur because this could lead to performance problems such as congestion. Congestion can occur at the bottleneck from too much data being sent in to the switch and there being not enough bandwidth to send back out. The switch would either slow down the consumption of incoming data or drop input data entirely. The result of congestion is increased latency and communication timeouts. In workloads with high data exchange it may be important to have a stable latency in presence of high bandwidth usage across the network.
+The design of the topology should take into account where bottlenecks could occur because this could lead to performance problems such as congestion. Congestion occurs at the bottleneck when a single switch or link is being sent more than it can handle. The switch would either slow down the consumption of incoming data or drop input data entirely \cite{xia2016survey}. The result of congestion is increased latency and communication timeouts. In workloads with high data exchange it may be important to have a stable latency in presence of high bandwidth usage across the network .
 
 
 % subsubsection net-load-balance (end)
@@ -287,22 +287,22 @@ The design of the topology should take into account where bottlenecks could occu
 
 \subsection{Hierarchical Model} \label{sub:net-hierarchical}
 
-Hierarchical models are the most commonly used since they offer simple deployment and straightforward comprehension of the multiple layers that comprise it \cite{wang2015survey, xia2016survey}. Each layer in a hierarchical network treats traffic differently. Congestion is reduced from the lower layers by sending data through the upper layers, which are better suited to route traffic from point-to-point. Described here are three-tier \cite{kliazovich2012greencloud}, Fat-tree \cite{al2008scalable}, and VL2 \cite{greenberg2009vl2}.
+Hierarchical models are the most commonly used type of network structure since they offer simple deployment and straightforward management of the multiple layers that comprise it \cite{wang2015survey, xia2016survey}. Each layer in a hierarchical network treats traffic differently. Congestion is reduced from the lower layers by sending data through the upper layers, which are better suited to route traffic from point-to-point. Described here are three different types of hierarchical topology designs: three-tier \cite{kliazovich2012greencloud}, Fat-tree \cite{al2008scalable}, and VL2 \cite{greenberg2009vl2}.
 
 \subsubsection{Three-tier} \label{subp:three-tier}
 
-One of the most common hierarchical models is the three-tier hierarchical topology. It consists of the core, aggregation and edge layers, where the edge layer is the layer directly connected to the servers (also known as the top of rack switch (ToR)), the aggregation layer which interfaces between the edge layer and the core layer, and the core layer directly connects to the Internet as well as to every aggregation layer. This layout enables the addition or removal of edge switches and aggregation switches with the minimal amount of modification to the existing network.
+One of the most common hierarchical models is the three-tier \cite{kliazovich2012greencloud} hierarchical topology. It consists of the core, aggregation and edge layers, where the edge layer is the layer directly connected to the servers (also known as the top of rack switch (ToR)), the aggregation layer which interfaces between the edge layer and the core layer, and the core layer that directly connects to the Internet as well as to the aggregation layer. This layout enables the addition or removal of nodes at the edge layer and switches at each layer with a minimal amount of modification to the existing network.
 % subsubsection three-tier (end)
 
 \subsubsection{Fat-tree} \label{subp:fat-tree}
 
-The Fat-tree hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with it's associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
+The Fat-tree \cite{al2008scalable} hierarchical network structure takes the existing three-tier topology and groups together aggregated switches with it's associated edge switches to form pods. These pods are then connected to the core layer switches for performing communication between the Internet and the pods. All switches in all three layers are identical commodity switches. At each higher layer the number of switches increases to provide full end-to-end bisection bandwidth. Another benefit is that there exists multiple equal-cost paths for communication to occur between any two hosts. The downside to Fat-trees is that the cabling complexity is large due to obtaining the full bisection bandwidth.
 % subsubsection fat-tree (end)
 
 % VL2
 \subsubsection{VL2} \label{subp:vl2}
 
-VL2 is a creation by Microsoft which performs addressing using two addresses: one called the Location-specific IP address (LA), and the other being the Application-specific IP address (AA). The LA is used by the switches to forward the packet to the proper machine while the AA is encapsulated in the LA header and provides a never changing address to the application or VM that should receive the packet. This split address design allows the application to change the physical machines that it runs on while still retaining the same AA, thereby supporting application or VM migrations. The underlying network routes the AA to the proper LA. Once a packet egresses the edge router it is encapsulated with a LA header. When a packet ingresses the edge router the LA header is decapsulated.
+VL2 \cite{greenberg2009vl2} is a topology created by Microsoft which performs addressing using two addresses: one called the Location-specific IP address (LA), and the other being the Application-specific IP address (AA). The LA is used by the switches to forward the packet to the proper machine while the AA is encapsulated in the LA header and provides a never changing address to the application or VM that should receive the packet. This split address design allows the application to change the physical machine that it runs on while still retaining the same AA, thereby supporting application or VM migrations. The underlying network routes the AA to the proper LA. Once a packet egresses the edge router it is encapsulated with a LA header. When a packet ingresses the edge router the LA header is decapsulated.
 
 % subsubsection vl2 (end)
 
@@ -310,7 +310,7 @@ VL2 is a creation by Microsoft which performs addressing using two addresses: on
 \subsubsection{Conclusion} \label{ssub:hierarchical-concl}
 
 
-Hierarchical models of network topology is the simplest to use since most commodity hardware supports it. Minimal setup and configuration is required for these networks. At a point scalability of these networks becomes a problem. Analysis of real-world systems show that hierarchical topologies have load-balancing issues at large scales \cite{singla2012jellyfish}.
+Hierarchical models of network topology is the simplest to use since most commodity hardware supports it. Minimal setup and configuration is required for these networks. Scalability becomes an issue when the network gets sufficiently large. Analysis of real-world systems show that hierarchical topologies have load-balancing issues at large scales \cite{singla2012jellyfish}.
 
 
 % subsubsection hierarchical-concl (end)
@@ -318,12 +318,12 @@ Hierarchical models of network topology is the simplest to use since most commod
 % subsection net-hierarchical (end)
 \subsection{Recursive Model} \label{sub:net-recursive}
 
-Network topologies involving recursive models are characteristic of their recursive nature when scaling the number of nodes on the network. They also incorporate the use of servers to perform routing between different groups of the network as each server has two or more network interfaces \cite{wang2015survey, xia2016survey}. Described here is DCell \cite{guo2008dcell} and BCube \cite{guo2009bcube}, two recursive network topologies.
+Network topologies involving recursive models are characteristic of their recursive nature when scaling the number of nodes on the network. Besides switches performing the forwarding and routing,  servers also perform the same task between different groups of the network \cite{wang2015survey, xia2016survey}. Described here is DCell \cite{guo2008dcell} and BCube \cite{guo2009bcube} - two recursive network topologies.
 
 % DCell
 \subsubsection{DCell} \label{subp:dcell}
 
-DCell is able to use inexpensive commodity switches to exponentially scale the number of nodes in the network. DCells are logically arranged in groups consisting of a switch and a number of servers. The switch connects to all servers in the group and each server connects to one other DCell group. If each DCell is considered a virtual node in a graph, the connecting links between each node form a complete graph. The servers and switches require more advanced configuration as servers are forwarding data to and from other DCells. The robustness achieved through the DCell topology allows a larger amount of failures to partition the network. DCell can suffer from unbalanced workloads causing congestion over certain links due to oversubscription.
+DCell \cite{guo2008dcell} is able to use inexpensive commodity switches to exponentially scale the number of nodes in the network. DCells are logically arranged in groups consisting of a switch and a number of servers. The switch connects to all servers in the group and each server connects to one other DCell group. If each DCell is considered a virtual node in a graph, the connecting links between each node form a complete graph. The servers and switches require more advanced configuration as servers are forwarding data to and from other DCells. The robustness achieved through the DCell topology allows a larger amount of failures to partition the network and lower the bandwidth. DCell can suffer from congestion over links and nodes due to unbalanced workloads, as DCell oversubscribes the bisection bandwidth.
 
 % subsubsection dcell (end)
 
@@ -331,7 +331,7 @@ DCell is able to use inexpensive commodity switches to exponentially scale the n
 % BCube
 \subsubsection{BCube} \label{subp:bcube}
 
-Slightly differing from DCell, BCube connects different cells to each other through a switch instead of directly to the host. This topology allows one-to-all communication to be very efficient. Links are more oversubscribed than DCell, at 1:256. The downside of BCube is that expanding the network requires re-cabling the existing topology and thus changing the switch and server configuration.
+Slightly differing from DCell, BCube \cite{guo2009bcube} connects different cells to each other through a switch instead of directly to the host. This topology allows one-to-all communication to be very efficient. Links are more oversubscribed than hierarchical topologies, at 1:256. The downside of BCube is that expanding the network requires re-cabling the existing topology and thus changing the switch and server configuration.
 
 % subsubsection bcube (end)
 
@@ -340,7 +340,7 @@ Slightly differing from DCell, BCube connects different cells to each other thro
 
 
 % recursive conclusion
-Recursive topologies enable providers to cheaply and efficiently scale their networks compared to hierarchical networks. As more research is performed on recursive topologies it is becoming apparent that this model is not well suited for cloud computing. Particularly the fact that since servers are performing more advanced routing than in hierarchical networks the overhead involved competes with the resources given to the applications and VMs that run on the service.
+Recursive topologies enable providers to cheaply and efficiently scale their networks compared to hierarchical networks. The trade-off is that the network is oversubscribed greater than hierarchical networks, which can result in congestion. As more research is performed on recursive topologies it is becoming apparent that this model is not well suited for cloud computing. Particularly the fact that since servers are performing more advanced routing than in hierarchical networks the overhead involved competes with the resources given to the applications and VMs that run on the server \cite{xia2016survey}.
 
 % subsubsection recursive-concl (end)
 
@@ -353,14 +353,14 @@ Characterized by the lack of a switch connecting multiple ToR switches, the rack
 % Jellyfish
 \subsubsection{Jellyfish} \label{subp:jellyfish}
 
-In the Jellyfish topology, each switch has a fixed number of ports to connect to other switches and servers. All of the switches are then randomly connected with one another. The random links between switches provide the necessary incremental expansion by being able to unplug and plug back in a new random section of the network. Any server in the Jellyfish topology can reach more servers in fewer hops compared to the Fat-tree hierarchical topology.
+In the Jellyfish topology \cite{singla2012jellyfish}, each switch has a fixed number of ports to connect to other switches and servers. All of the switches are then randomly connected with one another. The random links between switches provide the necessary incremental expansion by being able to unplug and plug back in a new random section of the network. Any server in the Jellyfish topology can reach more servers in fewer hops compared to the Fat-tree hierarchical topology.
 
 % subsubsection jellyfish (end)
 
 % Scafida
 \subsubsection{Scafida} \label{subp:scafida}
 
-Scafida topologies, just like Jellyfish topologies, also include randomness in it's graph. Scafida imposes an upper bound on the length of the longest path to prevent the communication time from becoming too long. Each server and switch in the network doesn't follow any order when it comes to its addressing and routing information. Because of this, the node's routing table is programmatically determined from its surrounding neighbours.
+Scafida topologies \cite{gyarmati2010scafida}, just like Jellyfish topologies, also include randomness in it's graph. Scafida imposes an upper bound on the length of the longest route to prevent the communication time between two distant servers from becoming too long. Each server and switch in the network does not follow any order when it comes to its addressing and routing information. Because of this, the node's routing table is programmatically determined from its surrounding neighbours.
 
 
 % subsubsection scafida (end)
@@ -369,7 +369,7 @@ Scafida topologies, just like Jellyfish topologies, also include randomness in i
 \subsubsection{Conclusion} \label{ssub:rack-concl}
 
 
-Traffic complexity can be greatly balanced in rack-to-rack models compared to hierarchical and recursive based models due to its random routes between nodes. Another benefit is the minimal modification to the existing network when expanding the topology. The robustness of the network also increases as it takes multiple failures to partition a network. Rack-to-rack networks hasn't emerged as a useful topology to cloud providers as it has a number of drawbacks: addressing and routing of a random network of switches and servers makes it harder for servers to route to and from the Internet, additionally the redundant paths and loops reduce the throughput and increases overheads on the routing tables.
+Traffic complexity can be greatly balanced in rack-to-rack models compared to hierarchical and recursive based models due to its random routes between nodes. Another benefit is the minimal modification to the existing network when expanding the topology \cite{xia2016survey}. The robustness of the network also increases as it takes multiple failures to partition a network. Rack-to-rack networks has not emerged as a useful topology to cloud providers as it has a number of drawbacks: addressing and routing of a random network of switches and servers makes it harder for servers to route to and from the Internet, additionally the redundant paths and loops reduce the throughput and increases overheads on the routing tables. Fairness and QoS is also an issue if nodes have different distances to travel \cite{wang2015survey}.
 
 % subsubsection rack-concl (end)
 
@@ -379,14 +379,19 @@ Traffic complexity can be greatly balanced in rack-to-rack models compared to hi
 
 \section{Software Defined Networks} \label{sec:sdn}
 
-Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}. Technologies such as virtual LANs (VLAN) \cite{vlan} and Virtual Private Networks (VPN) \cite{vlan} predate the cloud paradigm. Both continue to exist in the majority of all layer 3 switches but are designed with the physical hardware in mind, preventing adoption in large-scale networks where greater than 4096 VLANs are required \cite{wang2015survey}. In the post-cloud world both technologies have been reinvented as Virtual Extensible Local Area Network (VXLAN) \cite{vxlan} and Network Virtualization Using Generic Routing Encapsulation (NVGRE) \cite{nvgre}, respectively.
+Software Defined Networks (SDN) is the virtualization of physical networks. With SDN, custom networking protocols and addressing schemes can be used on top of hardware which does not support it. This is particularly helpful when the overhead or limitations of certain protocols are holding back network performance \cite{Jennings2015}. Technologies such as virtual LANs (VLAN) \cite{vlan} and Virtual Private Networks (VPN) \cite{vlan} predate the cloud paradigm. Both continue to exist in the majority of all layer 3 switches but are designed with the physical hardware in mind, preventing adoption in large-scale networks where greater than 4096 VLANs are required \cite{wang2015survey}. In the post-cloud world both technologies have been reinvented as Virtual Extensible Local Area Network (VXLAN) \cite{vxlan} and Network Virtualization Using Generic Routing Encapsulation (NVGRE) \cite{nvgre}, respectively.
 
 
 
 \subsection{Architecture}
 
-The Open Network Foundation (ONF) is a consortium consisting of multiple members of industry and academia whose purpose is to standardize and develop SDN-based technologies. Their definition best explains what SDN is: ``In the SDN architecture, the control and data planes are decoupled, network intelligence and state are logically centralized, and the underlying network infrastructure is abstracted
-from the applications'' \cite{onfSDNdef}. More of their definition explains how the SDN architecture is split into three main layers, namely: the infrastructure, control, and application layers.
+The Open Network Foundation (ONF)\footnote{\url{https://www.opennetworking.org/}} is a consortium consisting of multiple members of industry and academia whose purpose is to standardize and develop SDN-based technologies. Their definition best explains what SDN is:
+
+\begin{quote}
+    In the SDN architecture, the control and data planes are decoupled, network intelligence and state are logically centralized, and the underlying network infrastructure is abstracted from the applications \cite{onfSDNdef}.
+\end{quote}
+
+Presented next are the three main layers, namely the infrastructure, control, and application layers.
 
 % infrastructure layer
 \subsubsection{Infrastructure Layer}
@@ -412,14 +417,14 @@ The application layer mainly consists of the user's applications that interact w
 
 SDN enables clouds to easily configure and automate the management processes for network services by decoupling the configuration from the network device and centralizing its configuration and management \cite{yan2016software}. SDN presents the new paradigm of network-as-a-service. It continues the X-as-a-service model seen in infrastructure-, platform- and software-as-a-service. With the power gained from SDN, clouds gain more control, scalability, dynamism, and management, which can result in better energy savings \cite{yen2014sdn,lin2013flow}, load balancing \cite{yen2014sdn}, monitoring \cite{yen2014sdn}, QoS \cite{akella2014quality}, performance \cite{cziva2014sdn, lin2013flow}, policy \cite{banikazemi2013meridian,akella2014quality}, and security \cite{seeber2014improving}.
 
-Switches are not required to know of the entire network topology, as message tunnelling implemented through the control layer enables performance improvements of VLAN communications with any scale and complexity of physical network topology. Technologies such as OpenFlow, ForCES and ONE will be discussed as providers of virtual isolated multitenant networks \cite{wang2015survey}.
+Switches are not required to know of the entire network topology, as message tunnelling implemented through the control layer enables performance improvements of VLAN communications with any scale and complexity of physical network topology. Technologies such as OpenFlow \cite{openflow}, ForCES \cite{forces}, and ONE \cite{ciscoone} will be discussed as providers of virtual, isolated, multitenant networks \cite{wang2015survey}.
 
 
 
 
 \subsection{SDN Standards}
 
-Many organizations have developed and managed SDN standards and implementations. OpenFlow of the ONF, ForCES a working group of the Internet Engineering Task Force (IETF), and ONE of Cisco are all implementations of SDN with their own approaches.
+Many organizations have developed and managed SDN standards and implementations. OpenFlow \cite{openflow} of the ONF, ForCES \cite{forces} a working group of the Internet Engineering Task Force (IETF), and ONE \cite{ciscoone} of Cisco are all implementations of SDN with their own approaches.
 
 % Openflow
 \subsubsection{OpenFlow}
@@ -429,7 +434,7 @@ OpenFlow \cite{openflow} is commonly mentioned when SDN is discussed as it is th
 % ForCES
 \subsubsection{ForCES}
 
-Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standard built into hardware and software that allow for external control, all within the same device. Control and forwarding layers are separated but kept within the same device. ForCES defines devices called Network Elements (NE) which consist of a Control Element (CE) and a Forwarding Element (FE), much like OpenFlow's switch and controller model. The ForCES protocol is used in the CEs for controlling the FE's forwarding. Much like the OpenFlow flow table, the FEs have Logical Function Blocks (LFBs) for forwarding packets. Configuration of the FEs and CEs is done externally of the NE via a FE manager and a CE manager \cite{wang2015survey}. The biggest difference from OpenFlow is the separation of control for FEs and CEs through their respective managers.
+Forwarding and Control Element Separation (ForCES) \cite{forces} is a SDN standard built into hardware and software that allow for external control of network devices. Control and forwarding layers are separated but kept within the same device. ForCES defines devices called Network Elements (NE) which consist of a Control Element (CE) and a Forwarding Element (FE), much like OpenFlow's switch and controller model. The ForCES protocol is used in the CEs for controlling the FE's forwarding. Much like the OpenFlow flow table, the FEs have Logical Function Blocks (LFBs) for forwarding packets. Configuration of the FEs and CEs is done externally of the NE via a FE manager and a CE manager \cite{wang2015survey}. The biggest difference from OpenFlow is the separation of control for FEs and CEs through their respective managers.
 
 
 % cisco ONE
@@ -449,31 +454,31 @@ Virtualization of infrastructure can come in the form of virtual servers, switch
 
 \subsubsection{Virtual Machine (VM)}
 
-VMs are created by partitioning physical resources of the host server. A hypervisor performs this virtualization by translating the guest operating system's binary hardware calls to ones that run on the host. Hypervisors offer the front line integration with virtual networks through virtual NICs \cite{wang2015survey}. Examples include Xen and VMWare. Strong isolation between the other VMs and the host server is achieved at a slight performance cost. This cost has spurred development of lighter weight machine virtualization such as Kernel VMs (KVM)/containers \cite{oci,docker} where each virtual machine takes up less of the host's resources.
+VMs are created by partitioning physical resources of the host server. A hypervisor performs this virtualization by translating the guest operating system's binary hardware calls to ones that run on the host. Hypervisors offer the front line integration with virtual networks through a virtual NIC (vNIC) \cite{wang2015survey}. Examples include Xen and VMWare. Strong isolation between the other VMs and the host server is achieved at a slight performance cost. This cost has spurred development of lighter weight machine virtualization such as Kernel VMs (KVM)/containers \cite{oci,docker} where each virtual machine takes up less of the host's resources to run the same applications.
 
 \subsubsection{Virtual NIC}
 
-Through software, the hardware-based NIC can be virtualized as a virtual NIC (vNIC). Hypervisors assign vNICs to virtual machines for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC to properly translate packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{dong2012renic} are able to provide close to native speeds. Incoming packets are read and directed to the proper vNIC in silicon.
+Through software, the hardware-based NIC can be virtualized as a vNIC. Hypervisors assign vNICs to VMs for connecting those machines to the virtual network. To achieve this the hypervisor has to have low level access with the host operating system to be able to intercept system calls made to the physical NIC for properly translating packets between the physical and virtual NICs. This translation can affect the networking performance when there are many vNICs in use. Hardware-assisted solutions such as SR-IOV \cite{dong2012renic} are able to provide close to native speeds while using vNICs. Incoming packets are read and directed to the proper vNIC in silicon.
 
 
 
 \subsubsection{Virtual Switch and Link}
 
-Virtual switches (vSwitches) are characterized by being defined in software instead of hardware. A vSwitch would run on each hypervisor host, providing forwarding between the vNICs and the network outside of the host. vSwitches are able to copy packets of data directly from one vNIC buffer to another vNIC buffer if they reside on the same host, otherwise the vSwitch interfaces with the physical NIC. vSwitches also implement packet loss through configurable buffer sizes, emulating the same results as a physical switch. Customization of the vSwitch includes routing control with OpenFlow modules, custom layer 2 routing, and port management \cite{wang2015survey}. Open vSwitch \cite{crisan2013openvswitch}, VALE \cite{rizzo2012vale}, and Click Router \cite{wang2013clickrouter} are all technologies that provide vSwitch functionality.
+Virtual switches (vSwitches) are characterized by existing in software instead of hardware. A vSwitch would run on each hypervisor host, providing forwarding between the vNICs and the network outside of the host. vSwitches are able to copy packets of data directly from one vNIC buffer to another vNIC buffer if they reside on the same host, otherwise the vSwitch interfaces with the physical NIC. vSwitches also implement packet loss through configurable buffer sizes, emulating the same results as a physical switch during congestion. Customization of the vSwitch includes routing control with OpenFlow modules, custom layer 2 routing, and port management \cite{wang2015survey}. Open vSwitch \cite{crisan2013openvswitch}, VALE \cite{rizzo2012vale}, and Click Router \cite{wang2013clickrouter} are all technologies that provide vSwitch functionality.
 
 Virtual links (vLinks) virtualize the physical link between two network components. They typically use tunnelling technologies such as GRE or IPSec to create links between vNIC-vNIC or vNIC-vSwitch. These tunnels provide traffic isolation as no other devices communicate on the same link.
 
-Both vSwitches and vLinks share the common problem of memory and CPU contention when communication buffers and traffic increase in size. Since the forwarding and routing is performed in software the speed is a magnitude less than the same operations in hardware. In a positive light, the physical switch and link sees less traffic and usage because communication between VMs on the same host can occur on the host.
+Both vSwitches and vLinks share the common problem of memory and CPU contention when communication buffers and traffic increase in size. Since the forwarding and routing is performed in software the speed is a magnitude less than the same operations in hardware. In a positive light, the physical switch and link sees less traffic and usage because communication between VMs on the same host can occur in software.
 
 \subsubsection{Virtual Network}
 
-As mentioned earlier, VLANs and VPNs predate the cloud paradigm. From the large-scale needs of clouds emerged newer virtual networking technologies which were more scalable, efficient, secure, and easier to manage \cite{wang2015survey}. VLANs enable multiple virtual networks at layer 2 of the OSI model, while sharing the same physical network. The number of virtual networks is limited to 4096 (12 bits) due to the protocol design, a constraint for large clouds. Multitenancy with VLAN is not recommended as
+As mentioned earlier, VLANs and VPNs predate the cloud paradigm. From the large-scale needs of clouds emerged newer virtual networking technologies which are more scalable, efficient, secure, and easier to manage \cite{wang2015survey}. VLANs enable multiple virtual networks at layer 2 of the OSI model, while sharing the same physical network. The number of virtual networks is limited to 4096 (12 bits) due to the protocol design, a constraint for large clouds. Multitenancy with VLAN is not recommended as it provides no security. Malicious users are to intercept VLAN traffic on different virtual networks \cite{vlanattacks}.
 
-VXLAN \cite{vxlan} is the successor to VLANs for cloud computing environments. It performs network segmentation by tunnelling communications through MAC-in-UDP. 16 million virtual networks (24 bits) are possible due to the increase in address size. Broadcasts on the virtual network are implemented as UDP multicasts since a broadcast on the physical network is constrained to its local subnet. Newer technology is needed that supports VXLAN in layer 3 switches. Higher latency is also prevalent due to the extra overhead when forwarding packets across a far hop distance \cite{wang2015survey}.
+VXLAN \cite{vxlan} is the successor to VLAN for cloud computing environments. It performs network segmentation by tunnelling communications through MAC-in-UDP. 16 million virtual networks (24 bits) are possible due to the increase in address size. Broadcasts on the virtual network are implemented as UDP multicasts since a broadcast on the physical network is constrained to its local subnet. Newer technology is needed to support VXLAN in layer 3 switches. Higher latency is also prevalent due to the extra overhead when forwarding packets across far hop distances \cite{wang2015survey}.
 
-VPNs in cloud environments are more commonly implemented using NVGRE \cite{nvgre}. NVGRE uses GRE to tunnel MAC-in-GRE. Each layer 2 network is differentiated by a 24 bit Virtual Subnet Identifier (VSID). Broadcast isolation is achieved without burdening the underlying network.
+VPNs in cloud environments are more commonly implemented using NVGRE \cite{nvgre}. NVGRE uses GRE to tunnel MAC-in-GRE. Each layer 2 network is differentiated by a 24 bit Virtual Subnet Identifier (VSID). Broadcasts are implemented as IP multicast and do not strain the underlying network.
 
-OpenContrail \cite{opencontrail} is an OpenFlow controller which provides methods to encapsulate MAC-in-UDP and MAC-in-IP for creating layer 2 and layer 3 VPNs. OpenContrail provides an high-level SDN interface for managing and automating isolated virtual networks. The number of virtual networks are limited to 4096 based on the OpenFlow header segment number.
+OpenContrail \cite{opencontrail} is an OpenFlow controller which provides methods to encapsulate MAC-in-UDP and MAC-in-IP for creating layer 2 and layer 3 VPNs. OpenContrail provides a high-level SDN interface for managing and automating isolated virtual networks. The number of virtual networks is limited to 4096 based on the OpenFlow header segment number.
 
 % routing schemes - maybe
 
@@ -485,9 +490,9 @@ OpenContrail \cite{opencontrail} is an OpenFlow controller which provides method
 
 \section{Data Processing} \label{sec:data-processing}
 
-With enormous amounts of data that is impossible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, healthcare, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks. Google has also presented the DataFlow Model \cite{akidau2015dataflow}, a new bridge between batch and stream systems for processing unbounded streams of data while balancing correctness, latency, and cost.
+With large amounts of data that is infeasible to store and process on a single machine, multiple machines are needed to process data in a cost effective and timely manner. Industries such as telecommunications, manufacturing, retail, healthcare, insurance, finance, and government are taking advantage of the large streams of information that they are processing every day to derive useful business information by using data processing systems \cite{ibmbigdataindustries}. MapReduce from Google \cite{dean2008mapreduce} was the first parallel processing framework that addressed this problem and presented a solution. Their paper has spurred development of the open source Hadoop MapReduce \cite{hadoop} and its ecosystem of other big data processing frameworks. Google has also presented the DataFlow Model \cite{akidau2015dataflow}, which is a new bridge between batch and stream systems for processing unbounded streams of data while balancing correctness, latency, and cost.
 
-Big data processing systems are characteristic of their horizontal scalability of nodes while almost linearly increasing performance. Simple programming APIs and query languages make it easy to interface with these systems. Data processing systems can be categorized into a few categories based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
+Big data processing systems are characteristic of their horizontal scalability of nodes with an almost linear performance increase per node. Simple programming APIs and query languages make it easy to interface with these systems. Data processing systems can be categorized into a few categories based on their characteristics: batch, stream, graph, and machine learning \cite{zhang2016survey}. Batch processing caters best to processing large collections of data in batches, where timeliness is not priority. Stream processing prioritizes the speed at which continuously incoming data can be processed in a short time period. Graph processing parallelizes the processing of data organized in the graph model. Lastly, machine learning processing prioritizes fast convergence when finding the optimal value(s) of an objective function. This is achieved by trading fault tolerance and strong consistency for faster results.
 
 
 
@@ -497,21 +502,21 @@ Big data processing systems are characteristic of their horizontal scalability o
 
 Batch processing is characterized by grouping data together then processing it as a whole to maximize throughput. MapReduce-based systems inherently use map and reduce operators on the data to perform the processing. Newer frameworks offer more operators and functionality such as iteration and recursion.
 
-MapReduce is famed for its successful abstraction of running a distributed parallel program that is fault tolerant, load balanced and has a distributed data model. Graph processing, text processing, data mining, statistical machine translation, and machine learning algorithms have all been implemented using MapReduce frameworks \cite{dean2008mapreduce}. Out of all MapReduce frameworks, the open source Hadoop by Apache is the most popular and widely used.
+MapReduce is famed for its successful abstraction of running a distributed parallel program that is fault tolerant, load balanced and has a distributed data model. Graph processing, text processing, data mining, statistical machine translation, and machine learning algorithms have all been implemented using MapReduce frameworks \cite{dean2008mapreduce}. Out of all MapReduce frameworks, the open source Hadoop \cite{hadoop} by Apache is the most popular and widely used.
 
-MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing the entire job needing to be restarted and minimizes the lost work by breaking down the job into multiple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
+MapReduce frameworks became popular due to many advantages. The simplicity of not requiring developers to understand distributed systems or parallel programming, as well as simple setup and configuration of the framework made it uncomplicated to use. Fault tolerance of nodes is built into the framework, thereby preventing failures to halt progress for the entire job and minimizes the lost work by breaking down the job into multiple tasks. Flexibility is achieved by not requiring any specific structure to the input data. MapReduce is designed to be independent of the underlying storage system. Files on a distributed file system, database query results, and structured input files are all interchangeable inputs and outputs. Lastly, MapReduce is able to scale to running on thousands of nodes in a single cluster.
 
 
 \subsubsection{MapReduce Workflow}
 
 The logical workflow for MapReduce jobs work as follows:
 \begin{enumerate}
-    \item The user's input data is partitioned into equal sized blocks and then multiple copies of each block is stored across a distributed file system on a cluster of machines to increase data redundancy and fault tolerance.
-    \item MapReduce then reads the MapReduce program to determine the number of map and reduce tasks are required. The master node assigns work to the slaves that are part of the cluster. The MapReduce scheduler will try to assign tasks to the nodes which have a copy of the data partition for a task, thereby maximizing locality \footnote{Locality has been shown in \cite{ousterhout2015making} to not matter in clusters with a suitably performant network.}.
-    \item Nodes which are processing map tasks will run the specified map function to create key-value pairs. Those pairs are then grouped into $r$ partitions based on the number of reduce tasks there are. The results of the map function are stored in the global file system. The master is then notified of where the locations of each partition are. The master forwards the location information to the nodes processing the reduce tasks.
-    \item Nodes that are processing the reduce tasks gather the intermediate data from the map tasks and then sorts the results by the value of the key. The values will then be aggregated by the key according to the user-defined reduce function. The results of the reduce function are stored in the global file system.
-    \item The master monitors for node or task failure and reschedules those tasks to any available slave node.
-    \item After all tasks complete, the user program that initiated the MapReduce job will finish.
+    \item The user's input data is partitioned into equal sized blocks and then multiple copies of each block is stored across a distributed filesystem on a cluster of machines to increase data redundancy and fault tolerance.
+    \item MapReduce then reads the MapReduce program to determine the number of map and reduce tasks that are required. The master node assigns tasks to the slaves of the cluster. The MapReduce scheduler will try to assign tasks to the nodes which have a copy of the data partition for a task, thereby maximizing locality\footnote{Against conventional thought, locality has been shown in \cite{ousterhout2015making} to not matter in clusters with a suitably performant network.}.
+    \item Nodes which are processing map tasks will run the specified map function on its data to create key-value pairs. Those pairs are then grouped into $r$ partitions based on the number of reduce tasks there are. The results of the map function are stored in the global filesystem. The master is notified of where the data locations of each partition are, then forwards the data location information to the nodes processing the reduce tasks.
+    \item Nodes that are processing the reduce tasks gather the intermediate data from the map tasks and then sorts the results by the value of the key. The values will then be aggregated by the key according to the user-defined reduce function. The results of the reduce function are stored in the global filesystem.
+    \item The master monitors for node or task failure and reschedules those orphaned tasks to any available slave node.
+    \item After all tasks complete the user program that initiated the MapReduce job will finish. The final data is stored in the distributed filesystem.
 \end{enumerate}
 
 
@@ -519,20 +524,20 @@ The logical workflow for MapReduce jobs work as follows:
 
 Big data systems and Data Base Management Systems (DBMS) share some common characteristics. The authors of \cite{stonebreaker2010mapreduce} concluded that DBMS and MapReduce are complementary to each other. DBMSs optimize for efficiency whereas MapReduce optimize for fault tolerance and scalability.
 
-MapReduce is slower at executing tasks than DBMS, but is able to load data into its internal storage representation much faster than DBMS systems \cite{pavlo2009mapreduce}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce doesn't change the data layout at all. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defence, MapReduce is still in its infancy and has not had enough time to mature.
+MapReduce is slower at executing tasks than DBMS but is able to load data into its internal storage representation much faster than DBMS systems \cite{pavlo2009mapreduce}. The necessary overhead of Hadoop results in a slower start up time. Additionally, DBMS may organize their data in memory and disk where MapReduce does not change the data layout at all, leaving it up to the programmer. DBMS have existed for decades which have brought performance improvements through methods such as column storage, compression, and parallel algorithms. In its defence, MapReduce is still in its infancy and has not had enough time to mature.
 
-DBMS use indexes and schemas for speeding up queries and automatically performing optimizations, for example, using data types on columns to enable efficient comparison of data. Higher level abstractions are put into place where users can declaratively write queries to the schema and get data in return. MapReduce has no concept of schemas or indexes therefore the programmer is left to writing how to parse the input and implement their own optimizations. Simple operations such as selection and projection are not included and result in possibly suboptimal and difficult to reuse.
+DBMS use indexes and schemas for speeding up queries and automatically performing optimizations. For example, using data types on columns to enable efficient comparison of data. Higher level abstractions are put into place where users can declaratively write queries to the schema and get data in return. MapReduce has no concept of schemas or indexes, and therefore the programmer is tasked with writing code to parse the input and implement their own optimizations. Simple operations such as selection and projection are not included and can result in suboptimal and difficult to reuse code.
 
 MapReduce excels at problems where complex analysis is required. An example being where map tasks are too difficult to express in SQL queries such as text analysis. One-off analysis of data is also preferential in MapReduce since it is quicker to use as there is no schema to define and the data load time is generally faster.
 
 
 \subsubsection{Spark} \label{ssub:spark}
 
-Spark \cite{zaharia2010spark} is an open source batch processing framework that builds on top of Hadoop MapReduce. Spark was designed for iterative dataflow and easy extensibility. Multiple frameworks work seamlessly with Spark such Streaming for streaming, MLbase for machine learning, and GraphX for graph processing. Because of this, it is one of the most popular and active data processing frameworks \cite{zhang2016survey}. Its architecture is the same as MapReduce - a master and multiple workers.
+Spark \cite{zaharia2010spark} is an open source batch processing framework that builds on top of Hadoop MapReduce. Spark was designed for iterative dataflow and easy extensibility. Multiple frameworks work seamlessly with Spark such Streaming for streaming, MLbase for machine learning, and GraphX for graph processing. Because of this, Spark is one of the most popular and active data processing frameworks \cite{zhang2016survey}. Its architecture is the same as MapReduce - a master and multiple workers.
 
-Resilient distributed datasets (RDD) is an abstraction for storing read-only data in a distributed filesystem. These RDDs are used as inputs to operations, and new RDDs are created as the output of intermediate steps. Resiliency is achieved by being able to rebuild a RDD if it is lost. RDDs are primarily stored in memory as to reduce the overhead of disk data access. An LRU cache controls the RDDs kept in memory. Intermediate RDDs use the \textit{cache} operator to keep the data in memory for more processing, whereas the \textit{save} operation saves the RDD to the distributed filesystem.
+Resilient distributed datasets (RDD) is the abstraction used for storing read-only data in a distributed filesystem. These RDDs are used as inputs to operations, and new RDDs are created as the output of intermediate steps. Resiliency is achieved by being able to rebuild a RDD if it is lost. RDDs are primarily stored in memory as to reduce the overhead of disk data access. An LRU cache controls the RDDs kept in memory or on disk. Intermediate RDDs use the \textit{cache} operator to keep the data in memory for more processing, whereas the \textit{save} operation saves the RDD to the distributed filesystem.
 
-Like MapReduce, a job is given to the master and tasks are created from it and then assigned to workers based on the locality of the task's data. The programmer can use a sequence of parallel operations to manipulate the input RDDs. Those are \emph{map}, \emph{reduce}, \emph{collect}, \emph{filter}, and \emph{foreach}. \emph{Map} and \emph{reduce} are the standard MapReduce commands. \emph{Collect} aggregates values at the master based on a function. \emph{Filter} reduces the data size by programmatically excluding elements. Lastly, \emph{foreach} performs a user defined function on each piece of data.
+Like MapReduce, a job to be run is given to the master. Multiple tasks are created from the job and are then assigned to workers based on the locality of the task's data. The programmer can use a sequence of parallel operations to manipulate the input RDDs. Those are \emph{map}, \emph{reduce}, \emph{collect}, \emph{filter}, and \emph{foreach}. \emph{Map} and \emph{reduce} are the standard MapReduce commands. \emph{Collect} aggregates values at the master based on a function. \emph{Filter} reduces the data size by programmatically excluding elements. Lastly, \emph{foreach} performs a user defined function on each piece of data.
 
 
 % TODO other batch processing frameworks
@@ -545,23 +550,23 @@ Like MapReduce, a job is given to the master and tasks are created from it and t
 
 % \cite{zhang2016survey}
 
-The use cases for stream processing differ from batch processing in that stream processing caters to processing high rates of incoming data at near real-time speeds. The long latency between updates for batch processing can be too slow for some applications. Both Storm \cite{toshniwal2014storm} and S4 \cite{neumeyer2010s4} are discussed as stream processing systems.
+The use cases for stream processing differ from batch processing in that stream processing caters to processing high rates of incoming data at near real-time speeds. The long latency between results using batch processing can be too slow for some applications. Both Storm \cite{toshniwal2014storm} and S4 \cite{neumeyer2010s4} are discussed as stream processing systems.
 
 \subsubsection{Storm}
 
-Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and real-time requirements \cite{toshniwal2014storm}.
+Originally developed by Twitter, Storm \cite{toshniwal2014storm} is a distributed and unbounded stream processing system. It is now an open source project of the Apache Software Foundation. Twitter's use cases involved real-time processing of hundreds of millions of user's tweets per day. Batch processing of tweets could not keep up with the volume of incoming data and real-time requirements \cite{toshniwal2014storm}.
 
-Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: tuples flow into the graph from \textit{spouts} and \textit{bolts} are where a given function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
+Storm's architecture consists of an incoming stream of tuples which are processed individually. A topology is the name for the directed graph that contains the steps for processing the tuples. Two kinds of vertices exist: \textit{spouts} and \textit{bolts}. \textit{Spouts} are where data enters the topology from and is passed to one or more \textit{bolts}. \textit{Bolts} are where a user-defined function occurs. Edges represent the flow of data from a \textit{spout} to a \textit{bolt} or a \textit{bolt} to \textit{bolt}. Cycles are possible within a topology.
 
 Storm is architected into three types of nodes: the Nimbus, workers and ZooKeeper \cite{zookeeper}. Nimbus is the master node and is therefore responsible for coordinating the worker nodes to act as parts of the topology. Worker nodes run the \textit{spouts} and \textit{bolts} as well as receive orders from Nimbus. ZooKeeper is responsible for keeping the state of the cluster in case of failure and providing distributed synchronization.
 
-Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of failure. A backflow mechanism relays information to the originating \textit{spout} to notify it of it's progress. Trident \cite{toshniwal2014storm}, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
+Storm guarantees that tuples will be processed at least once and will only replay tuples in the case of a failure. A backflow mechanism relays information to the originating \textit{spout} to notify of each tuple's progress. Trident \cite{toshniwal2014storm}, included with Storm, enables only once processing semantics by providing a higher level abstraction over Storm's. Trident also provides windowing, aggregation and state management which is not available in Storm.
 
 
 
 \subsubsection{S4}
 
-S4 \cite{neumeyer2010s4} is a distributed and decentralized architecture which takes design decisions from the Actor model and MapReduce. Streams of data are structured as events that look like $(K, A)$, where $K$ is a key consisting of a tuple and $A$ is an attribute to that key. For example, a word count program could have an event structure such as $(word, count)$ \cite{zhang2016survey}.
+S4 \cite{neumeyer2010s4} is a distributed and decentralized stream processing system which borrows designs from the Actor model and MapReduce. Streams of data are structured as events that look like $(K, A)$, where $K$ is a key consisting of a tuple and $A$ is an attribute to that key. For example, a word count program could have an event structure such as $(word, count)$ \cite{zhang2016survey}.
 
 Applications built on top of S4 consist of a graph of Processing Elements (PE). Each processing element is a function written by a programmer. Streams interconnect the PEs. The key of each event determines which node an event goes to. External streams exist where events can be sent and received from external applications.
 
@@ -577,32 +582,32 @@ Graph processing is a specialization on the data model for MapReduce jobs. Graph
 
 \subsubsection{GraphLab}
 
-Graphs in GraphLab \cite{low2012graphlab} use the vertex-centric model where operations are performed on vertexes. GraphLab uses concepts such as a data graph, a sync mechanism, and an update function. The data graph contains the user-defined data for vertices and edges, intermediate data used by the graph algorithm, model parameters, and statistical data. The sync mechanism is used to perform aggregate calculations over the entire graph. It is analogous to the reduce function in MapReduce, but can run concurrently with the update functions. Update functions are analogous to the map part of MapReduce, but in addition to modify its own data, update functions are permitted to modify data of adjacent edges and nodes. The output of the update functions is the updated data and the vertices that need to be modified in the next iteration round.
+Graphs in GraphLab \cite{low2012graphlab} use the vertex-centric model where operations are performed on vertexes. GraphLab uses concepts such as a data graph, a sync mechanism, and an update function. The data graph contains the user-defined data for vertices and edges, intermediate data used by the graph algorithm, model parameters, and statistical data. The sync mechanism is used to perform aggregate calculations over the entire graph. It is analogous to the reduce function in MapReduce, but can run concurrently with the update functions. Update functions are analogous to the map part of MapReduce, but in addition to modifying its own data, update functions are permitted to modify the data of adjacent edges and nodes. The output of the update functions is the updated data and the vertices that need to be modified in the next iteration round.
 
 Work is broken down into iterations where an update function or a sync mechanism operates at most once on a vertice. GraphLab synchronizes iterations between all nodes and coordinates updates between partitions. Data is partitioned across the cluster using either domain specific knowledge or partition heuristics.
 
-Depending on the style of algorithm executed, different schedulers for running the update functions and sync mechanisms for an iteration is required. Jacobi style algorithms can use the synchronous scheduler, where all vertices are updated at the same time, or for Gauss-Seidel algorithms, a round robin scheduler can be used \cite{zhang2016survey}.
+Depending on the style of algorithm executed, different schedulers are needed for running the update functions and the sync mechanisms. Jacobi style algorithms can use the synchronous scheduler, where all vertices are updated at the same time, or for Gauss-Seidel algorithms, a round robin scheduler can be used \cite{zhang2016survey}.
 
-Fault tolerance is designed into GraphLab by a transparent checkpointing system that can incrementally create snapshots across the cluster. Execution is not suspended while this is occurring. When a failure occurs GraphLab will resume from the last snapshot.
+Fault tolerance is designed into GraphLab by a transparent checkpointing system that can incrementally create snapshots across the cluster. Execution is not suspended while this is occurring. When a failure occurs GraphLab will resume from the last created snapshot.
 
 
 
 \subsubsection{Pregel}
 
-Pregel \cite{malewicz2010pregel} was designed to allow any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vertice identifier for a source and target.
+Pregel \cite{malewicz2010pregel} was designed to allow for any type of graph algorithm to operate in large distributed environments while being resilient to faults. Pregel follows the same vector-centric model as GraphLab and operates in a master-slave architecture. Values exist at vertices and on edges. Edges additionally specify a direction by containing a vertice identifier for a source and target.
 
-Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of the edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself \cite{zhang2016survey}.
+Programmers are able to manipulate the data stored in the vertices and edges. The biggest differences between GraphLab and Pregel is that in Pregel, the user defined functions that operate on the vertices can only access its own data and the data of its edges. Accessing data from the neighbour vertices is implemented using message passing. Functions defined using Pregel are able to receive messages sent to it from the previous iteration, send messages to other vertices for the next iteration, modify the data of it's vertice and it's outgoing edges, and change the structure of the graph itself \cite{zhang2016survey}.
 
-Each iteration blocks until all nodes have finished computing whereas GraphLab allows asynchronous iterations due to sufficient scheduling algorithms and dependency management. Each iteration Pregel runs the user defined function on each vertice in parallel. Simpler reasoning can be performed due to the synchronous nature of Pregel. Race conditions and deadlocks are not an issue.
+Each iteration blocks until all nodes have finished computing whereas GraphLab allows asynchronous iterations due to sufficient scheduling algorithms and dependency management. In each iteration Pregel runs the user defined function on each vertice in parallel. Simpler reasoning can be performed due to the synchronous nature of Pregel. Race conditions and deadlocks are not an issue.
 
 Fault tolerance is implemented similarly like GraphLab. At the beginning of each iteration each node saves the state of its graph partition to a persistent storage medium. The master of the cluster saves aggregate values calculated over the entire cluster. In case of failure the cluster is rolled back to the latest checkpoint, minimizing the loss of state to the last complete iteration.
 
 
 \subsection{Machine Learning Processing}
 
-Scalability is one of the major hurdles affecting machine learning research. Data sizes are growing at an exponential rate and the machine learning models and problems are deemed ``Big Model on Big Data'' \cite{xing2015petuum}. The problems faced are multiplied by the complexity of developing complex mathematical models and algorithms while implementing them in parallel distributed systems. At the same time avoiding the typical pitfalls such as deadlocks and race conditions.
+Scalability is one of the major hurdles affecting machine learning research. Data sizes are growing at an exponential rate and the machine learning models and problems are deemed ``Big Model on Big Data'' \cite{xing2015petuum}. The problems faced are multiplied by the complexity of developing sophisticated mathematical models and algorithms while implementing them in parallel distributed systems. At the same time avoiding the typical pitfalls such as deadlocks and race conditions.
 
-Regular MapReduce is not able to solve a category of machine learning problems therefore new frameworks have been specifically made. Petuum \cite{xing2015petuum} is an example of a framework developed to efficiently solve large machine learning problems.
+Regular MapReduce is not able to solve a category of machine learning problems, therefore new frameworks have been specifically made. Petuum \cite{xing2015petuum} is an example of a framework developed to efficiently solve large machine learning problems.
 
 
 
@@ -610,7 +615,7 @@ Regular MapReduce is not able to solve a category of machine learning problems t
 
 Petuum \cite{xing2015petuum} is a distributed framework for solving machine learning problems that other data processing systems such as GraphLab \cite{low2012graphlab} and Spark \cite{zaharia2010spark} are unable to. Machine learning algorithms built with Petuum are turned into distributed iterative-convergent programs. Parallelization is exploited in both the data and the algorithms to enable performant execution. Additionally, non-uniform convergence, task dependencies, and error tolerance are understood by Petuum, separating it from a general purpose data processing system.
 
-The architecture consists of a scheduler, workers and a parameter server. Three functions are also defined - \textit{push}, \textit{pull}, and \textit{schedule}. The scheduler controls the parameters that are updated by each worker according to the user-defined \textit{schedule} function. This enables determining the task dependencies at runtime, enabling for better selection of parameters for parallel updates to prevent error and non-convergence. Parameters which need more iterations to converge are prioritized using the user defined \textit{schedule} function. Lastly, the scheduler handles aggregation across the workers whenever the \textit{pull} function is used.
+The architecture consists of a scheduler, a number of workers and a parameter server. Three functions are also defined - \textit{push}, \textit{pull}, and \textit{schedule}. The scheduler controls the parameters that are updated by each worker according to the user-defined \textit{schedule} function. This enables determining the task dependencies at runtime, enabling for better selection of parameters for parallel updates to prevent error and non-convergence. Parameters which need more iterations to converge are prioritized using the user defined \textit{schedule} function. Lastly, the scheduler handles aggregation across the workers whenever the \textit{pull} function is used.
 
 All workers in the cluster receive parameters from the scheduler and run the \textit{push} function in parallel. Parameters are synchronized with the parameter server automatically. The workers achieve low communication and synchronization overhead with the parameter server by being tolerant to small consistency errors as machine learning algorithms are able to handle small inconsistencies. Convergence guarantees are still maintained.
 
@@ -622,7 +627,7 @@ Fault tolerance is implemented using checkpoints and will restart back to the la
 
 \section{Hadoop} \label{sec:hadoop}
 
-Hadoop \footnote{Homepage: \url{https://hadoop.apache.org/}} is an open source project that belongs to the Apache Software Foundation. Growing volumes of collected data prompted the need for storing and analyzing large amounts of this data efficiently. All of this business data is analysed to better understand the customer and perform less riskier decision making. This motive has spawned the concept of Big Data and has now found it's way into almost every field: retail, telecommunications, healthcare, academia, manufacturing, government, and finance. Hadoop enables the efficient processing of big data on clusters with thousands of commodity servers, provides a simple abstraction for harnessing the power of parallel computing without requiring knowledge with distributed systems or parallel programming, and enables reliable processing with built-in fault tolerance \cite{zhang2016survey,singh2015survey}.
+Hadoop \footnote{Homepage: \url{https://hadoop.apache.org/}} is an open source project that belongs to the Apache Software Foundation. Growing volumes of collected data prompted the need for storing and analyzing large amounts of data efficiently. The data is analyzed to better understand the customer and for performing more informed decision making. This motive has spawned the concept of Big Data and has now found its way into almost every field: retail, telecommunications, healthcare, academia, manufacturing, government, and finance. Hadoop enables the efficient processing of big data on clusters with thousands of commodity servers, provides a simple abstraction for harnessing the power of parallel computing without requiring knowledge with distributed systems or parallel programming, and enables reliable processing with built-in fault tolerance \cite{zhang2016survey,singh2015survey}.
 
 Hadoop can be categorized into a few primary components, the Hadoop Distributed File System (HDFS), Yet Another Resource Scheduler (YARN), and the MapReduce framework. Each component is covered in the following subsection (\ref{sub:components}). Following that is the broader Hadoop ecosystem, where other systems integrate or build on top of the main Hadoop components (\ref{sub:ecosystem}).
 
@@ -635,39 +640,39 @@ Hadoop can be described by its four main components. Those are Common, HDFS \cit
 
 \subsubsection{HDFS}
 
-HDFS \cite{hdfs} is a highly resilient and distributed filesystem for storing extremely large files and petabytes of data. HDFS achieves these goals by breaking down files into blocks (usually of 128 MB) and storing one or more replicas of that each block across a cluster of commodity servers for tolerance of node failure. This ensures that data is not lost and is available to be read from multiple nodes, thereby increasing performance. HDFS also includes a resiliency mechanism by keeping metadata checksums of each block. If a block's checksum is invalid, HDFS will replace that block with the healthy block from one of the other replicas. Additionally, heartbeats are sent from each DataNode to the NameNode for tracking node availability. Files stored with HDFS are write once, read many, including the ability to append and truncate. Hard and soft deletions are also supported \cite{singh2015survey}.
+HDFS \cite{hdfs} is a highly resilient and distributed filesystem for storing extremely large files and petabytes of data. HDFS achieves these goals by breaking down files into blocks (usually 128 MB each) and storing one or more replicas of each block across a cluster of commodity servers for tolerance of node failure and data corruption. This ensures that data is not lost and is available to be read from multiple nodes, thereby increasing performance. HDFS also includes a resiliency mechanism by keeping metadata checksums of each block. If a block's checksum is invalid, HDFS will replace that block with the healthy block from one of the other replicas. Additionally, heartbeats are sent from each DataNode to the NameNode for tracking node availability. Files stored with HDFS are write once, read many, including the ability to append and truncate. Hard and soft deletions are also supported \cite{singh2015survey}.
 
-The HDFS architecture consists of a single master called the NameNode and multiple slaves called DataNodes \cite{hdfsarchitecture}. The NameNode keeps track of filesystem namespaces and access control. DataNodes manage the physical storage which HDFS uses to store data in. Files are split into blocks and stored across a set of DataNodes. Operations such as opening, closing and renaming files and directories go through the one NameNode. Reading and writing data occurs directly at the DataNodes. The NameNode performs only metadata operations so that the high bandwidth data operations are only go through DataNodes.
+The HDFS architecture consists of a single master called the NameNode and multiple slaves called DataNodes \cite{hdfsarchitecture}. The NameNode keeps track of filesystem namespaces and access control. DataNodes store and manage data on physical storage for HDFS. Files are split into blocks and stored across a set of DataNodes. Operations such as opening, closing and renaming files and directories go through the one NameNode. Reading and writing data occurs directly at the multiple DataNodes. The NameNode performs only metadata operations so that the high bandwidth read and write operations on the data only go through the DataNodes.
 
-Clients of HDFS include MapReduce, HBase, and other big data systems. Clients will first communicate with the NameNode to open or create files \cite{hdfsarchitecture}. The NameNode responds with either creating a new block or providing the address of an existing block, and includes the address of the DataNode that it resides on. The HDFS client will then communicate directly with the DataNode to read or write a file to a block. When reading or writing to a block, if the next block in the sequence is needed the client asks the NameNode for the next available block, and then proceeds just like another communication with the DataNode.
+Clients of HDFS include MapReduce, HBase, and other big data systems (see Subsection \ref{sub:ecosystem} for more). Clients will first communicate with the NameNode to open or create files \cite{hdfsarchitecture}. The NameNode responds with either creating a new block or providing the address of an existing block, and includes the address of the DataNode that it resides on. The HDFS client will then communicate directly with the DataNode to read or write a file to a block. When reading or writing to a block, if the next block in the sequence is needed the client asks the NameNode for the next available block. The next available block is then accessed whether it is on the same or a different DataNode.
 
 
 
 \subsubsection{YARN}
 
-First introduced in Hadoop 2.0, YARN \cite{yarn} is the next generation resource scheduler for Hadoop. It replaces the previous resource scheduler which tightly coupled resource and job control flow, leading to scalability issues for large clusters. Hadoop originally catered towards MapReduce job processing but soon became synonymous with big data processing which lead to less than ideal uses of MapReduce. YARN was designed to alleviate these issues by decoupling the resource management components and empowers the applications to perform their own application-specific scheduling and fault tolerance. The result is more performant clusters and an extensible framework for building new big data processing applications.
+First introduced in Hadoop 2.0, YARN \cite{yarn} is the next generation resource scheduler for Hadoop. It replaces the previous resource scheduler which tightly coupled resource and job control flow, leading to scalability issues for large clusters. Hadoop originally catered towards MapReduce job processing but soon became synonymous with big data processing which lead to less than ideal uses of MapReduce. YARN was designed to alleviate these issues by decoupling the resource management components from the job control flow and empowers the applications to perform their own application-specific scheduling and fault tolerance. The result is more performant clusters and an extensible framework for building new big data processing applications.
 
 The YARN architecture \cite{yarnarchitecture} is composed of a global ResourceManager and one ApplicationMaster per application. The ResourceManager runs an agent on each machine in the cluster called the NodeManager. The NodeManager monitors the machine's resources such as CPU, memory, disk, and network and relays that information back to the ResourceManager. The ResourceManager has two primary components: the scheduler and the ApplicationsManager \footnote{The ApplicationsManager should not be confused with the ApplicationMaster.}. The ApplicationsManager accepts jobs which then create new ApplicationMasters, creating the first container for new ApplicationMasters, and restarting the ApplicationMaster on failure. The scheduler is in charge of allocating resources to the ApplicationMasters. It is fully replaceable with other resource schedulers (see Section \ref{sec:scheduling}).
 
-The ApplicationMaster can be the master node for a MapReduce, Storm, Spark, etc. application. It is responsible for communicating with the ResourceManager to allocate and free resources such as CPU, memory, disk and network as needed, as well as monitoring the running tasks within containers for completion or errors. The ApplicationMaster also interacts with the NodeManagers for executing and monitoring tasks on that node. In case of application or node failures it is up to the ApplicationManager to reschedule any lost resources, the ResourceManager does not concern itself with this.
+The ApplicationMaster can be the master node for a MapReduce, Storm, Spark, etc. application. It is responsible for communicating with the ResourceManager to allocate and free resources such as CPU, memory, disk, and network as needed, as well as monitoring the running tasks within containers for completion or errors. The ApplicationMaster also interacts with the NodeManagers for executing and monitoring tasks on that node. In case of application or node failures it is up to the ApplicationsManager to reschedule any lost resources, the ResourceManager does not concern itself with this.
 
-When an ApplicationMaster requests resources from the ResourceManager, if successful, the ApplicationMaster will be given a container on a node to use. A container is a abstract concept of a group of resources such as CPU, disk, network, and memory. The ApplicationMaster will then bootstrap the container with the necessary configuration to function as it's own worker. Under high load situations containers can be preempted from ApplicationMasters to schedule new containers or requests for new containers can fail. It is up to the ResourceManager's scheduler as to what the behaviour is.
+When an ApplicationMaster requests resources from the ResourceManager, if successful, the ApplicationMaster will be given a container on a node to use. A container is a abstract concept of a group of resources such as CPU, disk, network, and memory. The ApplicationMaster will then bootstrap the container with the necessary configuration to function as its own worker. Under high load situations containers can be preempted from ApplicationMasters to schedule new containers or requests for new containers can fail. It is up to the ResourceManager's scheduler as to what the behaviour is.
 
 
 
 \subsection{Ecosystem} \label{sub:ecosystem}
 
 % \cite{thusoo2009hive,olston2008pig,chang2008bigtable}
-The Hadoop ecosystem is very active with a number of projects using Hadoop to solve big data problems. Notable systems are Hive \cite{thusoo2009hive}, Pig \cite{olston2008pig}, HBase \cite{chang2008bigtable}, and Spark \cite{zaharia2010spark}. Hive is a distributed data warehousing system with a SQL interface, Pig is a high level language for analysing large datasets which compiles down to sequences of MapReduce programs, HBase is a distributed operational database for massive tables, and Spark is a flexible general purpose framework for performing batch, stream, graph, and machine learning processing. Hive, Pig, and HBase are discussed below. Spark has been covered previously in Section \ref{ssub:spark}.
+The Hadoop ecosystem is very active with a number of projects using Hadoop to solve big data problems. Notable systems are Hive \cite{thusoo2009hive}, Pig \cite{olston2008pig}, HBase \cite{chang2008bigtable}, and Spark \cite{zaharia2010spark}. Hive is a distributed data warehousing system with a SQL interface, Pig is a high level language for analyzing large datasets that compiles down to sequences of MapReduce programs, HBase is a distributed operational database for massive tables, and Spark is a flexible general purpose framework for performing batch, stream, graph, and machine learning processing. Hive, Pig, and HBase are discussed below. Spark has been covered previously in Section \ref{ssub:spark}.
 
 
 % Hive, Pig, HBase
 
 \subsubsection{Hive} \label{ssub:hive}
 
-Apache Hive \cite{thusoo2009hive,sakr2013hadoop} was originally built by the Facebook Data Infrastructure Team on top of the Hadoop environment. It presents a SQL interface to a relational data warehouse built on top of Hadoop MapReduce and HDFS. What is gained is the scalability and fault tolerance that characterizes Hadoop. HiveQL is the subset of SQL that is used for querying. Queries are transformed into MapReduce jobs and then dispatched across the cluster for execution. Custom MapReduce programs can also be processed besides using HiveQL.
+Apache Hive \cite{thusoo2009hive,sakr2013hadoop} was originally built by the Facebook Data Infrastructure Team on top of the Hadoop environment. It presents a SQL interface to a relational data warehouse built on top of Hadoop MapReduce and HDFS. What is gained is the scalability and fault tolerance that characterizes Hadoop with the friendly SQL-like querying interface. HiveQL is the subset of SQL that is used for querying. Queries are transformed into MapReduce jobs and then dispatched across the cluster for execution. Custom MapReduce programs can also be written and processed alongside HiveQL.
 
-HiveQL allows only allows load and insert Data Manipulation Language (DML) statements and disallows insert into, update and delete DML statements. This is to enable simple concurrent read and write mechanisms without the extra locking complexity that would otherwise be required. Tables can be created, dropped and altered using standard Data Definition Language (DDL) statements.
+HiveQL allows only allows load and insert Data Manipulation Language (DML) statements and disallows insert into, update and delete DML statements. This is to enable simple concurrent read and write mechanisms without the extra locking complexity that would otherwise be required. Tables can be created, dropped, and altered using standard Data Definition Language (DDL) statements.
 
 The Hive metastore separates this system from a traditional data processing system built on top of Hadoop. Its purpose is to store the metadata about each table and how it maps to HDFS. This metadata is derived from the DDL statements when they are created and is used every time a query is processed \cite{sakr2013hadoop}.
 
@@ -676,7 +681,7 @@ Hive can handle petabytes of data reliably but is not suitable for interactive q
 
 \subsubsection{Pig}
 
-Pig \cite{pig} is a platform and a dynamically typed high level language for data analysis on top of Hadoop MapReduce. Pig uses the Pig Latin \cite{piglatin} language for programming MapReduce queries and Pig manages the execution of those programs. Both Pig and Pig Latin are used interchangeably. Pig takes language ideas such as SQL's declarative statements and functional programming. As described in \cite{sakr2013hadoop}, writing Pig can be described as being similar to a SQL query execution plan. Experienced programmers are drawn towards using Pig because it is better than writing SQL and persuading the optimizer to write an efficient query plan.
+Pig \cite{pig} is a platform and a dynamically typed high level language for data analysis on top of Hadoop MapReduce. Pig uses the Pig Latin \cite{piglatin} language for programming MapReduce queries and Pig manages the execution of those programs. Both Pig and Pig Latin are used interchangeably. Pig takes language ideas such as SQL's declarative statements and parts of functional programming. As described in \cite{sakr2013hadoop}, writing Pig can be described as being similar to writing a SQL query execution plan. Experienced programmers are drawn towards using Pig because it is better than writing SQL and persuading the optimizer to write an efficient query plan.
 
 Pig has primitives that perform filtering, grouping, and aggregation. It also allows the programmer to define their own functions that can be included in the control flow. Pig programs are parsed by an interpreter, checked for valid syntax, and then transformed into a logical plan of dependencies which is then optimized. The resulting Directed Acyclic Graph (DAG) is converted to a sequence of MapReduce jobs, which is very similar to Hive. Another optimization round is completed and then the resulting DAG of MapReduce jobs is run in topological order on Hadoop MapReduce \cite{sakr2013hadoop,polato2014hadoop}.
 
@@ -685,7 +690,7 @@ Pig has primitives that perform filtering, grouping, and aggregation. It also al
 
 Originally based off of Google BigTable \cite{chang2008bigtable}, Apache HBase is an open source NoSQL database supporting massive sparse tables and petabytes of data. HBase is built on top of MapReduce and HDFS for its scalability and fault tolerance primitives. It supports read and write operations and random access of data \cite{hbaseanalysis}.
 
-It is best to think of HBase as a multi-dimensional map. Data in HBase is organized into tables, each of which have a name. Data in tables are stored in the following form: $(\mathbf{row}:string, \ \mathbf{column}:string, \ \mathbf{time}:int64) \rightarrow \mathbf{value}:string$ \cite{chang2008bigtable,hbasedocs}. The \textit{row} is the unique key used for the row. It can be up to 64k, but 10-100 bytes are suitable for most cases. Cells are stored in sorted order by row-key, thereby ensuring that items of greatest interest are near each other.
+It is best to think of HBase as a multi-dimensional map. Data in HBase is organized into tables, each of which have a name. Data in tables are stored in the following form: $(\mathbf{row}:string, \ \mathbf{column}:string, \ \mathbf{time}:int64) \rightarrow \mathbf{value}:string$ \cite{chang2008bigtable,hbasedocs}. The \textit{row} is the unique key used for the row. It can be up to 64k, but 10-100 bytes are suitable for most cases \cite{chang2008bigtable}. Cells are stored in sorted order by row-key, thereby ensuring that items of greatest interest are near each other.
 
 The \textit{column} consists of two parts: the column family and the column qualifier \footnote{The column qualifier is mutable and can be thought of as the column name}. The column family physically groups together it's column qualifiers and their values. The column family also stores operational options such as whether compression should be enabled, values should be cached in memory, or how row-keys are encoded. Each row in the table has the same column families but can differ greatly for column qualifiers. A new column qualifier can be added to an existing column family at any time \cite{hbasedocs}. Sparseness is achieved by not requiring every row to have a cell for each empty column.
 
@@ -693,13 +698,13 @@ The \textit{time} is a timestamp that enables versioning of the data. Column fam
 
 The \textit{value} is the actual data that is stored for the row-column-time entry. It is simply an array of bytes.
 
-Any table scans are implemented using MapReduce jobs whereas accessing a single row-key require only finding its location in the index. Updates to rows are atomic on the row, thereby enabling reading and writing to occur at the same time \cite{hbaseanalysis}.
+Any table scan query is implemented using MapReduce jobs whereas accessing a single row-key requires only finding its location in the index and accessing the specific data. Updates to rows are atomic on the row, thereby enabling reading and writing to occur at the same time \cite{hbaseanalysis}.
 
 To achieve distributed and redundant storage HBase uses HDFS to automatically partition tables into regions. Each region is a chunk of rows identified by its starting and ending row and its own random identifier \cite{hbaseanalysis}.
 
 The architecture for HBase consists of a master node called the HMaster and multiple slave nodes called HRegionServers. The HMaster assigns regions to the HRegionServers and performs recovery when a HRegionServer is down. HRegionServers interface with clients to perform the reading and writing to regions. A ZooKeeper \cite{zookeeper} instance is used to manage the HBase cluster's configuration \cite{hbaseanalysis}.
 
-The SQL language is not supported with HBase, but a project exists to integrate Hive (Section \ref{ssub:hive}) with HBase to run Hive SQL queries on HBase tables \cite{hivehbaseintegration}.
+The SQL language is not supported with HBase, but a project exists to integrate Hive (Section \ref{ssub:hive}) with HBase to run HiveQL queries on HBase tables \cite{hivehbaseintegration}.
 
 
 
@@ -707,7 +712,7 @@ The SQL language is not supported with HBase, but a project exists to integrate 
 
 \section{Security} \label{sec:security}
 
-The advantages of cloud computing is quite clear: infinitely scalable, on-demand computing resources, reduced costs, and quicker product development. More benefits of the cloud can be found in Section \ref{sec:cloud-services}. Users of cloud services expect their data to be secure and only accessible through allowed methods. Breaches of this trust has resulted in the cloud service users (CSUs) losing confidence in the abilities of the cloud service provider (CSP), ultimately affecting the CSP's reputation and unknowable damage to the CSU. Discussed next are the threats that CSPs or CSUs should be aware of and, if applicable, put in the proper safeguards.
+The advantages of cloud computing is quite clear: infinitely scalable, on-demand computing resources, reduced costs, and quicker product development. More benefits of the cloud can be found in Section \ref{sec:cloud-services}. Users of cloud services expect their data to be secure and only accessible through allowed methods. Breaches of this trust has resulted in the cloud service users (CSUs) losing confidence in the abilities of the cloud service provider (CSP), ultimately affecting the CSP's reputation and unknowable damage to the CSU \cite{kazim2015survey}. Discussed next are the threats that CSPs or CSUs should be aware of and, if applicable, put in the proper safeguards.
 
 \subsection{Threats}
 
@@ -717,13 +722,13 @@ Certain threats to users and operators of cloud services are discussed next. The
 
 \subsubsection{Data Loss and Breach}
 
-By definition, cloud computing means that valuable business data is stored on the servers of the service providers. If this data were to be deleted or accessed due to an accident or for malicious purposes the effects can be detrimental to the CSU. A survey that was conducted on customers of cloud services has shown that 63\% will be less likely to buy a cloud service if the CSP reported that private customer data was breached \cite{microsoftdata}. Causes of data loss can be due to the actions of malicious attackers, corruption, loss of encryption keys, natural disasters, deletion and faults in software \cite{kazim2015survey}.
+By definition, cloud computing means that valuable business data is stored on the servers of the service providers. If this data were to be deleted or accessed due to an accident or for malicious purposes the effects can be detrimental to the CSU. A survey that was conducted on customers of cloud services has shown that 63\% will be less likely to buy a cloud service if the CSP reported that private customer data was breached \cite{microsoftdata}. Causes of data loss can be due to the actions of malicious attackers, corruption, loss of encryption keys, natural disasters, deletion, and faults in software \cite{kazim2015survey}.
 
 Data breaches can be the result of application bugs, infrastructure issues, insufficient authorization or authentication, and operational issues. Breaches can also occur in unexpected ways such as a malicious virtual machine running on the same hypervisor as the targeted virtual machine \cite{zhang2012cross}.
 
-Social engineering customer service agents has resulted in numerous leakages of data and unauthorized access \cite{amazonse,icloudse}. Brute forcing of authentication methods can also result in unauthorized access and the possibility of data loss and breaches \cite{alertlogicsecurity}.
+Social engineering customer service agents has resulted in numerous leakages of private data and unauthorized access \cite{amazonse,icloudse}. Brute forcing of authentication methods can also result in unauthorized access and the possibility of data loss and breaches \cite{alertlogicsecurity}.
 
-CSPs create multiple dispersed copies of customer's data for resiliency. The more copies of the data out there, the more attack surfaces that exist for hackers to target. Problems in data synchronization across environments can lead to inconsistencies and corruption in data. Additionally, heterogeneous security settings across the multiple copies of data is only as secure as its weakest link in the chain \cite{liu2015survey}.
+CSPs create multiple dispersed copies of customer's data for resiliency. The more copies of the data out there, the more attack surfaces that exist for hackers to target. Problems in data synchronization across environments can lead to inconsistencies and corruption in data. Additionally, heterogeneous security settings across the multiple copies of data and the infrastructure that stores it is only as secure as its weakest link in the chain \cite{liu2015survey}.
 
 
 \subsubsection{Hypervisor}
@@ -734,13 +739,13 @@ VM escape occurs when a malicious user breaks the security mechanisms of the hyp
 
 VM hopping can occur when an attacker has gained access to the hypervisor, and manipulates network traffic, configuration files, or performs a man-in-the-middle attack to the running VMs \cite{hyde2009survey}.
 
-VMs can become infected and remotely controlled when the configuration and data files of the VM are changed and then migrated to a different host. Once the VM starts up on the new host the infected VM can infect that host and its VMs. This kind of attack is called VM mobility \cite{hyde2009survey,zhang2011virtualization}.
+VMs can become infected and remotely controlled when the configuration and data files of the VM are changed and then migrated to a different host. Once the VM starts up on the new host the infected VM can spread to that host and its VMs. This kind of attack is called VM mobility \cite{hyde2009survey,zhang2011virtualization}.
 
 Lastly, VMs that have  been forgotten can quickly become vulnerable to new security flaws that would otherwise be patched in an actively maintained system. Attackers are able to exploit unpatched vulnerabilities and gain access to the system and its data \cite{jasti2010security}.
 
 \subsubsection{Denial of Service}
 
-Denial of service (DoS) and distributed DoS (DDoS) attacks of high profile companies and public figures are becoming more common and more powerful \cite{verisignddos}. In 2016 a 1 Terabit per second attack was performed using a botnet of IoT devices \cite{arsddos}. These attacks are performed to prevent legitimate users from using the service by overwhelming the networking and computing equipment of a website or online service. 81\% of CSU consider DDoS attacks a serious threat in clouds \cite{top2013notorious}.
+Denial of service (DoS) and distributed DoS (DDoS) attacks of high profile companies and public figures are becoming more common and powerful \cite{verisignddos}. In 2016 a 1 Terabit per second attack was performed using a botnet of IoT devices \cite{arsddos}. These attacks are performed to prevent legitimate users from using the service by overwhelming the networking and computing equipment of a website or online service. 81\% of CSUs consider DDoS attacks a serious threat in clouds \cite{top2013notorious}.
 
 Single machines or hundreds of thousands of compromised devices in a botnet can be remotely controlled to perform various bandwidth-heavy attacks directed at a target. Examples of methods use technologies from many layers of the OSI networking model. Some include continually making expensive to process HTTP requests, opening many TCP connections, and performing DNS amplification attacks with spoofed IP addresses all directed at the victim's cloud service.
 
@@ -750,21 +755,23 @@ Single machines or hundreds of thousands of compromised devices in a botnet can 
 
 % data loss, data breach, hypervisor, multitenancy, managerial, account hijacking, DoS, insecure APIs
 
-\subsection{Defenses}
+\subsection{Defences}
+
+No single defence is perfect as attackers can use different methods to gain access to critical systems. Threat models are often used to gauge potential attack vectors and to describe the defences that can be used. Taking proactive measures and performing due diligence to secure systems are required for any type of cloud and the applications that run on it. Defences such as encryption, access control, denial of service protection, and third party audits are explained next.
 
 \subsubsection{Encryption}
 
-Encryption offers integrity and confidentiality of data. Data at rest inside of a VM, in a backup system, or transiting across a network can be encrypted to hide the sensitive information within. Data can also be encrypted before it is even placed in the cloud. Proper key management infrastructure may be required. Encrypting the data at rest and in transit can thwart man-in-the-middle attacks and prevent the reading of data if access to the encrypted data has been compromised.
+Encryption offers integrity and confidentiality of data. Data at rest inside of a VM, in a backup system, or transiting across a network can be encrypted to protect the sensitive information within. Data can also be encrypted before it is even placed in the cloud. Proper key management infrastructure may be required. Encrypting the data at rest and in transit can thwart man-in-the-middle attacks and prevent the reading of data if access to the encrypted data has been compromised.
 
-CloudProof \cite{popa2011enabling} is a system for encrypting data for storage on Amazon S3 and Azure Blob Storage. It tracks the integrity of all files stored for detecting tampering and access violations. When CSP's break their data security SLA by witnessing misbehaviour, CloudProof can provide proof of the misbehaviour and gives the CSU leverage at demanding some sort of compensation.
+CloudProof \cite{popa2011enabling} is a system for encrypting data for storage on Amazon AWS S3 and Microsoft Azure Blob Storage. It tracks the integrity of all files stored for detecting tampering and access violations. When CSPs break their data security SLA by having data tampered with, CloudProof can provide proof of the misbehaviour and gives the CSU leverage at demanding some sort of compensation.
 
 Encryption is not perfect, with the fact that a legitimate person could decrypt the encrypted information. In multitenant systems encryption provides an extra layer of security in case a tenant breaks outside of their virtualized environment. Additional complexity is encountered due to having to manage multiple encryption keys and the access control around those keys. One of the major limitations which is gradually being overcome with Moore's Law is the computational overhead imposed by encryption \cite{liu2015survey}.
 
 \subsubsection{Access Control}
 
-Access control enables CSPs to define which users have the privilege to perform an action on a resource at a fine grained level. CSPs can put access controls into place to resist DDoS attacks by restricting the resources they are able to access or to prevent unauthorized users from accessing private data \cite{liu2015survey}.
+Access control enables both CSPs and CSUs to define which users have the privilege to perform an action on a resource at a fine grained level. CSPs can put access controls into place to resist DDoS attacks by restricting the resources they are able to access or to prevent unauthorized users from accessing private data \cite{liu2015survey}.
 
-Access controls are limited by the added complexity that they introduce. Sufficiently complicated access control schemes can result in limited scalability and heterogeneous policies can result in weak link in the chain scenarios which could break and expose the resources to unauthorized access. Access controls can be simply bypassed if flaws exist in the system that implements it, access controls that are too open, or to CSPs that enable unfettered access to their employees \cite{kazim2015survey}.
+Access controls are limited by the added complexity that they introduce. Sufficiently complicated access control schemes can result in limited scalability and heterogeneous policies can result in weak link in the chain scenarios. Access controls can be simply bypassed if flaws exist in the system that implements it, access controls that are too open, or to CSPs that enable unfettered access to their employees \cite{kazim2015survey}.
 
 Fine grained access controls on data comes with increased amounts of computation overhead from data management and key distribution. The authors in \cite{yu2010achieving} provide a mechanism for enforcing fine grained access control policies based on data attributes and hand off most of the computation work to untrusted cloud computing without leaking any of the data's contents.
 
@@ -773,13 +780,13 @@ Fine grained access controls on data comes with increased amounts of computation
 \subsubsection{Denial of Service Protection}
 
 
-Proactive testing of the security of systems and implementing basic security mechanisms for databases, applications, and other services help prevent loopholes from being found and exploited by attackers. DDoS attacks can be handled using a number of methods. Running an Intrusion Detection System (IDS) can verify network requests before they reach the cloud servers. Extra network bandwidth can cope with the increase in bandwidth caused by the DDoS. Additionally, having backup IPs can still allow access to critical resources.
+Proactive testing of the security of systems and implementing basic security mechanisms for databases, applications, and other services help prevent loopholes from being found and exploited by attackers in the form of DoS. Dos and DDoS attacks can be handled using a number of methods. Running an Intrusion Detection System (IDS) can verify and dynamically allow or deny network requests before they reach the cloud servers. Extra network bandwidth can cope with the increase in bandwidth caused by the DDoS. Additionally, having backup IPs can still allow access to critical resources \cite{kazim2015survey}.
 
 The authors in \cite{jin2003hop} present an industrial solution to DDoS attack prevention called hop count filtering where spoofed IP packets are filtered out of the incoming network requests based on the time to live (TTL) information of incoming packets. An IP to hop count table is built to compare the expected number of hops for a given IP range. Spoofed incoming packets will often have a different hop count than the expected number of hops. This method has shown to reduce the DDoS attack by 90\%.
 
-Another method is introduced in \cite{bakshi2010securing} where an IDS monitors the traffic flows coming into VMs. When a traffic spike occurs the IDS checks that the senders are acknowledging their connections. If no acknowledgement happens a honeypot pings the suspicious IP address. No reply from the ping request signifies a DDoS attack. The attacker IP addresses are blocked and the VM is migrated to a different datacentre.
+Another method is introduced in \cite{bakshi2010securing} where an IDS monitors the TCP traffic flows coming into VMs. When a traffic spike occurs the IDS checks that the senders are acknowledging their connections. If no acknowledgement happens a honeypot pings the suspicious IP address. No reply from the ping request signifies a DDoS attack. The attacker IP addresses are blocked and the VM is migrated to a different datacentre.
 
-Bohatei \cite{fayaz2015bohatei} is the name of a mechanism which uses software defined networking (SDN) and network functions virtualization (NFV) to flexibly and elastically defend against DDoS attacks. CSPs can add Bohatei to their network to dynamically filter and block DDoS attacks directed towards their CSUs. The authors show that many different attack types can be mitigated within one minute and can handle up to 500 Gbps of bandwidth.
+Bohatei \cite{fayaz2015bohatei} is the name of a defence mechanism which uses software defined networking (SDN) and network functions virtualization (NFV) to flexibly and elastically defend against DDoS attacks. CSPs can add Bohatei to their network to dynamically filter and block DDoS attacks directed towards their CSUs. The authors show that many different attack types can be mitigated within one minute and can handle up to 500 Gbps of bandwidth.
 
 
 \subsubsection{Third Party Audit}
@@ -817,11 +824,11 @@ Third party auditors can verify the integrity of data through mechanisms such as
 
 
 
-There is no one size fits all scheduler for properly scheduling jobs to their resources. Applications such as MapReduce (Section \ref{sub:batch}), virtual resources such as those offered by IaaS (Section \ref{ssub:iaas}), and the underlying physical hardware all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}.
+There is no one size fits all scheduler for properly scheduling resources to workloads. Applications such as MapReduce (Section \ref{sub:batch}), virtual resources such as those offered by IaaS (Section \ref{ssub:iaas}), and the underlying physical hardware all incorporate scheduling as an integral part of its operation. Many parameters exist which may be more important to a provider or a user of the system. The most prominent of those QoS parameters are cost, time and energy \cite{Singh2016}.
 
 Cloud Providers typically have to balance their resources according to current demand as well as having enough resources for future demand. To meet demand for the future, a predictive model based on historical observations is usually used \cite{Jennings2015}.
 
-The organization of algorithms for scheduling of cloud resources is explained in the following section. Sections \ref{sub:infra-sched}, \ref{sub:virt-sched}, \ref{sub:appl-sched} then give a representative sample of the scheduling algorithms available.
+The organization of algorithms for scheduling of cloud resources is explained in the following section. Sections \ref{sub:infra-sched}, \ref{sub:virt-sched}, and \ref{sub:appl-sched} then give a representative sample of the scheduling algorithms available.
 
 
 
@@ -832,7 +839,7 @@ The cloud architecture exhibits a separation of concerns.  The architecture can 
 
 \subsubsection{Deployment Layer}
 
-The deployment layer focuses on the physical resources such as networking, storage, server hardware and low-level cloud services. It is concerned with the optimal scheduling of data routing, application migrations, multi-datacentre, service placement, and strategic infrastructure. When scheduling the deployment layer the three biggest concerns are scheduling for partner federation, data routing, and service placement.
+The deployment layer focuses on the physical resources such as networking, storage, server hardware, and low-level cloud services. It is concerned with the optimal scheduling of data routing, application migrations, multi-datacentre, service placement, and strategic infrastructure. When scheduling the deployment layer the three biggest concerns are scheduling for partner federation, data routing, and service placement.
 
 
 
@@ -844,7 +851,7 @@ The virtualization layer concerns itself with the virtualized infrastructure tha
 
 \subsubsection{Application Layer}
 
-Applications are deployed on top of the virtualization layer for use by the cloud service user (CSU) or their end users. Applications, user tasks, workflows, and frameworks all run on this layer. Scheduling of this software is primarily concerned with optimizing efficiency and QoS. This category of scheduling is broken down into three subcategories: scheduling for negotiation, CSU QoS, and CSP efficiency.
+Applications are deployed on top of the virtualization layer for use by the CSU or their end users. Applications, user tasks, workflows, and frameworks all run on this layer. Scheduling of this software is primarily concerned with optimizing efficiency and QoS. This category of scheduling is broken down into three subcategories: scheduling for negotiation, CSU QoS, and CSP efficiency.
 
 
 
@@ -856,25 +863,25 @@ The components that make up the physical infrastructure and the services that go
 
 \subsubsection{Partner Federation}
 
-Partner federation is the act of CSPs interacting with each other to provide a unified service that CSUs interact with, abstracting the underlying CSP that is used. \cite{zhang2010load} uses an ant colony optimization method where the objective is to balance the complex and dynamic load balancing across the federated clouds while maximizing the user satisfaction to utilization across all clouds ratio.
+Partner federation is the act of CSPs interacting with each other to provide a unified service that CSUs interact with, abstracting the underlying CSP that is used. \cite{zhang2010load} uses an ant colony optimization method where the objective is to balance the complex and dynamic load balancing across the federated clouds while maximizing the ratio of user satisfaction to utilization across all clouds.
 
 
-Similairly, the authors of \cite{liu2011declarative} present the COPE platform which automatically optimizes resource utilization across clouds based on each CSU's SLAs. Declarative policies are specified in which the SLAs are used as input to a optimization problem which finds the suitable resources to place each CSU's workloads on. \cite{macias2012client} analyses the case where not all SLAs are satisfied and gives policies where preferential CSUs can take priority over other CSUs.
+Similarly, the authors of \cite{liu2011declarative} present the COPE platform which automatically optimizes resource utilization across clouds based on each CSU's SLAs. Declarative policies are specified in which the SLAs are used as input to a optimization problem which finds the suitable resources to place each CSU's workloads on. \cite{macias2012client} analyses the case where not all SLAs are satisfied and accepts rules where preferential CSUs can take priority over other CSUs.
 
 
 \subsubsection{Data Routing}
 
-Defined as the efficient finding of the shortest path to the cloud services and data after they have been deployed is called data routing. \cite{jia2010dynamic} describe a method of rapidly and efficiently finding the shortest route between a service and the database it interacts with by using an ant colony optimization algorithm.
+Defined as the efficient finding of the shortest path to the cloud services and data after they have been deployed is data routing. \cite{jia2010dynamic} describe a method of rapidly and efficiently finding the shortest route between a service and the database it interacts with by using an ant colony optimization algorithm.
 
-In \cite{yan2011optimization} used ant colony optimization and genetic algorithms to create a cloud database route scheduling algorithm that also prioritized efficient and effective discovery of the shortest path. Their findings showed that the routing load decreased and improved the efficiency of compute resources.
+The authors of \cite{yan2011optimization} used an ant colony optimization and genetic algorithm to create a cloud database route scheduling algorithm that also prioritizes efficient and effective discovery of the shortest path. Their findings showed that the routing load decreased and the efficiency of compute resources improved.
 
 
 
 \subsubsection{Service Placement}
 
-When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on the datacentre closest to the users. Placing the services close as possible to the users provides low latency and high bandwidth between them and the service. Placement of VMs on a federated cloud for PaaS was looked at in \cite{agostinho2011bio}. The authors optimized energy savings and load balancing among the CSP's datacentres.
+When deploying an IaaS/PaaS/SaaS service placement can be optimally placed on the datacentre closest to the users. Close placement provides low latency and high bandwidth between the end user and the service. Placement of VMs on a federated cloud for PaaS was looked at in \cite{agostinho2011bio}. The authors optimized energy savings and load balancing among the many CSP datacentres.
 
-\cite{jindarak2011performance} took the approach of optimizing the average time it took users to access data and the balance of the workload across CSPs by placing data. Their approach used a genetic algorithm to optimally schedule the service placements to datacentres. \cite{guo2013data} took a different approach from \cite{jindarak2011performance} by optimally scheduling to minimize the distributed cooperation costs.
+\cite{jindarak2011performance} took the approach of optimizing the average time it took users to access data and the balance of the workload across CSPs. Their approach used a genetic algorithm to optimally schedule the service placements to datacentres. \cite{guo2013data} took a different approach from \cite{jindarak2011performance} by optimally scheduling to minimize the distributed cooperation costs.
 
 
 
@@ -883,59 +890,59 @@ When deploying an Iaas/PaaS/SaaS service placement can be optimally placed on th
 
 \subsection{Virtualization Layer Scheduling} \label{sub:virt-sched}
 
-Virtualization of physical resources into resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated by \textcite{xu2014managing}, virtualized resources such as storage, memory, CPU, network, are best grouped together and treated as a whole in the form of a VM. Many of the schedulers below mentioned use this abstraction for managing resources. Discussed next is the scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud,Singh2016}.
+Virtualization of physical resources into virtual resources that are consumed by CSUs can be scheduled many different ways. The optimization taken for scheduling can be in favour of the CSP, the CSU, or both. Stated in \cite{xu2014managing}, virtualized resources such as storage, memory, CPU, or network are best grouped together and treated as a whole in the form of a VM. Many of the schedulers mentioned next use this abstraction for managing resources. Virtualization layer scheduling is composed of scheduling of virtual resources in favour of cost effectiveness, load balance, and energy conservation \cite{zhan2015cloud,Singh2016}.
 
 
 \subsubsection{Cost Effectiveness}
 
-In a environment where the cloud computing resources have heterogeneous costs, monetary savings can be had by scheduling for cost effectiveness. The authors of \cite{mark2011evolutionary} present a hybrid algorithm consisting of ant conlony optimization, genetic, and particle swarm optimization to schedule VMs to physical machines. Their method included a demand forecaster to predict the expected demand in the future. The scheduler was optimized to guarantee the lowest cost depending on the availability of resources and resource price, including  a heuristic to place VMs of the same customer close to each other.
+In an environment where the cloud computing resources have heterogeneous costs, monetary savings can be had by scheduling for cost effectiveness. The authors of \cite{mark2011evolutionary} present a hybrid algorithm consisting of ant colony optimization, genetic, and particle swarm optimization to schedule VMs to physical machines. Their method included a demand forecaster to predict the expected demand in the future. The scheduler was optimized to guarantee the lowest cost depending on the availability of resources and resource price, including  a heuristic to place VMs of the same customer close to each other.
 
-\textcite{ioannis2011cost} determined a way to handle starvation and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
+The authors of \cite{ioannis2011cost} determined a way to handle starvation and migrations of performance-based VMs while focusing on the evaluation of Gang scheduling. A deadline based priority queue is used to determine the workload's priority and prevent starvation.
 
-A genetic algorithm approach was taken by the authors of \cite{lee2010topology} to reduce application makespan, indirectly providing cost savings. Their method involved scheduling VMs based on the dependency graph that was made. The situation involved more physical machines than VMs that would run at a single time, therefore the chromosome was a binary string that was as long as the physical machines and the value for each bit of the string was whether the phsyical machine would run a VM, or not. A prediction algorithm analysed the VM dependency graph and the potential schedule to determine its effectiveness in reducing the makespan.
+A genetic algorithm approach was taken by the authors of \cite{lee2010topology} to reduce application makespan, indirectly providing cost savings. Their method involved scheduling VMs based on the dependency graph of tasks to perform. The situation involved more physical machines than VMs that would run at a single time, therefore the chromosome was a binary string that was as long as the physical machines and the value for each bit of the string was whether the physical machine would run a VM, or not. A prediction algorithm analyzed the VM dependency graph and the potential schedule to determine its effectiveness in reducing the makespan.
 
 
 
 
 \subsubsection{Load Balance}
 
-Optimizing for load balance involves allocating virtual reources evenly across the physical resources. Genetic algorithms have been proposed by many to balance different aspects of virtualized resources. \cite{hu2010scheduling} used a genetic algorithm to optimize the load balance for VMs to physical resources. VMs are encoded in a tree-type encoding on the physical resource to indicate how many VMs it contains. When the load balance changes the genetic algorithm redistributes the load while minimizing VM migration and optimizing load balance.
+Optimizing for load balance involves allocating virtual resources evenly across the physical resources. Genetic algorithms have been proposed by many to balance different aspects of virtualized resources. \cite{hu2010scheduling} used a genetic algorithm to optimize the load balance for VMs to physical resources. VMs are encoded in a tree-type encoding on the physical resource to indicate how many VMs it contains. When the load balance changes, the genetic algorithm redistributes the load while minimizing VM migration and optimizing load balance.
 
-The authors in \cite{zhou2012optimize} focused on load balancing the virtualized block storage resources. Their approach used a genetic algorithm to efficiently load balance the virtual block storage on to the physical storage system. The dynamic load balance stragegy resulted in higher I/O performance.
+The authors in \cite{zhou2012optimize} focused on load balancing the virtualized block storage resources. Their approach used a genetic algorithm to efficiently load balance the virtual block storage onto the physical storage system. The dynamic load balance strategy resulted in higher I/O performance.
 
-Load balancing of VMs to physical resources by taking into account the memory, CPU, and network was looked at by \cite{zhao2011multi}. A genetic algorithm was used to take into account the three resources and objectively optimize the resource allocation. Their genetic coding involved defining the length of the chromosome as the number of VMs and each gene is an integer corresponding to the phsyical machine the VM belongs to. The NSGA-II algorithm was used to solve this multiobjective optimization problem.
+Load balancing of VMs to physical resources by taking into account the memory, CPU, and network was looked at by \cite{zhao2011multi}. A genetic algorithm was used to take into account the three resources and objectively optimize the resource allocation. Their genetic coding involved defining the length of the chromosome as the number of VMs and each gene is an integer corresponding to the physical machine the VM belongs to. The NSGA-II algorithm was used to solve this multiobjective optimization problem.
 
 
 
 \subsubsection{Energy Conservation}
 
-Perpendicular to scheduling for load balance, energy conservation aims to optimize the energy saved by putting as many VMs onto phsyical machines as possible. This optimization benefits the CSP because they can reduce energy costs by putting unused computing resources into a power saving state.
+Perpendicular to scheduling for load balance, energy conservation aims to optimize the energy saved by putting as many VMs onto a group of physical machines which consume the minimum amount of energy as possible. This optimization benefits the CSP because they can reduce energy costs by putting unused computing resources into a power saving state.
 
-Maximizing the utilization of physical resources by packing VMs as tight as possible was achieved using a genetic algorithm in \cite{zhong2010approach}. This resulted in the minimum number of physical machines being used to run the virtual machine workload. Their chromosome encoding scheme consisted of the length of the chromosome being the number of VMs and the gene being the physical machine that the VM ran on. The scheduling runs every time the physical or virtual resources are added or removed.
+Maximizing the utilization of physical resources by packing VMs as tight as possible was achieved using a genetic algorithm in \cite{zhong2010approach}. Their chromosome encoding scheme consisted of the length of the chromosome being the number of VMs and the gene being the physical machine that the VM runs on. The scheduling runs every time the physical or virtual resources are added or removed.
 
-The authors of \cite{feller2011energy} modeled the energy conservation problem as a multidimensional bin-packing problem. An ant colony optimization algorithm was used to place VMs onto physical machines using pheremone information and a heuristic to place as many VMs on every physical node as possible, thus reducing the number of physical nodes used. The same work was followed up in \cite{feller2012autonomous} by using an ant colony optimization approach to perform autonomous scheduling of VMs in large cloud infrastructures to optimize for energy conservation and scalability. Unused physical machines are put into a low power mode to conserve energy.
+The authors of \cite{feller2011energy} modelled the energy conservation problem as a multidimensional bin-packing problem. An ant colony optimization algorithm was used to place VMs onto physical machines using pheromone information and a heuristic to place as many VMs on the smallest number of physical machines as possible, thus reducing the energy used. The same work was followed up in \cite{feller2012autonomous} by using an ant colony optimization approach to perform autonomous scheduling of VMs in large cloud infrastructures to optimize for energy conservation and scalability. Unused physical machines are put into a low power mode to conserve energy.
 
 
 
 \subsection{Application Layer Scheduling} \label{sub:appl-sched}
 
-Scheduling for the application layer can be considered the most important of the three layers as it directly interacts with the CSU or end users. Providers want to maximize utilization to get the most out of their resources per the work being done or reducing the energy spent. Users want to have certain performance objectives such as QoS, application makespan, user cost, or application performance \cite{zhan2015cloud,Jennings2015}. The balance of the two bring forth many different types of schedulers. Negotiation scheduling is the balance of both CSP's and CSU's concerns, while user QoS is purely scheduling for the user's concerns, and provider efficiency is scheduling purely for the provider's concerns.
+Scheduling for the application layer can be considered the most important of the three layers as it directly interacts with the CSU or end users. Providers want to maximize utilization to get the most out of their resources per the work being done or reducing the energy spent. Users want to have certain performance objectives such as QoS, application makespan, user cost, or application performance \cite{zhan2015cloud,Jennings2015}. The balance of the two bring forth many different types of schedulers. Negotiation scheduling is the balance of concerns for both the CSP and the CSU, while user QoS is purely scheduling for the user's concerns, and provider efficiency is purely scheduling for the provider's concerns.
 
 
 \subsubsection{Negotiation}
 
-CSPs can deal with the fluctuation of cloud resource demand throughout the day by changing the amount charged for the cloud resources. This strategy finds a balance between user cost and cloud utilization, which is called scheduling by negotiation. Additionally, reserving a VM for a period of time is cheaper than the same period of time using an on-demand VM. The scheduler can then optimize for cost by being able to pack VMs more efficiently together \cite{chaisiri2012optimization}.
+CSPs can deal with the fluctuation of cloud resource demand throughout the day by changing the amount charged for the cloud resources. This strategy finds a balance between user cost and cloud utilization, which is called scheduling by negotiation. Additionally, reserving a VM for a period of time is cheaper than the same period of time using an on-demand VM. The scheduler can then optimize for cost by being able to pack VMs more efficiently together and to more effectively predict for the future \cite{chaisiri2012optimization}.
 
-An ant colony optimization algorithm was used to negotiate the user concerns of response time and throughput, and the provider concerns of operational cost and energy usage \cite{chimakurthi2011power}. The research showed that both user's and provider's concerns were met using the adaptive ant colony optimization scheduler which scheduled resources on to the minimal number of resources required.
+An ant colony optimization algorithm was used to negotiate the user concerns of response time and throughput, and the provider concerns of operational cost and energy usage \cite{chimakurthi2011power}. The research showed that both user's and provider's concerns were met using the adaptive ant colony optimization scheduler which scheduled resources using the minimal number of resources required.
 
 
 
 
 \subsubsection{User Quality of Service}
 
-The primary objectives of scheduling for the user is QoS, user costs, application performance, reliability, and makespan. In the work performed by \textcite{kumar2012independent}, the makespan was optimized by using a genetic algorithm and combining it with Min-Min and Max-Min strategies to improve population initialization and speed up the algorithm.
+The primary objectives of scheduling for the user is user costs, application performance, reliability, and makespan. In the work performed by \cite{kumar2012independent}, the makespan was optimized by using a genetic algorithm and combining it with Min-Min and Max-Min strategies to improve population initialization and generally speed up the algorithm.
 
-Multiple objective optimizations have been proposed by \cite{szabo2012evolving} which used a evolutionary computation algorithm to take into account the makespan and user costs. They applied their work to scheduling of workflow applications and VM scheduling. The NSGA-II algorithm was used to optimize and solve the multiobjective problem.
+Multiple objective optimizations have been proposed by \cite{szabo2012evolving} which used an evolutionary computation algorithm to take into account the makespan and user costs. They applied their work to scheduling of workflow applications and VM scheduling. The NSGA-II algorithm was used to optimize and solve the multiobjective problem.
 
 
 
@@ -945,9 +952,9 @@ Multiple objective optimizations have been proposed by \cite{szabo2012evolving} 
 
 Providers who schedule applications for their own efficiency can optimize for utilization, energy consumption, and load balancing. Optimal load balancing of resources across nodes of the cloud was performed in \cite{nishant2012load}. Their solution used an ant colony optimization algorithm to start at the node with the greatest number of neighbouring nodes so that the travelling ant has the greatest number of directions to travel in when attempting to find more nodes that are underloaded or overloaded. While the ant is travelling, it will move work on nodes that are overloaded to nodes which are underloaded.
 
-Another method was proposed by \cite{wang2012energy} to split one job into multiple tasks consisting of map and reduce stages. Energy consumption was optimized by using a genetic alogrithm that was modified to use a local search mechanism.
+Another method was proposed by \cite{wang2012energy} to split one job into multiple tasks consisting of map and reduce stages. Energy consumption was optimized by using a genetic algorithm that was modified to use a local search mechanism.
 
-In \cite{zhu2011hybrid}, the authors show a method to optimize for load balance using a multiagent genetic algorithm. To reduce the potentially large size of tasks to schedule, tasks were grouped together based on similarity. Groups of tasks are represented in the genetic algorithm as the length of the chromosome. A binary string is used to specify the VM the group of tasks go to.
+In \cite{zhu2011hybrid}, the authors show a method to optimize for load balance using a multi agent genetic algorithm. To reduce the potentially large size of tasks to schedule, tasks were grouped together based on similarity. Groups of tasks are represented in the genetic algorithm as the length of the chromosome. Genes are represented as a binary string for specifying which VM the group of tasks runs on.
 
 
 
@@ -956,10 +963,10 @@ In \cite{zhu2011hybrid}, the authors show a method to optimize for load balance 
 % end scheduling
 \section{Conclusion} \label{sec:conclusion}
 
-% Cloud and datacentres are becoming larger and more advanced in the race to provide competitive services to customers. Cloud computing demand keeps increasing as businesses find that it's more affordable to have other companies manage their infrastructure. Current datacentres are continually improving their systems to make each joule of energy as efficient as possible. The distributed systems running atop these massive clusters requires high bandwidth, low-latency networks across the nodes of a cluster. Being able to optimize globally across the cloud or datacentre by a small percentage can result in large savings.
 
 Cloud and datacentres are continuously evolving to serve competitive business needs, surges in users, and scalability. Clouds are enabling on-demand self service, broad network access, resource pooling, rapid elasticity, and measured service \cite{mell2011nist} to meet those needs. This survey has provided a representative sample of the current research in the biggest topics for cloud and datacentre networking: cloud services, network structure, software defined networks, data processing, Hadoop, security, and scheduling.
 
+\newpage
 
 % end conclusion
 \printbibliography
