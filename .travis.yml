@@ -11,5 +11,5 @@ deploy:
   file: honours-project.pdf
   skip_cleanup: true
   on:
-    repo: jonniesweb/honours-project
+    repo: jonniesweb/cloud-and-datacentre-networks
     tags: false
